@@ -18,23 +18,35 @@
     <link rel="stylesheet" href="css/style.css" />
     <style>
       /* Map legend card (replaces trail-journey-card) */
+      .trail-guide-main {
+        display: flex;
+        flex-direction: column;
+        overflow: hidden;
+        padding-bottom: calc(var(--bottom-nav-h) + env(safe-area-inset-bottom, 0));
+      }
+      .trail-guide-map {
+        position: relative;
+        flex: 1 1 auto;
+        min-height: 0;
+      }
+      .trail-guide-map__svg {
+        display: block;
+        background: #f0eee4;
+      }
       .map-legend-card {
-        position: absolute;
-        left: 0.85rem;
-        right: 0.85rem;
-        bottom: calc(var(--bottom-nav-h) + env(safe-area-inset-bottom, 0) + 0.55rem);
+        position: relative;
+        flex: 0 0 auto;
+        margin: 0.55rem 0.85rem 0.7rem;
         border-radius: var(--radius-2xl);
-        background: color-mix(in srgb, var(--surface-container-lowest) 94%, transparent);
-        backdrop-filter: blur(16px);
-        -webkit-backdrop-filter: blur(16px);
+        background: var(--surface-container-lowest);
         box-shadow: var(--shadow-card);
-        padding: 0.9rem 1.1rem 0.85rem;
+        padding: 0.72rem 1rem 0.76rem;
         z-index: 10;
       }
       .map-legend-card__title {
-        margin: 0 0 0.6rem;
+        margin: 0 0 0.48rem;
         font-family: var(--font-display);
-        font-size: 0.9375rem;
+        font-size: 0.875rem;
         font-weight: 800;
         color: var(--primary);
       }
@@ -70,8 +82,8 @@
         color: var(--on-primary);
       }
       .map-legend-hint {
-        margin: 0.55rem 0 0;
-        font-size: 0.75rem;
+        margin: 0.42rem 0 0;
+        font-size: 0.6875rem;
         color: var(--on-surface-variant);
         display: flex;
         align-items: center;
@@ -90,8 +102,10 @@
   <body data-parkquest-nav="map">
     <div class="app app--map">
       <header class="app-header trail-guide-header">
-        <div style="width:2.5rem;"></div>
-        <h1 class="app-header__title">Park Quest</h1>
+        <div class="app-header__brand">
+          <img class="app-header__logo" src="image/parkquest-logo.png" alt="ParkQuest logo" />
+          <h1 class="app-header__title">Park Quest</h1>
+        </div>
         <button class="icon-btn" id="btn-my-loc" aria-label="Show my location">
           <span class="material-symbols-outlined" aria-hidden="true">my_location</span>
         </button>
@@ -103,7 +117,7 @@
         <section class="trail-guide-map" aria-label="Brisbane City Botanic Gardens facilities map">
           <svg id="park-map-svg" class="trail-guide-map__svg"
                viewBox="0 0 420 620" preserveAspectRatio="xMidYMid slice"
-               role="img" aria-label="Illustrated map of Brisbane City Botanic Gardens showing toilets, drinking fountains, seating, picnic areas, café, accessible facilities and Trail Quest stops">
+               role="img" aria-label="Illustrated map of Brisbane City Botanic Gardens showing the Medicinal Plant Treasures route, toilets, water, playground, cafe, river walk, landmarks and rest areas">
             <defs>
               <linearGradient id="bgGrad" x1="0" y1="0" x2="1" y2="1">
                 <stop offset="0%" stop-color="#ddd8d0"/>
@@ -185,19 +199,19 @@
             <g opacity="0.48"><circle cx="212" cy="145" r="18" fill="#3c7850"/><circle cx="200" cy="155" r="13" fill="#3c7850"/></g>
             <g opacity="0.45"><circle cx="308" cy="488" r="16" fill="#3c7850"/><circle cx="322" cy="480" r="12" fill="#3c7850"/></g>
 
-            <!-- ── OAKMAN'S LAGOON ── -->
-            <path d="M 268,298 C 276,272 308,262 338,270 C 366,278 384,300 383,325
-                     C 382,350 364,368 336,370 C 308,372 274,358 265,336
-                     C 258,318 262,308 268,298 Z"
+            <!-- ── THE LAGOONS / LILYPOND LAWN ── -->
+            <path d="M 62,326 C 70,296 106,286 134,300 C 160,313 166,340 151,361
+                     C 136,384 102,388 78,372 C 55,356 55,344 62,326 Z"
                   fill="url(#lagoonGrad)" opacity="0.9"/>
             <!-- Lagoon shimmer -->
-            <ellipse cx="325" cy="316" rx="32" ry="22" fill="none" stroke="#fff" stroke-width="1.2" opacity="0.4"/>
-            <ellipse cx="325" cy="316" rx="20" ry="13" fill="none" stroke="#fff" stroke-width="0.8" opacity="0.3"/>
+            <ellipse cx="108" cy="340" rx="32" ry="20" fill="none" stroke="#fff" stroke-width="1.2" opacity="0.4"/>
+            <ellipse cx="108" cy="340" rx="19" ry="12" fill="none" stroke="#fff" stroke-width="0.8" opacity="0.3"/>
             <!-- Lagoon lily pads -->
-            <ellipse cx="300" cy="340" rx="7" ry="5" fill="#4a8a5a" opacity="0.5"/>
-            <ellipse cx="345" cy="348" rx="6" ry="4" fill="#4a8a5a" opacity="0.45"/>
+            <ellipse cx="88" cy="352" rx="7" ry="5" fill="#4a8a5a" opacity="0.5"/>
+            <ellipse cx="130" cy="330" rx="6" ry="4" fill="#4a8a5a" opacity="0.45"/>
             <!-- Lagoon label -->
-            <text x="325" y="312" text-anchor="middle" font-family="'Work Sans',sans-serif" font-size="6.5" font-weight="700" fill="#155a7a" opacity="0.85">OAKMAN'S LAGOON</text>
+            <text x="108" y="337" text-anchor="middle" font-family="'Work Sans',sans-serif" font-size="6.5" font-weight="700" fill="#155a7a" opacity="0.85">THE LAGOONS</text>
+            <text x="108" y="347" text-anchor="middle" font-family="'Work Sans',sans-serif" font-size="5.5" font-weight="700" fill="#155a7a" opacity="0.7">LILYPOND LAWN</text>
 
             <!-- ── PATHS NETWORK ── -->
             <!-- Main N-S spine -->
@@ -209,11 +223,11 @@
             <!-- NE diagonal upper -->
             <path d="M 262,264 L 320,222 L 380,202 L 392,265"
                   fill="none" stroke="#c8be7a" stroke-width="6" stroke-linecap="round" opacity="0.82"/>
-            <!-- Path to Lagoon west -->
-            <path d="M 262,264 L 298,280 L 268,298"
+            <!-- Path to The Lagoons -->
+            <path d="M 32,275 L 70,306 L 98,326"
                   fill="none" stroke="#c8be7a" stroke-width="6" stroke-linecap="round" opacity="0.8"/>
-            <!-- Path east of Lagoon -->
-            <path d="M 383,325 L 392,390 L 376,534"
+            <!-- Path east toward Rainforest and Cafe -->
+            <path d="M 262,264 L 325,310 L 392,390 L 376,534"
                   fill="none" stroke="#c8be7a" stroke-width="6" stroke-linecap="round" opacity="0.8"/>
             <!-- NW loop path -->
             <path d="M 32,275 L 88,298 L 140,345 L 200,362"
@@ -239,7 +253,7 @@
             <text x="210" y="613" text-anchor="middle" font-family="'Work Sans',sans-serif" font-size="8.5" font-weight="700" fill="#1a5a80" opacity="0.82" letter-spacing="1.5">BRISBANE RIVER</text>
 
             <!-- City Reach Boardwalk label -->
-            <text x="205" y="590" text-anchor="middle" font-family="'Work Sans',sans-serif" font-size="6" font-weight="600" fill="#2a6e52" opacity="0.7">CITY REACH BOARDWALK ENTRANCE</text>
+            <text x="205" y="590" text-anchor="middle" font-family="'Work Sans',sans-serif" font-size="6" font-weight="600" fill="#2a6e52" opacity="0.7">RIVER WALK / BOARDWALK</text>
 
             <!-- ── STREET LABELS ── -->
             <text x="210" y="61" text-anchor="middle" font-family="'Work Sans',sans-serif" font-size="8" font-weight="700" fill="#6b6050" letter-spacing="2" opacity="0.88">ALICE STREET</text>
@@ -251,186 +265,1031 @@
             <text x="160" y="261" text-anchor="middle" font-family="'Plus Jakarta Sans',sans-serif" font-size="9" font-weight="800" fill="#1e5e30" opacity="0.38" letter-spacing="0.5">BOTANIC GARDENS</text>
 
             <!-- Area labels -->
-            <text x="148" y="198" text-anchor="middle" font-family="'Work Sans',sans-serif" font-size="7" font-weight="700" fill="#1e5e30" opacity="0.62">BALDWIN LAWN</text>
+            <text x="106" y="150" text-anchor="middle" font-family="'Work Sans',sans-serif" font-size="7" font-weight="700" fill="#1e5e30" opacity="0.62">ROYAL PALM LAWN</text>
+            <text x="150" y="215" text-anchor="middle" font-family="'Work Sans',sans-serif" font-size="7" font-weight="700" fill="#1e5e30" opacity="0.62">BALDWIN LAWN</text>
+            <text x="214" y="312" text-anchor="middle" font-family="'Work Sans',sans-serif" font-size="7" font-weight="700" fill="#1e5e30" opacity="0.58">FORMAL GARDEN</text>
+            <text x="276" y="365" text-anchor="middle" font-family="'Work Sans',sans-serif" font-size="7" font-weight="700" fill="#1e5e30" opacity="0.58">RESIDENCE HILL</text>
+            <text x="348" y="318" text-anchor="middle" font-family="'Work Sans',sans-serif" font-size="7" font-weight="700" fill="#1e5e30" opacity="0.62">CAFE</text>
+            <text x="346" y="415" text-anchor="middle" font-family="'Work Sans',sans-serif" font-size="7" font-weight="700" fill="#1e5e30" opacity="0.62">RAINFOREST</text>
             <text x="350" y="510" text-anchor="middle" font-family="'Work Sans',sans-serif" font-size="7" font-weight="700" fill="#1e5e30" opacity="0.62">RIVERSTAGE</text>
-            <text x="355" y="130" text-anchor="middle" font-family="'Work Sans',sans-serif" font-size="7" font-weight="700" fill="#1e5e30" opacity="0.55">PALM GROVE</text>
+            <text x="232" y="438" text-anchor="middle" font-family="'Work Sans',sans-serif" font-size="7" font-weight="700" fill="#1e5e30" opacity="0.55">BAMBOO GROVE</text>
 
             <!-- ── TRAIL ROUTE LINE ── -->
             <g id="trail-route-line">
-              <path d="M 212,88 L 302,140 L 145,282 L 200,360 L 270,298 L 345,490"
-                    fill="none" stroke="#0f5238" stroke-width="2.5" stroke-dasharray="6,4"
-                    stroke-linecap="round" opacity="0.65"/>
+              <path d="M 202,286 C 160,254 110,214 93,166
+                       C 142,138 206,142 268,156
+                       C 298,195 322,244 338,312
+                       C 326,344 300,364 276,374
+                       C 254,383 237,388 220,394"
+                    fill="none" stroke="#f7efe0" stroke-width="7"
+                    stroke-linecap="round" stroke-linejoin="round" opacity="0.9"/>
+              <path d="M 202,286 C 160,254 110,214 93,166
+                       C 142,138 206,142 268,156
+                       C 298,195 322,244 338,312
+                       C 326,344 300,364 276,374
+                       C 254,383 237,388 220,394"
+                    fill="none" stroke="#cf3340" stroke-width="2.7" stroke-dasharray="3,4"
+                    stroke-linecap="round" stroke-linejoin="round" opacity="0.95"/>
             </g>
 
             <!-- ══════════════════════════════════════════════
                  FACILITY MARKERS
                  ══════════════════════════════════════════════ -->
 
-            <!-- ── ENTRANCES ── -->
-            <g class="facility-group" data-type="entrance">
-              <!-- Alice St main entrance -->
-              <circle cx="212" cy="78" r="8" fill="#0f5238" filter="url(#shadow-sm)"/>
-              <text x="212" y="82" text-anchor="middle" font-family="'Work Sans',sans-serif" font-size="8" font-weight="900" fill="#fff">↓</text>
-              <rect x="228" y="72" width="58" height="14" rx="7" fill="#fff" opacity="0.82"/>
-              <text x="257" y="82" text-anchor="middle" font-family="'Work Sans',sans-serif" font-size="6.5" font-weight="700" fill="#0f5238">MAIN ENTRY</text>
+            <!-- ── ENTRANCES AND LANDMARKS ── -->
+            <g class="facility-group" data-type="landmark">
+              <!-- You are here / Alice + Albert entry from real visitor map -->
+              <circle cx="44" cy="268" r="11" fill="#c3353d" filter="url(#shadow-sm)"/>
+              <text x="44" y="272" text-anchor="middle" font-family="'Work Sans',sans-serif" font-size="8" font-weight="900" fill="#fff">YOU</text>
+              <rect x="54" y="254" width="58" height="15" rx="7.5" fill="#fff" opacity="0.88"/>
+              <text x="83" y="264" text-anchor="middle" font-family="'Work Sans',sans-serif" font-size="6.5" font-weight="800" fill="#c3353d">YOU ARE HERE</text>
 
-              <!-- George St entrance -->
-              <circle cx="32" cy="275" r="8" fill="#0f5238" filter="url(#shadow-sm)"/>
-              <text x="32" y="279" text-anchor="middle" font-family="'Work Sans',sans-serif" font-size="8" font-weight="900" fill="#fff">→</text>
+              <!-- Major landmarks from the real map -->
+              <circle cx="207" cy="286" r="10" fill="#0f5238" filter="url(#shadow-sm)"/>
+              <text x="207" y="290" text-anchor="middle" font-family="'Work Sans',sans-serif" font-size="8" font-weight="900" fill="#fff">R</text>
+              <rect x="218" y="278" width="58" height="13" rx="6.5" fill="#fff" opacity="0.8"/>
+              <text x="247" y="287" text-anchor="middle" font-family="'Work Sans',sans-serif" font-size="6" font-weight="800" fill="#0f5238">ROTUNDA</text>
 
-              <!-- River/boardwalk entrance -->
-              <circle cx="206" cy="585" r="7" fill="#0f5238" filter="url(#shadow-sm)"/>
-              <text x="206" y="589" text-anchor="middle" font-family="'Work Sans',sans-serif" font-size="7" font-weight="900" fill="#fff">↑</text>
+              <circle cx="225" cy="438" r="10" fill="#0f5238" filter="url(#shadow-sm)"/>
+              <text x="225" y="442" text-anchor="middle" font-family="'Work Sans',sans-serif" font-size="8" font-weight="900" fill="#fff">i</text>
+              <rect x="238" y="431" width="55" height="13" rx="6.5" fill="#fff" opacity="0.8"/>
+              <text x="265" y="440" text-anchor="middle" font-family="'Work Sans',sans-serif" font-size="5.7" font-weight="800" fill="#0f5238">INFO KIOSK</text>
+
+              <circle cx="354" cy="505" r="10" fill="#0f5238" filter="url(#shadow-sm)"/>
+              <text x="354" y="509" text-anchor="middle" font-family="'Work Sans',sans-serif" font-size="8" font-weight="900" fill="#fff">RS</text>
+
+              <rect x="42" y="468" width="116" height="52" rx="7" fill="#dfddd6" opacity="0.78"/>
+              <text x="100" y="491" text-anchor="middle" font-family="'Work Sans',sans-serif" font-size="8" font-weight="800" fill="#6b6050">OLD GOVERNMENT</text>
+              <text x="100" y="504" text-anchor="middle" font-family="'Work Sans',sans-serif" font-size="8" font-weight="800" fill="#6b6050">HOUSE / QUT</text>
             </g>
 
-            <!-- ── TOILETS (WC) ── dark purple circles -->
+            <!-- ── TOILETS (WC) ── dark purple circles, placed from real map facilities -->
             <g class="facility-group" data-type="toilet">
-              <!-- WC near Alice St entrance (east) -->
-              <circle cx="358" cy="112" r="14" fill="#5e3fa0" filter="url(#shadow-sm)"/>
-              <text x="358" y="117" text-anchor="middle" font-family="'Work Sans',sans-serif" font-size="8.5" font-weight="800" fill="#fff">WC</text>
+              <!-- Rotunda toilets -->
+              <circle cx="190" cy="280" r="14" fill="#5e3fa0" filter="url(#shadow-sm)"/>
+              <text x="190" y="285" text-anchor="middle" font-family="'Work Sans',sans-serif" font-size="8.5" font-weight="800" fill="#fff">WC</text>
 
-              <!-- WC near Baldwin Lawn / playground -->
-              <circle cx="145" cy="305" r="14" fill="#5e3fa0" filter="url(#shadow-sm)"/>
-              <text x="145" y="310" text-anchor="middle" font-family="'Work Sans',sans-serif" font-size="8.5" font-weight="800" fill="#fff">WC</text>
+              <!-- Garden cafe toilets -->
+              <circle cx="342" cy="330" r="14" fill="#5e3fa0" filter="url(#shadow-sm)"/>
+              <text x="342" y="335" text-anchor="middle" font-family="'Work Sans',sans-serif" font-size="8.5" font-weight="800" fill="#fff">WC</text>
 
-              <!-- WC near Riverstage (SE area) -->
-              <circle cx="358" cy="488" r="14" fill="#5e3fa0" filter="url(#shadow-sm)"/>
-              <text x="358" y="493" text-anchor="middle" font-family="'Work Sans',sans-serif" font-size="8.5" font-weight="800" fill="#fff">WC</text>
+              <!-- Southern river / Riverstage toilets -->
+              <circle cx="354" cy="492" r="14" fill="#5e3fa0" filter="url(#shadow-sm)"/>
+              <text x="354" y="497" text-anchor="middle" font-family="'Work Sans',sans-serif" font-size="8.5" font-weight="800" fill="#fff">WC</text>
             </g>
 
             <!-- ── ACCESSIBLE FACILITIES ── teal circles with ♿ -->
             <g class="facility-group" data-type="accessible">
-              <!-- Accessible near Alice St toilet -->
-              <circle cx="358" cy="133" r="10" fill="#0a7b60" filter="url(#shadow-sm)"/>
-              <text x="358" y="138" text-anchor="middle" font-family="'Work Sans',sans-serif" font-size="10" fill="#fff">♿</text>
+              <circle cx="174" cy="280" r="10" fill="#0a7b60" filter="url(#shadow-sm)"/>
+              <text x="174" y="285" text-anchor="middle" font-family="'Work Sans',sans-serif" font-size="10" fill="#fff">♿</text>
 
-              <!-- Accessible near Baldwin Lawn toilet -->
-              <circle cx="145" cy="325" r="10" fill="#0a7b60" filter="url(#shadow-sm)"/>
-              <text x="145" y="330" text-anchor="middle" font-family="'Work Sans',sans-serif" font-size="10" fill="#fff">♿</text>
+              <circle cx="324" cy="330" r="10" fill="#0a7b60" filter="url(#shadow-sm)"/>
+              <text x="324" y="335" text-anchor="middle" font-family="'Work Sans',sans-serif" font-size="10" fill="#fff">♿</text>
 
-              <!-- Accessible near Riverstage toilet -->
-              <circle cx="358" cy="508" r="10" fill="#0a7b60" filter="url(#shadow-sm)"/>
-              <text x="358" y="513" text-anchor="middle" font-family="'Work Sans',sans-serif" font-size="10" fill="#fff">♿</text>
+              <circle cx="334" cy="492" r="10" fill="#0a7b60" filter="url(#shadow-sm)"/>
+              <text x="334" y="497" text-anchor="middle" font-family="'Work Sans',sans-serif" font-size="10" fill="#fff">♿</text>
             </g>
 
             <!-- ── DRINKING FOUNTAINS ── blue circles with water drop -->
             <g class="facility-group" data-type="fountain">
-              <!-- Near Alice St entrance (west side) -->
-              <circle cx="115" cy="108" r="12" fill="#1269a8" filter="url(#shadow-sm)"/>
-              <text x="115" y="114" text-anchor="middle" font-size="13" fill="#fff">💧</text>
+              <circle cx="78" cy="344" r="12" fill="#1269a8" filter="url(#shadow-sm)"/>
+              <text x="78" y="350" text-anchor="middle" font-size="13" fill="#fff">💧</text>
 
-              <!-- Central path junction -->
-              <circle cx="205" cy="280" r="12" fill="#1269a8" filter="url(#shadow-sm)"/>
-              <text x="205" y="286" text-anchor="middle" font-size="13" fill="#fff">💧</text>
+              <circle cx="116" cy="170" r="12" fill="#1269a8" filter="url(#shadow-sm)"/>
+              <text x="116" y="176" text-anchor="middle" font-size="13" fill="#fff">💧</text>
 
-              <!-- North of Lagoon -->
-              <circle cx="280" cy="278" r="12" fill="#1269a8" filter="url(#shadow-sm)"/>
-              <text x="280" y="284" text-anchor="middle" font-size="13" fill="#fff">💧</text>
+              <circle cx="202" cy="286" r="12" fill="#1269a8" filter="url(#shadow-sm)"/>
+              <text x="202" y="292" text-anchor="middle" font-size="13" fill="#fff">💧</text>
 
-              <!-- Near Riverstage -->
-              <circle cx="332" cy="510" r="12" fill="#1269a8" filter="url(#shadow-sm)"/>
-              <text x="332" y="516" text-anchor="middle" font-size="13" fill="#fff">💧</text>
+              <circle cx="322" cy="316" r="12" fill="#1269a8" filter="url(#shadow-sm)"/>
+              <text x="322" y="322" text-anchor="middle" font-size="13" fill="#fff">💧</text>
             </g>
 
             <!-- ── SEATING / BENCHES ── warm brown circles -->
             <g class="facility-group" data-type="seating">
-              <!-- Near cannon (Stop 2 area) -->
-              <circle cx="296" cy="160" r="11" fill="#7a5530" filter="url(#shadow-sm)"/>
-              <text x="296" y="165" text-anchor="middle" font-size="11">🪑</text>
+              <circle cx="96" cy="166" r="11" fill="#7a5530" filter="url(#shadow-sm)"/>
+              <text x="96" y="171" text-anchor="middle" font-size="11">🪑</text>
 
-              <!-- Near Baldwin playground -->
-              <circle cx="170" cy="348" r="11" fill="#7a5530" filter="url(#shadow-sm)"/>
-              <text x="170" y="353" text-anchor="middle" font-size="11">🪑</text>
+              <circle cx="153" cy="232" r="11" fill="#7a5530" filter="url(#shadow-sm)"/>
+              <text x="153" y="237" text-anchor="middle" font-size="11">🪑</text>
 
-              <!-- East of lagoon -->
-              <circle cx="374" cy="338" r="11" fill="#7a5530" filter="url(#shadow-sm)"/>
-              <text x="374" y="343" text-anchor="middle" font-size="11">🪑</text>
+              <circle cx="222" cy="315" r="11" fill="#7a5530" filter="url(#shadow-sm)"/>
+              <text x="222" y="320" text-anchor="middle" font-size="11">🪑</text>
 
-              <!-- Near south path (central) -->
-              <circle cx="240" cy="534" r="11" fill="#7a5530" filter="url(#shadow-sm)"/>
-              <text x="240" y="539" text-anchor="middle" font-size="11">🪑</text>
+              <circle cx="302" cy="360" r="11" fill="#7a5530" filter="url(#shadow-sm)"/>
+              <text x="302" y="365" text-anchor="middle" font-size="11">🪑</text>
 
-              <!-- George St entrance area -->
-              <circle cx="68" cy="292" r="11" fill="#7a5530" filter="url(#shadow-sm)"/>
-              <text x="68" y="297" text-anchor="middle" font-size="11">🪑</text>
+              <circle cx="246" cy="438" r="11" fill="#7a5530" filter="url(#shadow-sm)"/>
+              <text x="246" y="443" text-anchor="middle" font-size="11">🪑</text>
 
-              <!-- NE open area -->
-              <circle cx="348" cy="215" r="11" fill="#7a5530" filter="url(#shadow-sm)"/>
-              <text x="348" y="220" text-anchor="middle" font-size="11">🪑</text>
+              <circle cx="352" cy="522" r="11" fill="#7a5530" filter="url(#shadow-sm)"/>
+              <text x="352" y="527" text-anchor="middle" font-size="11">🪑</text>
             </g>
 
             <!-- ── PICNIC AREAS ── orange circles -->
             <g class="facility-group" data-type="picnic">
-              <!-- Central lawn -->
-              <circle cx="220" cy="235" r="13" fill="#c45e18" filter="url(#shadow-sm)"/>
-              <text x="220" y="241" text-anchor="middle" font-size="13">🍱</text>
+              <circle cx="168" cy="250" r="13" fill="#c45e18" filter="url(#shadow-sm)"/>
+              <text x="168" y="256" text-anchor="middle" font-size="13">🍱</text>
 
-              <!-- Near river, south area -->
-              <circle cx="192" cy="552" r="13" fill="#c45e18" filter="url(#shadow-sm)"/>
-              <text x="192" y="558" text-anchor="middle" font-size="13">🍱</text>
+              <circle cx="272" cy="386" r="13" fill="#c45e18" filter="url(#shadow-sm)"/>
+              <text x="272" y="392" text-anchor="middle" font-size="13">🍱</text>
             </g>
 
             <!-- ── CAFÉ / KIOSK ── amber circle -->
             <g class="facility-group" data-type="cafe">
-              <circle cx="230" cy="198" r="13" fill="#b06012" filter="url(#shadow-sm)"/>
-              <text x="230" y="204" text-anchor="middle" font-size="13">☕</text>
-              <rect x="244" y="190" width="40" height="12" rx="6" fill="#fff" opacity="0.78"/>
-              <text x="264" y="200" text-anchor="middle" font-family="'Work Sans',sans-serif" font-size="6" font-weight="700" fill="#7a4000">CAFÉ</text>
+              <circle cx="338" cy="316" r="13" fill="#b06012" filter="url(#shadow-sm)"/>
+              <text x="338" y="322" text-anchor="middle" font-size="13">☕</text>
+              <rect x="349" y="308" width="47" height="12" rx="6" fill="#fff" opacity="0.78"/>
+              <text x="372" y="318" text-anchor="middle" font-family="'Work Sans',sans-serif" font-size="6" font-weight="700" fill="#7a4000">GARDEN CAFE</text>
             </g>
 
             <!-- ── TRAIL QUEST STOPS ── numbered dark green circles -->
             <g class="facility-group" data-type="trail">
-              <!-- Stop 1: Alice St Entrance -->
-              <circle cx="212" cy="88" r="13" fill="#0f5238" stroke="#fff" stroke-width="2.5" filter="url(#shadow-sm)"/>
-              <text x="212" y="93" text-anchor="middle" font-family="'Plus Jakarta Sans',sans-serif" font-size="10" font-weight="800" fill="#fff">1</text>
+              <!-- Medicinal Plant Treasures stops, following the real brochure route -->
+              <circle cx="202" cy="286" r="13" fill="#0f5238" stroke="#fff" stroke-width="2.5" filter="url(#shadow-sm)"/>
+              <text x="202" y="291" text-anchor="middle" font-family="'Plus Jakarta Sans',sans-serif" font-size="10" font-weight="800" fill="#fff">1</text>
 
-              <!-- Stop 2: Cannon landmark -->
-              <circle cx="302" cy="140" r="13" fill="#0f5238" stroke="#fff" stroke-width="2.5" filter="url(#shadow-sm)"/>
-              <text x="302" y="145" text-anchor="middle" font-family="'Plus Jakarta Sans',sans-serif" font-size="10" font-weight="800" fill="#fff">2</text>
-              <!-- Mini cannon silhouette -->
-              <rect x="287" y="127" width="12" height="7" rx="2.5" fill="#7a6a4a" opacity="0.55"/>
-              <rect x="285" y="132" width="4" height="9" rx="1" fill="#7a6a4a" opacity="0.55"/>
+              <circle cx="93" cy="166" r="13" fill="#0f5238" stroke="#fff" stroke-width="2.5" filter="url(#shadow-sm)"/>
+              <text x="93" y="171" text-anchor="middle" font-family="'Plus Jakarta Sans',sans-serif" font-size="10" font-weight="800" fill="#fff">2</text>
 
-              <!-- Stop 3: Baldwin Lawn Playground -->
-              <circle cx="145" cy="282" r="13" fill="#0f5238" stroke="#fff" stroke-width="2.5" filter="url(#shadow-sm)"/>
-              <text x="145" y="287" text-anchor="middle" font-family="'Plus Jakarta Sans',sans-serif" font-size="10" font-weight="800" fill="#fff">3</text>
-              <text x="165" y="278" font-size="12" opacity="0.85">🛝</text>
+              <circle cx="268" cy="156" r="13" fill="#0f5238" stroke="#fff" stroke-width="2.5" filter="url(#shadow-sm)"/>
+              <text x="268" y="161" text-anchor="middle" font-family="'Plus Jakarta Sans',sans-serif" font-size="10" font-weight="800" fill="#fff">3</text>
 
-              <!-- Stop 4: Comfort Stop (toilets) -->
-              <circle cx="200" cy="360" r="13" fill="#0f5238" stroke="#fff" stroke-width="2.5" filter="url(#shadow-sm)"/>
-              <text x="200" y="365" text-anchor="middle" font-family="'Plus Jakarta Sans',sans-serif" font-size="10" font-weight="800" fill="#fff">4</text>
+              <circle cx="338" cy="312" r="13" fill="#0f5238" stroke="#fff" stroke-width="2.5" filter="url(#shadow-sm)"/>
+              <text x="338" y="317" text-anchor="middle" font-family="'Plus Jakarta Sans',sans-serif" font-size="10" font-weight="800" fill="#fff">4</text>
 
-              <!-- Stop 5: Oakman's Lagoon -->
-              <circle cx="270" cy="298" r="13" fill="#0f5238" stroke="#fff" stroke-width="2.5" filter="url(#shadow-sm)"/>
-              <text x="270" y="303" text-anchor="middle" font-family="'Plus Jakarta Sans',sans-serif" font-size="10" font-weight="800" fill="#fff">5</text>
-              <text x="252" y="318" font-size="12" opacity="0.85">🦎</text>
+              <circle cx="276" cy="374" r="13" fill="#0f5238" stroke="#fff" stroke-width="2.5" filter="url(#shadow-sm)"/>
+              <text x="276" y="379" text-anchor="middle" font-family="'Plus Jakarta Sans',sans-serif" font-size="10" font-weight="800" fill="#fff">5</text>
 
-              <!-- Stop 6: Riverstage -->
-              <circle cx="345" cy="490" r="13" fill="#0f5238" stroke="#fff" stroke-width="2.5" filter="url(#shadow-sm)"/>
-              <text x="345" y="495" text-anchor="middle" font-family="'Plus Jakarta Sans',sans-serif" font-size="10" font-weight="800" fill="#fff">6</text>
-              <text x="328" y="510" font-size="12" opacity="0.85">🎭</text>
+              <circle cx="220" cy="394" r="13" fill="#0f5238" stroke="#fff" stroke-width="2.5" filter="url(#shadow-sm)"/>
+              <text x="220" y="399" text-anchor="middle" font-family="'Plus Jakarta Sans',sans-serif" font-size="10" font-weight="800" fill="#fff">6</text>
+            </g>
+
+            <!-- ── Redrawn from the green City Botanic Gardens facilities map ── -->
+            <g id="real-facilities-drawn-map">
+              <!-- Cover the older abstract drawing while keeping the same SVG shell/controls. -->
+              <rect width="420" height="620" fill="#f0eee4"/>
+
+              <!-- Surrounding city blocks and river, matching the sign map composition. -->
+              <path d="M 328,0 L 420,0 L 420,620 L 330,620
+                       C 370,572 394,510 399,438
+                       C 406,338 385,254 390,170
+                       C 394,92 366,35 328,0 Z"
+                    fill="url(#riverGrad)" opacity="0.96"/>
+              <path d="M 0,455 C 44,472 78,498 112,538
+                       C 144,574 186,598 238,620 L 0,620 Z"
+                    fill="url(#riverGrad)" opacity="0.9"/>
+              <path d="M 26,92 L 185,12 L 236,88 L 76,182 Z" fill="#e9e7dc" opacity="0.86"/>
+              <path d="M 36,362 L 168,310 L 248,414 L 215,548 L 118,540 L 48,478 Z" fill="#dedfdc" opacity="0.92"/>
+              <path d="M 146,438 L 218,406 L 266,472 L 218,536 L 150,512 Z" fill="#cfd4d2" opacity="0.7"/>
+              <path d="M 78,310 L 128,282 L 175,318 L 130,356 Z" fill="#d7dad5" opacity="0.7"/>
+
+              <!-- Street labels outside the green park. -->
+              <text x="85" y="92" font-family="'Work Sans',sans-serif" font-size="7" font-weight="700" fill="#6b6050" transform="rotate(-39 85 92)">Mary St</text>
+              <text x="118" y="139" font-family="'Work Sans',sans-serif" font-size="7" font-weight="700" fill="#6b6050" transform="rotate(-39 118 139)">Albert St</text>
+              <text x="81" y="217" font-family="'Work Sans',sans-serif" font-size="8" font-weight="700" fill="#6b6050" transform="rotate(-39 81 217)">Alice St</text>
+              <text x="45" y="263" font-family="'Work Sans',sans-serif" font-size="8" font-weight="700" fill="#6b6050" transform="rotate(38 45 263)">George St</text>
+              <text x="198" y="486" font-family="'Work Sans',sans-serif" font-size="7" font-weight="700" fill="#6b6050" transform="rotate(50 198 486)">Main St</text>
+              <text x="252" y="505" font-family="'Work Sans',sans-serif" font-size="7" font-weight="700" fill="#6b6050" transform="rotate(-52 252 505)">Gardens Point Rd</text>
+
+              <!-- Green park footprint traced to the facilities sign layout. -->
+              <path d="M 246,24
+                       C 289,24 330,36 360,64
+                       C 381,82 386,115 376,154
+                       C 367,190 366,224 382,258
+                       C 401,301 396,377 381,433
+                       C 362,505 315,574 255,598
+                       C 218,611 189,597 183,563
+                       C 178,530 201,495 211,459
+                       C 221,425 200,396 168,382
+                       C 134,367 99,339 71,296
+                       C 51,265 56,229 88,206
+                       C 119,184 139,156 158,126
+                       C 178,95 208,60 246,24 Z"
+                    fill="#55b819"/>
+              <path d="M 246,24
+                       C 289,24 330,36 360,64
+                       C 381,82 386,115 376,154
+                       C 367,190 366,224 382,258
+                       C 401,301 396,377 381,433
+                       C 362,505 315,574 255,598
+                       C 218,611 189,597 183,563
+                       C 178,530 201,495 211,459
+                       C 221,425 200,396 168,382
+                       C 134,367 99,339 71,296
+                       C 51,265 56,229 88,206
+                       C 119,184 139,156 158,126
+                       C 178,95 208,60 246,24 Z"
+                    fill="none" stroke="#2f8f2f" stroke-width="2" opacity="0.5"/>
+
+              <!-- QUT / Old Government House cutout inside the green park. -->
+              <path d="M 74,336 L 160,298 L 224,384 L 198,472 L 118,496 L 54,438 Z"
+                    fill="#e4e2d7" opacity="0.95"/>
+              <path d="M 142,344 L 195,320 L 232,368 L 205,420 L 158,412 Z"
+                    fill="#cfd4d2" opacity="0.55"/>
+              <path d="M 172,452 L 212,434 L 236,474 L 205,512 L 170,498 Z"
+                    fill="#d6d8d3" opacity="0.75"/>
+
+              <!-- The Lagoons from the sign map. -->
+              <path d="M 111,214 C 130,196 159,201 168,222
+                       C 178,246 151,269 122,263
+                       C 96,258 88,235 111,214 Z"
+                    fill="url(#lagoonGrad)" opacity="0.95"/>
+              <path d="M 128,222 C 141,214 157,219 160,232
+                       C 163,245 148,255 132,251
+                       C 115,248 113,231 128,222 Z"
+                    fill="#68c4dc" opacity="0.92"/>
+              <ellipse cx="130" cy="239" rx="20" ry="11" fill="none" stroke="#fff" stroke-width="1.1" opacity="0.42"/>
+
+              <!-- Main paths copied from the sign map structure. -->
+              <g fill="none" stroke="#f8fff2" stroke-linecap="round" stroke-linejoin="round">
+                <path d="M 238,42 L 186,120 L 140,190 L 80,228" stroke-width="5.6"/>
+                <path d="M 238,42 L 306,78 L 356,94 L 378,130" stroke-width="5.6"/>
+                <path d="M 140,190 L 197,223 L 259,244 L 337,304 L 378,366" stroke-width="5.8"/>
+                <path d="M 173,246 L 224,284 L 276,338 L 318,420 L 352,504" stroke-width="5.8"/>
+                <path d="M 224,284 L 258,244 L 301,188 L 347,141" stroke-width="4.8"/>
+                <path d="M 197,223 L 183,300 L 168,382" stroke-width="4.8"/>
+                <path d="M 211,459 L 262,454 L 318,420 L 378,366" stroke-width="5.4"/>
+                <path d="M 222,548 C 258,540 310,524 352,504" stroke-width="5.4"/>
+                <path d="M 238,42 C 292,100 338,173 358,250 C 379,332 372,424 352,504" stroke-width="4"/>
+                <path d="M 316,100 L 316,185 L 318,292 L 318,420" stroke-width="4"/>
+                <path d="M 262,454 L 288,520 L 255,598" stroke-width="4.8"/>
+                <path d="M 80,228 L 116,258 L 173,246" stroke-width="4.8"/>
+                <path d="M 81,296 L 124,276 L 150,251" stroke-width="4.8"/>
+                <path d="M 183,300 L 224,284 L 276,338" stroke-width="4"/>
+              </g>
+              <g fill="none" stroke="#2b8f34" stroke-linecap="round" stroke-linejoin="round" opacity="0.42">
+                <path d="M 238,42 C 292,100 338,173 358,250 C 379,332 372,424 352,504" stroke-width="0.9" stroke-dasharray="2.4,4.2"/>
+                <path d="M 316,100 L 316,185 L 318,292 L 318,420" stroke-width="0.9" stroke-dasharray="2.4,4.2"/>
+                <path d="M 222,548 C 258,540 310,524 352,504" stroke-width="0.9" stroke-dasharray="2.4,4.2"/>
+              </g>
+
+              <!-- Small lawn/site markers from the sign map. -->
+              <g font-family="'Work Sans',sans-serif" font-size="6.4" font-weight="800" fill="#174b22" text-anchor="middle">
+                <text x="282" y="151">QUEENS PARK</text>
+                <text x="282" y="160">FIELD</text>
+                <text x="315" y="117">ROYAL PALM</text>
+                <text x="315" y="126">LAWN</text>
+                <text x="327" y="177">FIG TREE</text>
+                <text x="327" y="186">AVENUE LAWN</text>
+                <text x="344" y="226">BALDWIN LAWN</text>
+                <text x="344" y="235">PLAYGROUND</text>
+                <text x="259" y="198">HILL'S</text>
+                <text x="259" y="207">AVENUE</text>
+                <text x="238" y="276">FORMAL</text>
+                <text x="238" y="285">FLOWER</text>
+                <text x="238" y="294">GARDEN</text>
+                <text x="205" y="330">BAMBOO</text>
+                <text x="205" y="339">GROVE</text>
+                <text x="256" y="419">PALM</text>
+                <text x="256" y="428">GROVE</text>
+                <text x="337" y="340">BUNYA</text>
+                <text x="337" y="349">LAWN</text>
+                <text x="326" y="413">RESIDENCE</text>
+                <text x="326" y="422">HILL</text>
+                <text x="337" y="455">RAINFOREST</text>
+                <text x="337" y="464">HIDEAWAY</text>
+                <text x="313" y="493">THE</text>
+                <text x="313" y="502">GARDENS</text>
+                <text x="313" y="511">CLUB</text>
+                <text x="295" y="566">RIVERSTAGE</text>
+                <text x="232" y="584">DOMAIN</text>
+                <text x="138" y="343">MEMORIAL</text>
+                <text x="138" y="352">LAWN</text>
+                <text x="125" y="292">WEDDING</text>
+                <text x="125" y="301">LAWN</text>
+                <text x="125" y="226">LILYPOND</text>
+                <text x="125" y="235">LAWN</text>
+                <text x="143" y="257">THE</text>
+                <text x="143" y="266">LAGOONS</text>
+                <text x="172" y="325">PALM AVENUE</text>
+                <text x="172" y="334">LAWN</text>
+                <text x="185" y="360">SOUNDSHELL</text>
+                <text x="185" y="369">HILL</text>
+                <text x="130" y="377">PINETUM</text>
+              </g>
+              <g font-family="'Work Sans',sans-serif" font-size="6" font-weight="800" fill="#555" text-anchor="middle">
+                <text x="97" y="420">INFORMATION</text>
+                <text x="97" y="429">KIOSK</text>
+                <text x="94" y="470">QUEENSLAND</text>
+                <text x="94" y="479">UNIVERSITY OF</text>
+                <text x="94" y="488">TECHNOLOGY</text>
+                <text x="204" y="519">OLD</text>
+                <text x="204" y="528">GOVERNMENT</text>
+                <text x="204" y="537">HOUSE</text>
+              </g>
+
+              <!-- Bookable site and horticultural feature numbers. -->
+              <g font-family="'Plus Jakarta Sans',sans-serif" font-size="7.5" font-weight="900" text-anchor="middle">
+                <circle cx="240" cy="275" r="9" fill="#f3d34a"/><text x="240" y="278" fill="#684900">1</text>
+                <circle cx="208" cy="326" r="8" fill="#f3d34a"/><text x="208" y="329" fill="#684900">2</text>
+                <circle cx="257" cy="407" r="8" fill="#f3d34a"/><text x="257" y="410" fill="#684900">3</text>
+                <circle cx="257" cy="197" r="8" fill="#f3d34a"/><text x="257" y="200" fill="#684900">5</text>
+                <circle cx="130" cy="375" r="8" fill="#f3d34a"/><text x="130" y="378" fill="#684900">6</text>
+                <circle cx="125" cy="225" r="8" fill="#168dd6"/><text x="125" y="228" fill="#fff">3</text>
+                <circle cx="124" cy="293" r="8" fill="#168dd6"/><text x="124" y="296" fill="#fff">2</text>
+                <circle cx="172" cy="324" r="8" fill="#168dd6"/><text x="172" y="327" fill="#fff">1</text>
+                <circle cx="252" cy="151" r="8" fill="#168dd6"/><text x="252" y="154" fill="#fff">4</text>
+                <circle cx="315" cy="118" r="8" fill="#168dd6"/><text x="315" y="121" fill="#fff">5</text>
+                <circle cx="327" cy="178" r="8" fill="#168dd6"/><text x="327" y="181" fill="#fff">6</text>
+                <circle cx="337" cy="455" r="8" fill="#168dd6"/><text x="337" y="458" fill="#fff">7</text>
+                <circle cx="313" cy="493" r="8" fill="#168dd6"/><text x="313" y="496" fill="#fff">8</text>
+                <circle cx="337" cy="340" r="8" fill="#168dd6"/><text x="337" y="343" fill="#fff">9</text>
+              </g>
+
+              <!-- Thin riverwalk and boardwalk marks. -->
+              <path d="M 374,34 C 363,96 359,155 369,216 C 380,285 386,364 371,438 C 359,499 326,555 255,598"
+                    fill="none" stroke="#2d8dc2" stroke-width="2.2" opacity="0.8"/>
+              <text x="382" y="167" font-family="'Work Sans',sans-serif" font-size="5.7" font-weight="800" fill="#1269a8" transform="rotate(84 382 167)">RIVERWALK</text>
+              <text x="73" y="579" font-family="'Work Sans',sans-serif" font-size="5.7" font-weight="800" fill="#1269a8" transform="rotate(42 73 579)">MANGROVE BOARDWALK</text>
+            </g>
+
+            <g id="real-map-facility-layer">
+              <g class="facility-group" data-type="landmark">
+                <circle cx="232" cy="72" r="18" fill="#c3353d" filter="url(#shadow-sm)"/>
+                <text x="232" y="68" text-anchor="middle" font-family="'Work Sans',sans-serif" font-size="8" font-weight="900" fill="#fff">YOU</text>
+                <text x="232" y="79" text-anchor="middle" font-family="'Work Sans',sans-serif" font-size="8" font-weight="900" fill="#fff">HERE</text>
+                <path d="M 225,88 L 207,145" fill="none" stroke="#c3353d" stroke-width="4" stroke-linecap="round"/>
+                <circle cx="97" cy="419" r="9" fill="#0f5238" filter="url(#shadow-sm)"/><text x="97" y="423" text-anchor="middle" font-size="9" font-weight="900" fill="#fff">i</text>
+                <circle cx="185" cy="360" r="8" fill="#0f5238" filter="url(#shadow-sm)"/><text x="185" y="364" text-anchor="middle" font-size="7" font-weight="900" fill="#fff">S</text>
+                <circle cx="295" cy="566" r="8" fill="#0f5238" filter="url(#shadow-sm)"/><text x="295" y="570" text-anchor="middle" font-size="7" font-weight="900" fill="#fff">RS</text>
+              </g>
+
+              <g class="facility-group" data-type="toilet">
+                <circle cx="207" cy="145" r="11" fill="#1f2522" filter="url(#shadow-sm)"/><text x="207" y="149" text-anchor="middle" font-family="'Work Sans',sans-serif" font-size="7.5" font-weight="900" fill="#fff">WC</text>
+                <circle cx="312" cy="286" r="11" fill="#1f2522" filter="url(#shadow-sm)"/><text x="312" y="290" text-anchor="middle" font-family="'Work Sans',sans-serif" font-size="7.5" font-weight="900" fill="#fff">WC</text>
+                <circle cx="297" cy="527" r="11" fill="#1f2522" filter="url(#shadow-sm)"/><text x="297" y="531" text-anchor="middle" font-family="'Work Sans',sans-serif" font-size="7.5" font-weight="900" fill="#fff">WC</text>
+              </g>
+
+              <g class="facility-group" data-type="accessible">
+                <circle cx="344" cy="112" r="8" fill="#2c8ad7" filter="url(#shadow-sm)"/><text x="344" y="116" text-anchor="middle" font-size="8.5" fill="#fff">♿</text>
+              </g>
+
+              <g class="facility-group" data-type="fountain">
+                <circle cx="127" cy="238" r="9" fill="#111" filter="url(#shadow-sm)"/><text x="127" y="243" text-anchor="middle" font-size="10" fill="#fff">💧</text>
+                <circle cx="240" cy="284" r="9" fill="#111" filter="url(#shadow-sm)"/><text x="240" y="289" text-anchor="middle" font-size="10" fill="#fff">💧</text>
+                <circle cx="312" cy="493" r="9" fill="#111" filter="url(#shadow-sm)"/><text x="312" y="498" text-anchor="middle" font-size="10" fill="#fff">💧</text>
+              </g>
+
+              <g class="facility-group" data-type="seating">
+                <circle cx="153" cy="246" r="8" fill="#6b5238" filter="url(#shadow-sm)"/><text x="153" y="251" text-anchor="middle" font-size="9">🪑</text>
+                <circle cx="258" cy="244" r="8" fill="#6b5238" filter="url(#shadow-sm)"/><text x="258" y="249" text-anchor="middle" font-size="9">🪑</text>
+                <circle cx="345" cy="226" r="8" fill="#6b5238" filter="url(#shadow-sm)"/><text x="345" y="231" text-anchor="middle" font-size="9">🪑</text>
+                <circle cx="326" cy="413" r="8" fill="#6b5238" filter="url(#shadow-sm)"/><text x="326" y="418" text-anchor="middle" font-size="9">🪑</text>
+                <circle cx="255" cy="526" r="8" fill="#6b5238" filter="url(#shadow-sm)"/><text x="255" y="531" text-anchor="middle" font-size="9">🪑</text>
+              </g>
+
+              <g class="facility-group" data-type="picnic">
+                <circle cx="173" cy="324" r="9" fill="#c45e18" filter="url(#shadow-sm)"/><text x="173" y="329" text-anchor="middle" font-size="9">🍱</text>
+                <circle cx="232" cy="584" r="9" fill="#c45e18" filter="url(#shadow-sm)"/><text x="232" y="589" text-anchor="middle" font-size="9">🍱</text>
+              </g>
+
+              <g class="facility-group" data-type="cafe">
+                <circle cx="313" cy="493" r="10" fill="#b06012" filter="url(#shadow-sm)"/>
+                <text x="313" y="498" text-anchor="middle" font-size="10">☕</text>
+                <circle cx="312" cy="286" r="9" fill="#b06012" filter="url(#shadow-sm)"/>
+                <text x="312" y="291" text-anchor="middle" font-size="9">☕</text>
+              </g>
+
+              <g class="facility-group" data-type="trail">
+                <path d="M 202,286 C 160,254 110,214 93,166
+                         C 142,138 206,142 268,156
+                         C 298,195 322,244 338,312
+                         C 326,344 300,364 276,374
+                         C 254,383 237,388 220,394"
+                      fill="none" stroke="#ffffff" stroke-width="5.2" stroke-linecap="round" stroke-linejoin="round" opacity="0.86"/>
+                <path d="M 202,286 C 160,254 110,214 93,166
+                         C 142,138 206,142 268,156
+                         C 298,195 322,244 338,312
+                         C 326,344 300,364 276,374
+                         C 254,383 237,388 220,394"
+                      fill="none" stroke="#cf3340" stroke-width="2.1" stroke-dasharray="2.5,4" stroke-linecap="round" stroke-linejoin="round"/>
+                <circle cx="202" cy="286" r="12" fill="#cf3340" stroke="#fff" stroke-width="2" filter="url(#shadow-sm)"/><text x="202" y="290" text-anchor="middle" font-family="'Plus Jakarta Sans',sans-serif" font-size="9" font-weight="900" fill="#fff">1</text>
+                <circle cx="93" cy="166" r="12" fill="#cf3340" stroke="#fff" stroke-width="2" filter="url(#shadow-sm)"/><text x="93" y="170" text-anchor="middle" font-family="'Plus Jakarta Sans',sans-serif" font-size="9" font-weight="900" fill="#fff">2</text>
+                <circle cx="268" cy="156" r="12" fill="#cf3340" stroke="#fff" stroke-width="2" filter="url(#shadow-sm)"/><text x="268" y="160" text-anchor="middle" font-family="'Plus Jakarta Sans',sans-serif" font-size="9" font-weight="900" fill="#fff">3</text>
+                <circle cx="338" cy="312" r="12" fill="#cf3340" stroke="#fff" stroke-width="2" filter="url(#shadow-sm)"/><text x="338" y="316" text-anchor="middle" font-family="'Plus Jakarta Sans',sans-serif" font-size="9" font-weight="900" fill="#fff">4</text>
+                <circle cx="276" cy="374" r="12" fill="#cf3340" stroke="#fff" stroke-width="2" filter="url(#shadow-sm)"/><text x="276" y="378" text-anchor="middle" font-family="'Plus Jakarta Sans',sans-serif" font-size="9" font-weight="900" fill="#fff">5</text>
+                <circle cx="220" cy="394" r="12" fill="#cf3340" stroke="#fff" stroke-width="2" filter="url(#shadow-sm)"/><text x="220" y="398" text-anchor="middle" font-family="'Plus Jakarta Sans',sans-serif" font-size="9" font-weight="900" fill="#fff">6</text>
+              </g>
+            </g>
+
+            <!-- ── Metro-style rectangular schematic map ── -->
+            <g id="schematic-garden-map">
+              <rect width="420" height="620" fill="#eef3ea"/>
+
+              <!-- Minimal surrounding context. -->
+              <rect x="28" y="30" width="364" height="536" rx="26" fill="#55b819"/>
+              <rect x="376" y="30" width="16" height="536" rx="8" fill="#8bd9ef" opacity="0.95"/>
+              <rect x="28" y="548" width="364" height="18" rx="9" fill="#8bd9ef" opacity="0.92"/>
+              <rect x="42" y="408" width="104" height="88" rx="12" fill="#e5e2d6" opacity="0.95"/>
+              <text x="94" y="450" text-anchor="middle" font-family="'Work Sans',sans-serif" font-size="8" font-weight="800" fill="#666">QUT / OLD</text>
+              <text x="94" y="462" text-anchor="middle" font-family="'Work Sans',sans-serif" font-size="8" font-weight="800" fill="#666">GOVERNMENT HOUSE</text>
+
+              <!-- Schematic lawns and garden areas. -->
+              <rect x="50" y="64" width="125" height="86" rx="18" fill="#6dcc3a" opacity="0.86"/>
+              <rect x="200" y="64" width="148" height="86" rx="18" fill="#66c934" opacity="0.9"/>
+              <rect x="50" y="170" width="142" height="94" rx="18" fill="#63c72f" opacity="0.92"/>
+              <rect x="216" y="170" width="132" height="94" rx="18" fill="#64c630" opacity="0.9"/>
+              <rect x="164" y="292" width="184" height="86" rx="18" fill="#68ca36" opacity="0.88"/>
+              <rect x="164" y="404" width="184" height="110" rx="18" fill="#60c22c" opacity="0.92"/>
+              <path d="M 64,214 C 84,188 140,190 158,218 C 175,245 147,274 106,270 C 70,266 50,239 64,214 Z"
+                    fill="url(#lagoonGrad)" opacity="0.95"/>
+
+              <!-- Clean metro-style paths. -->
+              <g fill="none" stroke="#fbfff5" stroke-linecap="round" stroke-linejoin="round">
+                <path d="M 104,88 L 104,226 L 196,226 L 196,336 L 196,476 L 268,548" stroke-width="8"/>
+                <path d="M 104,226 L 196,336 L 284,336 L 348,276" stroke-width="8"/>
+                <path d="M 196,226 L 276,150 L 348,86" stroke-width="7"/>
+                <path d="M 276,150 L 276,336 L 312,468 L 348,548" stroke-width="7"/>
+                <path d="M 64,336 L 196,336" stroke-width="7"/>
+                <path d="M 196,476 L 312,468 L 348,420" stroke-width="7"/>
+                <path d="M 348,86 L 348,548" stroke-width="5" opacity="0.85"/>
+                <path d="M 104,548 L 268,548 L 348,548" stroke-width="6" opacity="0.9"/>
+              </g>
+              <g fill="none" stroke="#2b8f34" stroke-linecap="round" stroke-linejoin="round" opacity="0.32">
+                <path d="M 348,86 L 348,548" stroke-width="1.1" stroke-dasharray="3,5"/>
+                <path d="M 104,548 L 268,548 L 348,548" stroke-width="1.1" stroke-dasharray="3,5"/>
+              </g>
+
+              <!-- Area labels. -->
+              <g font-family="'Work Sans',sans-serif" text-anchor="middle" fill="#174b22">
+                <text x="112" y="107" font-size="8" font-weight="800">ROYAL PALM LAWN</text>
+                <text x="274" y="107" font-size="8" font-weight="800">QUEENS PARK FIELD</text>
+                <text x="118" y="208" font-size="8" font-weight="800">THE LAGOONS</text>
+                <text x="118" y="246" font-size="7" font-weight="800">WEDDING / LILYPOND LAWN</text>
+                <text x="282" y="216" font-size="8" font-weight="800">BALDWIN LAWN</text>
+                <text x="256" y="324" font-size="8" font-weight="800">FORMAL FLOWER GARDEN</text>
+                <text x="232" y="438" font-size="8" font-weight="800">BAMBOO / PALM GROVE</text>
+                <text x="310" y="492" font-size="8" font-weight="800">RAINFOREST</text>
+                <text x="256" y="535" font-size="8" font-weight="800">RIVERSTAGE / DOMAIN</text>
+              </g>
+              <text x="382" y="300" font-family="'Work Sans',sans-serif" font-size="8" font-weight="800" fill="#1269a8" transform="rotate(90 382 300)">RIVER WALK</text>
+              <text x="210" y="561" text-anchor="middle" font-family="'Work Sans',sans-serif" font-size="8" font-weight="800" fill="#1269a8">BRISBANE RIVER</text>
+            </g>
+
+            <g id="schematic-facilities">
+              <g class="facility-group" data-type="landmark">
+                <circle cx="184" cy="54" r="18" fill="#c3353d" filter="url(#shadow-sm)"/>
+                <text x="184" y="50" text-anchor="middle" font-family="'Work Sans',sans-serif" font-size="8" font-weight="900" fill="#fff">YOU</text>
+                <text x="184" y="61" text-anchor="middle" font-family="'Work Sans',sans-serif" font-size="8" font-weight="900" fill="#fff">HERE</text>
+                <path d="M 178,70 L 150,144" fill="none" stroke="#c3353d" stroke-width="4" stroke-linecap="round"/>
+                <circle cx="94" cy="392" r="9" fill="#0f5238" filter="url(#shadow-sm)"/>
+                <text x="94" y="396" text-anchor="middle" font-family="'Work Sans',sans-serif" font-size="9" font-weight="900" fill="#fff">i</text>
+                <circle cx="196" cy="476" r="9" fill="#0f5238" filter="url(#shadow-sm)"/>
+                <text x="196" y="480" text-anchor="middle" font-family="'Work Sans',sans-serif" font-size="8" font-weight="900" fill="#fff">S</text>
+                <circle cx="256" cy="535" r="9" fill="#0f5238" filter="url(#shadow-sm)"/>
+                <text x="256" y="539" text-anchor="middle" font-family="'Work Sans',sans-serif" font-size="7" font-weight="900" fill="#fff">RS</text>
+              </g>
+
+              <g class="facility-group" data-type="toilet">
+                <circle cx="150" cy="144" r="11" fill="#1f2522" filter="url(#shadow-sm)"/>
+                <text x="150" y="148" text-anchor="middle" font-family="'Work Sans',sans-serif" font-size="7.5" font-weight="900" fill="#fff">WC</text>
+                <circle cx="310" cy="336" r="11" fill="#1f2522" filter="url(#shadow-sm)"/>
+                <text x="310" y="340" text-anchor="middle" font-family="'Work Sans',sans-serif" font-size="7.5" font-weight="900" fill="#fff">WC</text>
+                <circle cx="268" cy="548" r="11" fill="#1f2522" filter="url(#shadow-sm)"/>
+                <text x="268" y="552" text-anchor="middle" font-family="'Work Sans',sans-serif" font-size="7.5" font-weight="900" fill="#fff">WC</text>
+              </g>
+
+              <g class="facility-group" data-type="accessible">
+                <circle cx="334" cy="84" r="8" fill="#2c8ad7" filter="url(#shadow-sm)"/>
+                <text x="334" y="88" text-anchor="middle" font-size="8.5" fill="#fff">♿</text>
+              </g>
+
+              <g class="facility-group" data-type="fountain">
+                <circle cx="118" cy="208" r="9" fill="#111" filter="url(#shadow-sm)"/>
+                <text x="118" y="213" text-anchor="middle" font-size="10" fill="#fff">💧</text>
+                <circle cx="196" cy="336" r="9" fill="#111" filter="url(#shadow-sm)"/>
+                <text x="196" y="341" text-anchor="middle" font-size="10" fill="#fff">💧</text>
+                <circle cx="310" cy="492" r="9" fill="#111" filter="url(#shadow-sm)"/>
+                <text x="310" y="497" text-anchor="middle" font-size="10" fill="#fff">💧</text>
+              </g>
+
+              <g class="facility-group" data-type="seating">
+                <circle cx="104" cy="88" r="8" fill="#6b5238" filter="url(#shadow-sm)"/><text x="104" y="93" text-anchor="middle" font-size="9">🪑</text>
+                <circle cx="196" cy="226" r="8" fill="#6b5238" filter="url(#shadow-sm)"/><text x="196" y="231" text-anchor="middle" font-size="9">🪑</text>
+                <circle cx="348" cy="276" r="8" fill="#6b5238" filter="url(#shadow-sm)"/><text x="348" y="281" text-anchor="middle" font-size="9">🪑</text>
+                <circle cx="196" cy="476" r="8" fill="#6b5238" filter="url(#shadow-sm)"/><text x="196" y="481" text-anchor="middle" font-size="9">🪑</text>
+              </g>
+
+              <g class="facility-group" data-type="picnic">
+                <circle cx="104" cy="548" r="9" fill="#c45e18" filter="url(#shadow-sm)"/><text x="104" y="553" text-anchor="middle" font-size="9">🍱</text>
+                <circle cx="232" cy="438" r="9" fill="#c45e18" filter="url(#shadow-sm)"/><text x="232" y="443" text-anchor="middle" font-size="9">🍱</text>
+              </g>
+
+              <g class="facility-group" data-type="cafe">
+                <circle cx="310" cy="336" r="10" fill="#b06012" filter="url(#shadow-sm)"/>
+                <text x="310" y="341" text-anchor="middle" font-size="10">☕</text>
+                <circle cx="310" cy="492" r="10" fill="#b06012" filter="url(#shadow-sm)"/>
+                <text x="310" y="497" text-anchor="middle" font-size="10">☕</text>
+              </g>
+
+              <g class="facility-group" data-type="trail">
+                <path d="M 196,336 L 104,226 L 104,88 L 276,150 L 310,336 L 232,438 L 196,476"
+                      fill="none" stroke="#fff" stroke-width="5.6" stroke-linecap="round" stroke-linejoin="round" opacity="0.9"/>
+                <path d="M 196,336 L 104,226 L 104,88 L 276,150 L 310,336 L 232,438 L 196,476"
+                      fill="none" stroke="#cf3340" stroke-width="2.2" stroke-dasharray="2.5,4" stroke-linecap="round" stroke-linejoin="round"/>
+                <circle cx="196" cy="336" r="12" fill="#cf3340" stroke="#fff" stroke-width="2" filter="url(#shadow-sm)"/><text x="196" y="340" text-anchor="middle" font-family="'Plus Jakarta Sans',sans-serif" font-size="9" font-weight="900" fill="#fff">1</text>
+                <circle cx="104" cy="88" r="12" fill="#cf3340" stroke="#fff" stroke-width="2" filter="url(#shadow-sm)"/><text x="104" y="92" text-anchor="middle" font-family="'Plus Jakarta Sans',sans-serif" font-size="9" font-weight="900" fill="#fff">2</text>
+                <circle cx="276" cy="150" r="12" fill="#cf3340" stroke="#fff" stroke-width="2" filter="url(#shadow-sm)"/><text x="276" y="154" text-anchor="middle" font-family="'Plus Jakarta Sans',sans-serif" font-size="9" font-weight="900" fill="#fff">3</text>
+                <circle cx="310" cy="336" r="12" fill="#cf3340" stroke="#fff" stroke-width="2" filter="url(#shadow-sm)"/><text x="310" y="340" text-anchor="middle" font-family="'Plus Jakarta Sans',sans-serif" font-size="9" font-weight="900" fill="#fff">4</text>
+                <circle cx="232" cy="438" r="12" fill="#cf3340" stroke="#fff" stroke-width="2" filter="url(#shadow-sm)"/><text x="232" y="442" text-anchor="middle" font-family="'Plus Jakarta Sans',sans-serif" font-size="9" font-weight="900" fill="#fff">5</text>
+                <circle cx="196" cy="476" r="12" fill="#cf3340" stroke="#fff" stroke-width="2" filter="url(#shadow-sm)"/><text x="196" y="480" text-anchor="middle" font-family="'Plus Jakarta Sans',sans-serif" font-size="9" font-weight="900" fill="#fff">6</text>
+              </g>
+            </g>
+
+            <!-- ── Google-map-inspired drawn outline with photo landmarks ── -->
+            <g id="google-style-garden-map">
+              <rect width="420" height="620" fill="#eef1ea"/>
+
+              <!-- Real-world context kept minimal: city/QUT land and Brisbane River. -->
+              <path d="M 340,0 L 420,0 L 420,620 L 300,620
+                       C 344,572 375,515 388,450
+                       C 405,365 391,292 382,220
+                       C 372,135 376,62 340,0 Z"
+                    fill="url(#riverGrad)" opacity="0.96"/>
+              <path d="M 0,518 C 46,525 82,548 120,580
+                       C 142,598 172,611 206,620 L 0,620 Z"
+                    fill="url(#riverGrad)" opacity="0.9"/>
+              <path d="M 0,70 L 206,0 L 272,78 L 86,176 L 0,164 Z"
+                    fill="#e5e3d8" opacity="0.95"/>
+              <path d="M 24,392 L 126,340 L 208,410 L 190,518 L 80,524 L 18,466 Z"
+                    fill="#dedfd9" opacity="0.95"/>
+              <path d="M 118,430 L 190,396 L 240,452 L 205,524 L 132,504 Z"
+                    fill="#cfd4d2" opacity="0.72"/>
+
+              <!-- Streets/edges just outside the garden. -->
+              <g fill="none" stroke="#c6c2b7" stroke-linecap="round">
+                <path d="M 34,78 L 174,34 L 256,80" stroke-width="11"/>
+                <path d="M 42,202 L 114,164 L 196,112" stroke-width="10"/>
+                <path d="M 130,520 L 194,562 L 284,590" stroke-width="10"/>
+              </g>
+              <g font-family="'Work Sans',sans-serif" font-size="8" font-weight="800" fill="#6d675e">
+                <text x="74" y="85" transform="rotate(-20 74 85)">George St</text>
+                <text x="142" y="154" transform="rotate(-31 142 154)">Alice St</text>
+                <text x="190" y="548" transform="rotate(28 190 548)">Gardens Point Rd</text>
+              </g>
+
+              <!-- Botanic Gardens footprint following the peninsula/river shape. -->
+              <path d="M 214,28
+                       C 270,28 323,49 351,91
+                       C 369,120 366,159 361,201
+                       C 356,242 371,281 382,319
+                       C 401,386 384,468 338,535
+                       C 301,590 239,611 198,584
+                       C 166,562 177,515 188,472
+                       C 196,439 187,411 159,394
+                       C 119,371 77,337 55,291
+                       C 37,253 49,212 88,185
+                       C 128,157 146,118 165,85
+                       C 177,64 192,42 214,28 Z"
+                    fill="#55b819"/>
+              <path d="M 214,28
+                       C 270,28 323,49 351,91
+                       C 369,120 366,159 361,201
+                       C 356,242 371,281 382,319
+                       C 401,386 384,468 338,535
+                       C 301,590 239,611 198,584
+                       C 166,562 177,515 188,472
+                       C 196,439 187,411 159,394
+                       C 119,371 77,337 55,291
+                       C 37,253 49,212 88,185
+                       C 128,157 146,118 165,85
+                       C 177,64 192,42 214,28 Z"
+                    fill="none" stroke="#2c8c2f" stroke-width="2.3" opacity="0.62"/>
+
+              <!-- QUT / Old Government House cutout within the peninsula. -->
+              <path d="M 54,372 L 138,328 L 207,392 L 186,482 L 102,506 L 36,452 Z"
+                    fill="#e5e3d8" opacity="0.98"/>
+              <path d="M 128,398 L 190,368 L 230,418 L 198,474 L 144,466 Z"
+                    fill="#cfd4d2" opacity="0.62"/>
+
+              <!-- Garden features from the photos. -->
+              <path d="M 92,211 C 111,184 155,184 171,212
+                       C 186,238 162,267 126,267
+                       C 89,267 70,239 92,211 Z"
+                    fill="url(#lagoonGrad)" opacity="0.96"/>
+              <path d="M 117,220 C 130,210 155,217 159,233
+                       C 163,249 143,259 124,252
+                       C 105,246 103,231 117,220 Z"
+                    fill="#65c4dc" opacity="0.92"/>
+              <ellipse cx="132" cy="238" rx="23" ry="13" fill="none" stroke="#fff" stroke-width="1.2" opacity="0.4"/>
+
+              <!-- Google-map-like path network: curved, cleaner, real-world oriented. -->
+              <g fill="none" stroke="#fbfff5" stroke-linecap="round" stroke-linejoin="round">
+                <path d="M 206,50 C 190,92 164,137 124,178 C 97,205 78,237 68,280" stroke-width="7"/>
+                <path d="M 206,50 C 254,77 310,99 351,123" stroke-width="7"/>
+                <path d="M 126,178 C 172,205 221,236 264,272 C 309,310 344,354 374,405" stroke-width="7.2"/>
+                <path d="M 164,262 C 205,292 239,333 270,389 C 295,432 316,487 338,535" stroke-width="7.2"/>
+                <path d="M 264,272 C 286,226 315,177 351,123" stroke-width="5.8"/>
+                <path d="M 214,318 C 241,299 268,281 301,264 C 326,251 346,231 361,201" stroke-width="5.8"/>
+                <path d="M 188,472 C 231,469 278,455 326,427 C 348,414 364,407 382,405" stroke-width="7"/>
+                <path d="M 198,584 C 240,573 292,558 338,535" stroke-width="7"/>
+                <path d="M 68,280 C 106,298 138,319 164,350 C 179,368 194,383 207,392" stroke-width="6"/>
+                <path d="M 159,394 C 169,427 183,451 188,472" stroke-width="5.4"/>
+                <path d="M 342,94 C 346,151 350,215 360,278 C 374,360 369,452 338,535" stroke-width="4.8" opacity="0.9"/>
+                <path d="M 270,389 C 250,435 226,505 198,584" stroke-width="5.4"/>
+              </g>
+              <g fill="none" stroke="#2b8f34" stroke-linecap="round" stroke-linejoin="round" opacity="0.34">
+                <path d="M 342,94 C 346,151 350,215 360,278 C 374,360 369,452 338,535" stroke-width="1.1" stroke-dasharray="3,5"/>
+                <path d="M 198,584 C 240,573 292,558 338,535" stroke-width="1.1" stroke-dasharray="3,5"/>
+              </g>
+
+              <!-- Area labels from the uploaded signs/photos. -->
+              <g font-family="'Work Sans',sans-serif" text-anchor="middle" fill="#174b22">
+                <text x="260" y="116" font-size="8" font-weight="800">QUEENS PARK FIELD</text>
+                <text x="312" y="96" font-size="7.5" font-weight="800">ROYAL PALM LAWN</text>
+                <text x="323" y="164" font-size="7.5" font-weight="800">FIG TREE AVENUE</text>
+                <text x="328" y="219" font-size="8" font-weight="800">BALDWIN LAWN</text>
+                <text x="328" y="230" font-size="8" font-weight="800">PLAYGROUND</text>
+                <text x="246" y="200" font-size="8" font-weight="800">HILL'S AVENUE</text>
+                <text x="237" y="289" font-size="8" font-weight="800">FORMAL FLOWER</text>
+                <text x="237" y="300" font-size="8" font-weight="800">GARDEN</text>
+                <text x="203" y="342" font-size="8" font-weight="800">BAMBOO GROVE</text>
+                <text x="248" y="423" font-size="8" font-weight="800">PALM GROVE</text>
+                <text x="316" y="420" font-size="8" font-weight="800">RESIDENCE HILL</text>
+                <text x="326" y="465" font-size="8" font-weight="800">RAINFOREST</text>
+                <text x="326" y="476" font-size="8" font-weight="800">HIDEAWAY</text>
+                <text x="294" y="511" font-size="8" font-weight="800">THE GARDENS CLUB</text>
+                <text x="270" y="562" font-size="8" font-weight="800">RIVERSTAGE</text>
+                <text x="215" y="590" font-size="8" font-weight="800">DOMAIN</text>
+                <text x="124" y="239" font-size="8" font-weight="800">THE LAGOONS</text>
+                <text x="112" y="210" font-size="7.5" font-weight="800">LILYPOND LAWN</text>
+                <text x="113" y="286" font-size="7.5" font-weight="800">WEDDING LAWN</text>
+                <text x="132" y="350" font-size="7.5" font-weight="800">MEMORIAL LAWN</text>
+                <text x="162" y="328" font-size="7.5" font-weight="800">PALM AVENUE</text>
+                <text x="162" y="338" font-size="7.5" font-weight="800">LAWN</text>
+                <text x="178" y="369" font-size="7.5" font-weight="800">SOUNDSHELL HILL</text>
+                <text x="128" y="382" font-size="7.5" font-weight="800">PINETUM</text>
+              </g>
+              <g font-family="'Work Sans',sans-serif" font-size="7" font-weight="800" fill="#5e625c" text-anchor="middle">
+                <text x="90" y="432">INFORMATION</text>
+                <text x="90" y="442">KIOSK</text>
+                <text x="91" y="468">QUEENSLAND</text>
+                <text x="91" y="478">UNIVERSITY OF</text>
+                <text x="91" y="488">TECHNOLOGY</text>
+                <text x="190" y="520">OLD GOVERNMENT</text>
+                <text x="190" y="530">HOUSE</text>
+              </g>
+              <text x="384" y="295" font-family="'Work Sans',sans-serif" font-size="8" font-weight="800" fill="#1269a8" transform="rotate(86 384 295)">RIVER WALK</text>
+              <text x="248" y="606" text-anchor="middle" font-family="'Work Sans',sans-serif" font-size="8" font-weight="800" fill="#1269a8">BRISBANE RIVER</text>
+            </g>
+
+            <g id="google-style-facilities">
+              <g class="facility-group" data-type="landmark">
+                <circle cx="194" cy="58" r="18" fill="#c3353d" filter="url(#shadow-sm)"/>
+                <text x="194" y="54" text-anchor="middle" font-family="'Work Sans',sans-serif" font-size="8" font-weight="900" fill="#fff">YOU</text>
+                <text x="194" y="65" text-anchor="middle" font-family="'Work Sans',sans-serif" font-size="8" font-weight="900" fill="#fff">HERE</text>
+                <path d="M 188,75 L 168,132" fill="none" stroke="#c3353d" stroke-width="4" stroke-linecap="round"/>
+                <circle cx="90" cy="432" r="9" fill="#0f5238" filter="url(#shadow-sm)"/><text x="90" y="436" text-anchor="middle" font-family="'Work Sans',sans-serif" font-size="9" font-weight="900" fill="#fff">i</text>
+                <circle cx="178" cy="369" r="8" fill="#0f5238" filter="url(#shadow-sm)"/><text x="178" y="373" text-anchor="middle" font-family="'Work Sans',sans-serif" font-size="7" font-weight="900" fill="#fff">S</text>
+                <circle cx="270" cy="562" r="9" fill="#0f5238" filter="url(#shadow-sm)"/><text x="270" y="566" text-anchor="middle" font-family="'Work Sans',sans-serif" font-size="7" font-weight="900" fill="#fff">RS</text>
+              </g>
+
+              <g class="facility-group" data-type="toilet">
+                <circle cx="168" cy="132" r="11" fill="#1f2522" filter="url(#shadow-sm)"/><text x="168" y="136" text-anchor="middle" font-family="'Work Sans',sans-serif" font-size="7.5" font-weight="900" fill="#fff">WC</text>
+                <circle cx="296" cy="308" r="11" fill="#1f2522" filter="url(#shadow-sm)"/><text x="296" y="312" text-anchor="middle" font-family="'Work Sans',sans-serif" font-size="7.5" font-weight="900" fill="#fff">WC</text>
+                <circle cx="296" cy="526" r="11" fill="#1f2522" filter="url(#shadow-sm)"/><text x="296" y="530" text-anchor="middle" font-family="'Work Sans',sans-serif" font-size="7.5" font-weight="900" fill="#fff">WC</text>
+              </g>
+
+              <g class="facility-group" data-type="accessible">
+                <circle cx="335" cy="104" r="8" fill="#2c8ad7" filter="url(#shadow-sm)"/><text x="335" y="108" text-anchor="middle" font-size="8.5" fill="#fff">♿</text>
+              </g>
+
+              <g class="facility-group" data-type="fountain">
+                <circle cx="124" cy="239" r="9" fill="#111" filter="url(#shadow-sm)"/><text x="124" y="244" text-anchor="middle" font-size="10" fill="#fff">💧</text>
+                <circle cx="237" cy="289" r="9" fill="#111" filter="url(#shadow-sm)"/><text x="237" y="294" text-anchor="middle" font-size="10" fill="#fff">💧</text>
+                <circle cx="294" cy="511" r="9" fill="#111" filter="url(#shadow-sm)"/><text x="294" y="516" text-anchor="middle" font-size="10" fill="#fff">💧</text>
+              </g>
+
+              <g class="facility-group" data-type="seating">
+                <circle cx="312" cy="96" r="8" fill="#6b5238" filter="url(#shadow-sm)"/><text x="312" y="101" text-anchor="middle" font-size="9">🪑</text>
+                <circle cx="328" cy="219" r="8" fill="#6b5238" filter="url(#shadow-sm)"/><text x="328" y="224" text-anchor="middle" font-size="9">🪑</text>
+                <circle cx="178" cy="369" r="8" fill="#6b5238" filter="url(#shadow-sm)"/><text x="178" y="374" text-anchor="middle" font-size="9">🪑</text>
+                <circle cx="316" cy="420" r="8" fill="#6b5238" filter="url(#shadow-sm)"/><text x="316" y="425" text-anchor="middle" font-size="9">🪑</text>
+                <circle cx="270" cy="562" r="8" fill="#6b5238" filter="url(#shadow-sm)"/><text x="270" y="567" text-anchor="middle" font-size="9">🪑</text>
+              </g>
+
+              <g class="facility-group" data-type="picnic">
+                <circle cx="113" cy="286" r="9" fill="#c45e18" filter="url(#shadow-sm)"/><text x="113" y="291" text-anchor="middle" font-size="9">🍱</text>
+                <circle cx="215" cy="590" r="9" fill="#c45e18" filter="url(#shadow-sm)"/><text x="215" y="595" text-anchor="middle" font-size="9">🍱</text>
+              </g>
+
+              <g class="facility-group" data-type="cafe">
+                <circle cx="294" cy="511" r="10" fill="#b06012" filter="url(#shadow-sm)"/>
+                <text x="294" y="516" text-anchor="middle" font-size="10">☕</text>
+                <circle cx="296" cy="308" r="9" fill="#b06012" filter="url(#shadow-sm)"/>
+                <text x="296" y="313" text-anchor="middle" font-size="9">☕</text>
+              </g>
+
+              <g class="facility-group" data-type="trail">
+                <path d="M 237,289 C 178,258 126,211 112,156
+                         C 162,120 228,128 270,154
+                         C 305,204 321,262 296,308
+                         C 275,348 238,384 216,426
+                         C 200,455 190,480 178,506"
+                      fill="none" stroke="#fff" stroke-width="5.8" stroke-linecap="round" stroke-linejoin="round" opacity="0.9"/>
+                <path d="M 237,289 C 178,258 126,211 112,156
+                         C 162,120 228,128 270,154
+                         C 305,204 321,262 296,308
+                         C 275,348 238,384 216,426
+                         C 200,455 190,480 178,506"
+                      fill="none" stroke="#cf3340" stroke-width="2.2" stroke-dasharray="2.5,4" stroke-linecap="round" stroke-linejoin="round"/>
+                <circle cx="237" cy="289" r="12" fill="#cf3340" stroke="#fff" stroke-width="2" filter="url(#shadow-sm)"/><text x="237" y="293" text-anchor="middle" font-family="'Plus Jakarta Sans',sans-serif" font-size="9" font-weight="900" fill="#fff">1</text>
+                <circle cx="112" cy="156" r="12" fill="#cf3340" stroke="#fff" stroke-width="2" filter="url(#shadow-sm)"/><text x="112" y="160" text-anchor="middle" font-family="'Plus Jakarta Sans',sans-serif" font-size="9" font-weight="900" fill="#fff">2</text>
+                <circle cx="270" cy="154" r="12" fill="#cf3340" stroke="#fff" stroke-width="2" filter="url(#shadow-sm)"/><text x="270" y="158" text-anchor="middle" font-family="'Plus Jakarta Sans',sans-serif" font-size="9" font-weight="900" fill="#fff">3</text>
+                <circle cx="296" cy="308" r="12" fill="#cf3340" stroke="#fff" stroke-width="2" filter="url(#shadow-sm)"/><text x="296" y="312" text-anchor="middle" font-family="'Plus Jakarta Sans',sans-serif" font-size="9" font-weight="900" fill="#fff">4</text>
+                <circle cx="216" cy="426" r="12" fill="#cf3340" stroke="#fff" stroke-width="2" filter="url(#shadow-sm)"/><text x="216" y="430" text-anchor="middle" font-family="'Plus Jakarta Sans',sans-serif" font-size="9" font-weight="900" fill="#fff">5</text>
+                <circle cx="178" cy="506" r="12" fill="#cf3340" stroke="#fff" stroke-width="2" filter="url(#shadow-sm)"/><text x="178" y="510" text-anchor="middle" font-family="'Plus Jakarta Sans',sans-serif" font-size="9" font-weight="900" fill="#fff">6</text>
+              </g>
+            </g>
+
+            <!-- ── Final clean navigation schematic using real garden labels ── -->
+            <g id="clean-navigation-map">
+              <rect width="420" height="620" fill="#eef4ec"/>
+              <rect x="24" y="28" width="372" height="540" rx="28" fill="#5fbd2f"/>
+              <rect x="376" y="28" width="20" height="540" rx="10" fill="#9eddf0"/>
+              <rect x="24" y="548" width="372" height="20" rx="10" fill="#9eddf0"/>
+              <text x="386" y="300" font-family="'Work Sans',sans-serif" font-size="8" font-weight="900" fill="#1269a8" transform="rotate(90 386 300)">RIVER WALK</text>
+              <text x="210" y="562" text-anchor="middle" font-family="'Work Sans',sans-serif" font-size="8" font-weight="900" fill="#1269a8">BRISBANE RIVER</text>
+
+              <!-- Small outside context only. -->
+              <rect x="42" y="390" width="96" height="76" rx="12" fill="#e6e1d5"/>
+              <text x="90" y="426" text-anchor="middle" font-family="'Work Sans',sans-serif" font-size="7" font-weight="900" fill="#5d5f59">QUT</text>
+              <text x="90" y="437" text-anchor="middle" font-family="'Work Sans',sans-serif" font-size="7" font-weight="900" fill="#5d5f59">OLD GOVT HOUSE</text>
+              <text x="90" y="78" text-anchor="middle" font-family="'Work Sans',sans-serif" font-size="7" font-weight="900" fill="#6d675e">ALICE / GEORGE ST</text>
+              <text x="210" y="594" text-anchor="middle" font-family="'Work Sans',sans-serif" font-size="7" font-weight="900" fill="#6d675e">GARDENS POINT RD</text>
+
+              <!-- Tidy navigation path network. -->
+              <g fill="none" stroke="#ffffff" stroke-linecap="round" stroke-linejoin="round">
+                <path d="M 76,118 H 210 H 334" stroke-width="8"/>
+                <path d="M 76,222 H 210 H 334" stroke-width="8"/>
+                <path d="M 76,328 H 210 H 334" stroke-width="8"/>
+                <path d="M 138,442 H 238 H 334" stroke-width="8"/>
+                <path d="M 210,118 V 222 V 328 V 442 V 536" stroke-width="8"/>
+                <path d="M 334,118 V 222 V 328 V 442 V 536" stroke-width="7"/>
+                <path d="M 76,222 C 104,264 142,296 210,328" stroke-width="6"/>
+                <path d="M 210,222 C 248,258 292,292 334,328" stroke-width="6"/>
+                <path d="M 210,442 C 242,478 284,510 334,536" stroke-width="6"/>
+              </g>
+              <g fill="none" stroke="#2f8f34" stroke-linecap="round" opacity="0.32">
+                <path d="M 334,92 V 536" stroke-width="1.2" stroke-dasharray="3,5"/>
+                <path d="M 118,536 H 334" stroke-width="1.2" stroke-dasharray="3,5"/>
+              </g>
+
+              <!-- The Lagoons as a clear water landmark. -->
+              <path d="M 66,184 C 84,160 132,160 150,184 C 168,208 146,242 104,242 C 68,242 48,211 66,184 Z"
+                    fill="url(#lagoonGrad)" opacity="0.96"/>
+              <ellipse cx="106" cy="205" rx="28" ry="16" fill="none" stroke="#fff" stroke-width="1.2" opacity="0.42"/>
+
+              <!-- Label cards: real labels from the photos, arranged for scanning. -->
+              <g font-family="'Work Sans',sans-serif" text-anchor="middle">
+                <g fill="#e0f2cf" stroke="#45a525" stroke-width="1">
+                  <rect x="48" y="88" width="96" height="42" rx="10"/>
+                  <rect x="164" y="88" width="92" height="42" rx="10"/>
+                  <rect x="276" y="88" width="92" height="42" rx="10"/>
+                  <rect x="48" y="190" width="106" height="60" rx="10"/>
+                  <rect x="164" y="190" width="92" height="42" rx="10"/>
+                  <rect x="276" y="190" width="92" height="52" rx="10"/>
+                  <rect x="48" y="292" width="96" height="58" rx="10"/>
+                  <rect x="164" y="292" width="96" height="52" rx="10"/>
+                  <rect x="276" y="292" width="92" height="52" rx="10"/>
+                  <rect x="154" y="404" width="92" height="64" rx="10"/>
+                  <rect x="276" y="404" width="92" height="72" rx="10"/>
+                  <rect x="154" y="510" width="86" height="42" rx="10"/>
+                  <rect x="276" y="510" width="92" height="42" rx="10"/>
+                </g>
+                <g fill="#174b22" font-size="7.2" font-weight="900">
+                  <text x="96" y="105">ENTRANCE LAWN</text>
+                  <text x="96" y="116">YOU ARE HERE</text>
+                  <text x="210" y="105">QUEENS PARK</text>
+                  <text x="210" y="116">FIELD</text>
+                  <text x="322" y="105">ROYAL PALM</text>
+                  <text x="322" y="116">LAWN</text>
+
+                  <text x="101" y="207">LILYPOND LAWN</text>
+                  <text x="101" y="218">THE LAGOONS</text>
+                  <text x="101" y="229">WEDDING LAWN</text>
+                  <text x="210" y="207">FIG TREE</text>
+                  <text x="210" y="218">AVENUE LAWN</text>
+                  <text x="322" y="207">BALDWIN LAWN</text>
+                  <text x="322" y="218">PLAYGROUND</text>
+                  <text x="322" y="229">ALL-ABILITIES</text>
+
+                  <text x="96" y="309">MEMORIAL LAWN</text>
+                  <text x="96" y="320">PALM AVENUE</text>
+                  <text x="96" y="331">LAWN / PINETUM</text>
+                  <text x="212" y="309">FORMAL FLOWER</text>
+                  <text x="212" y="320">GARDEN</text>
+                  <text x="212" y="331">HILL'S AVENUE</text>
+                  <text x="322" y="309">MIDDLE GARDENS</text>
+                  <text x="322" y="320">BUNYA LAWN</text>
+
+                  <text x="200" y="421">BAMBOO GROVE</text>
+                  <text x="200" y="432">PALM GROVE</text>
+                  <text x="200" y="443">SOUNDSHELL HILL</text>
+                  <text x="322" y="421">RESIDENCE HILL</text>
+                  <text x="322" y="432">RAINFOREST</text>
+                  <text x="322" y="443">HIDEAWAY</text>
+                  <text x="322" y="454">HISTORIC MACADAMIA</text>
+                  <text x="322" y="465">HISTORIC BAND ROTUNDA</text>
+
+                  <text x="197" y="527">INFORMATION</text>
+                  <text x="197" y="538">KIOSK</text>
+                  <text x="197" y="549">WALTER HILL FOUNTAIN</text>
+                  <text x="322" y="527">THE GARDENS CLUB</text>
+                  <text x="322" y="538">CAFE OUTLOOK</text>
+                </g>
+                <g fill="#174b22" font-size="7.2" font-weight="900">
+                  <text x="260" y="514">RIVERSTAGE</text>
+                  <text x="260" y="525">DOMAIN</text>
+                  <text x="260" y="536">BUNYA WALK</text>
+                </g>
+              </g>
+            </g>
+
+            <g id="clean-navigation-facilities">
+              <g class="facility-group" data-type="landmark">
+                <circle cx="96" cy="78" r="17" fill="#c3353d" filter="url(#shadow-sm)"/>
+                <text x="96" y="75" text-anchor="middle" font-family="'Work Sans',sans-serif" font-size="7.5" font-weight="900" fill="#fff">YOU</text>
+                <text x="96" y="85" text-anchor="middle" font-family="'Work Sans',sans-serif" font-size="7.5" font-weight="900" fill="#fff">HERE</text>
+                <circle cx="197" cy="508" r="9" fill="#0f5238" filter="url(#shadow-sm)"/>
+                <text x="197" y="512" text-anchor="middle" font-family="'Work Sans',sans-serif" font-size="9" font-weight="900" fill="#fff">i</text>
+                <circle cx="200" cy="452" r="8" fill="#0f5238" filter="url(#shadow-sm)"/>
+                <text x="200" y="456" text-anchor="middle" font-family="'Work Sans',sans-serif" font-size="7" font-weight="900" fill="#fff">S</text>
+                <circle cx="260" cy="502" r="9" fill="#0f5238" filter="url(#shadow-sm)"/>
+                <text x="260" y="506" text-anchor="middle" font-family="'Work Sans',sans-serif" font-size="7" font-weight="900" fill="#fff">RS</text>
+                <circle cx="322" cy="464" r="8" fill="#0f5238" filter="url(#shadow-sm)"/>
+                <text x="322" y="468" text-anchor="middle" font-family="'Work Sans',sans-serif" font-size="7" font-weight="900" fill="#fff">HB</text>
+              </g>
+
+              <g class="facility-group" data-type="toilet">
+                <circle cx="150" cy="222" r="11" fill="#1f2522" filter="url(#shadow-sm)"/><text x="150" y="226" text-anchor="middle" font-family="'Work Sans',sans-serif" font-size="7.5" font-weight="900" fill="#fff">WC</text>
+                <circle cx="334" cy="332" r="11" fill="#1f2522" filter="url(#shadow-sm)"/><text x="334" y="336" text-anchor="middle" font-family="'Work Sans',sans-serif" font-size="7.5" font-weight="900" fill="#fff">WC</text>
+                <circle cx="300" cy="508" r="11" fill="#1f2522" filter="url(#shadow-sm)"/><text x="300" y="512" text-anchor="middle" font-family="'Work Sans',sans-serif" font-size="7.5" font-weight="900" fill="#fff">WC</text>
+              </g>
+
+              <g class="facility-group" data-type="accessible">
+                <circle cx="352" cy="120" r="8" fill="#2c8ad7" filter="url(#shadow-sm)"/>
+                <text x="352" y="124" text-anchor="middle" font-size="8.5" fill="#fff">♿</text>
+              </g>
+
+              <g class="facility-group" data-type="fountain">
+                <circle cx="106" cy="205" r="9" fill="#111" filter="url(#shadow-sm)"/><text x="106" y="210" text-anchor="middle" font-size="10" fill="#fff">💧</text>
+                <circle cx="212" cy="320" r="9" fill="#111" filter="url(#shadow-sm)"/><text x="212" y="325" text-anchor="middle" font-size="10" fill="#fff">💧</text>
+                <circle cx="322" cy="538" r="9" fill="#111" filter="url(#shadow-sm)"/><text x="322" y="543" text-anchor="middle" font-size="10" fill="#fff">💧</text>
+              </g>
+
+              <g class="facility-group" data-type="seating">
+                <circle cx="210" cy="118" r="8" fill="#6b5238" filter="url(#shadow-sm)"/><text x="210" y="123" text-anchor="middle" font-size="9">🪑</text>
+                <circle cx="322" cy="230" r="8" fill="#6b5238" filter="url(#shadow-sm)"/><text x="322" y="235" text-anchor="middle" font-size="9">🪑</text>
+                <circle cx="96" cy="331" r="8" fill="#6b5238" filter="url(#shadow-sm)"/><text x="96" y="336" text-anchor="middle" font-size="9">🪑</text>
+                <circle cx="322" cy="432" r="8" fill="#6b5238" filter="url(#shadow-sm)"/><text x="322" y="437" text-anchor="middle" font-size="9">🪑</text>
+              </g>
+
+              <g class="facility-group" data-type="picnic">
+                <circle cx="101" cy="229" r="9" fill="#c45e18" filter="url(#shadow-sm)"/><text x="101" y="234" text-anchor="middle" font-size="9">🍱</text>
+                <circle cx="260" cy="525" r="9" fill="#c45e18" filter="url(#shadow-sm)"/><text x="260" y="530" text-anchor="middle" font-size="9">🍱</text>
+              </g>
+
+              <g class="facility-group" data-type="cafe">
+                <circle cx="322" cy="538" r="10" fill="#b06012" filter="url(#shadow-sm)"/>
+                <text x="322" y="543" text-anchor="middle" font-size="10">☕</text>
+              </g>
+
+              <g class="facility-group" data-type="trail">
+                <path d="M 212,320 L 101,229 L 96,118 L 210,118 L 322,230 L 322,432 L 200,452"
+                      fill="none" stroke="#fff" stroke-width="5.6" stroke-linecap="round" stroke-linejoin="round" opacity="0.92"/>
+                <path d="M 212,320 L 101,229 L 96,118 L 210,118 L 322,230 L 322,432 L 200,452"
+                      fill="none" stroke="#cf3340" stroke-width="2.2" stroke-dasharray="2.5,4" stroke-linecap="round" stroke-linejoin="round"/>
+                <circle cx="212" cy="320" r="12" fill="#cf3340" stroke="#fff" stroke-width="2" filter="url(#shadow-sm)"/><text x="212" y="324" text-anchor="middle" font-family="'Plus Jakarta Sans',sans-serif" font-size="9" font-weight="900" fill="#fff">1</text>
+                <circle cx="96" cy="118" r="12" fill="#cf3340" stroke="#fff" stroke-width="2" filter="url(#shadow-sm)"/><text x="96" y="122" text-anchor="middle" font-family="'Plus Jakarta Sans',sans-serif" font-size="9" font-weight="900" fill="#fff">2</text>
+                <circle cx="210" cy="118" r="12" fill="#cf3340" stroke="#fff" stroke-width="2" filter="url(#shadow-sm)"/><text x="210" y="122" text-anchor="middle" font-family="'Plus Jakarta Sans',sans-serif" font-size="9" font-weight="900" fill="#fff">3</text>
+                <circle cx="322" cy="230" r="12" fill="#cf3340" stroke="#fff" stroke-width="2" filter="url(#shadow-sm)"/><text x="322" y="234" text-anchor="middle" font-family="'Plus Jakarta Sans',sans-serif" font-size="9" font-weight="900" fill="#fff">4</text>
+                <circle cx="322" cy="432" r="12" fill="#cf3340" stroke="#fff" stroke-width="2" filter="url(#shadow-sm)"/><text x="322" y="436" text-anchor="middle" font-family="'Plus Jakarta Sans',sans-serif" font-size="9" font-weight="900" fill="#fff">5</text>
+                <circle cx="200" cy="452" r="12" fill="#cf3340" stroke="#fff" stroke-width="2" filter="url(#shadow-sm)"/><text x="200" y="456" text-anchor="middle" font-family="'Plus Jakarta Sans',sans-serif" font-size="9" font-weight="900" fill="#fff">6</text>
+              </g>
+            </g>
+
+            <!-- ── Real map image with digital marker overlay ── -->
+            <g id="real-map-image-layer">
+              <rect width="420" height="620" fill="#e9eee8"/>
+              <image href="image/park_map.png"
+                     x="50.5" y="0" width="319" height="620"
+                     preserveAspectRatio="xMidYMid meet" />
+            </g>
+
+            <g id="digital-map-markers" font-family="'Plus Jakarta Sans', 'Work Sans', sans-serif">
+              <g class="facility-group" data-type="trail">
+                <path d="M 231,238 C 190,216 158,176 151,132
+                         C 205,105 262,119 296,166
+                         C 319,210 320,262 308,320
+                         C 292,385 268,436 244,482"
+                      fill="none" stroke="#ffffff" stroke-width="7" stroke-linecap="round" stroke-linejoin="round" opacity="0.9"/>
+                <path d="M 231,238 C 190,216 158,176 151,132
+                         C 205,105 262,119 296,166
+                         C 319,210 320,262 308,320
+                         C 292,385 268,436 244,482"
+                      fill="none" stroke="#cf3340" stroke-width="2.8" stroke-dasharray="3,4" stroke-linecap="round" stroke-linejoin="round"/>
+                <circle cx="231" cy="238" r="13" fill="#cf3340" stroke="#fff" stroke-width="2.5" filter="url(#shadow-sm)"/>
+                <text x="231" y="243" text-anchor="middle" font-size="10" font-weight="900" fill="#fff">1</text>
+                <circle cx="151" cy="132" r="13" fill="#cf3340" stroke="#fff" stroke-width="2.5" filter="url(#shadow-sm)"/>
+                <text x="151" y="137" text-anchor="middle" font-size="10" font-weight="900" fill="#fff">2</text>
+                <circle cx="296" cy="166" r="13" fill="#cf3340" stroke="#fff" stroke-width="2.5" filter="url(#shadow-sm)"/>
+                <text x="296" y="171" text-anchor="middle" font-size="10" font-weight="900" fill="#fff">3</text>
+                <circle cx="308" cy="320" r="13" fill="#cf3340" stroke="#fff" stroke-width="2.5" filter="url(#shadow-sm)"/>
+                <text x="308" y="325" text-anchor="middle" font-size="10" font-weight="900" fill="#fff">4</text>
+                <circle cx="279" cy="405" r="13" fill="#cf3340" stroke="#fff" stroke-width="2.5" filter="url(#shadow-sm)"/>
+                <text x="279" y="410" text-anchor="middle" font-size="10" font-weight="900" fill="#fff">5</text>
+                <circle cx="244" cy="482" r="13" fill="#cf3340" stroke="#fff" stroke-width="2.5" filter="url(#shadow-sm)"/>
+                <text x="244" y="487" text-anchor="middle" font-size="10" font-weight="900" fill="#fff">6</text>
+              </g>
+
+              <g class="facility-group" data-type="landmark">
+                <circle cx="179" cy="124" r="11" fill="#1f2522" stroke="#fff" stroke-width="2" filter="url(#shadow-sm)"/>
+                <text x="179" y="128" text-anchor="middle" font-size="8.5" font-weight="900" fill="#fff">BUS</text>
+                <circle cx="151" cy="335" r="12" fill="#1d8bd1" stroke="#fff" stroke-width="2" filter="url(#shadow-sm)"/>
+                <text x="151" y="340" text-anchor="middle" font-size="13" font-weight="900" fill="#fff">i</text>
+                <circle cx="179" cy="314" r="10.5" fill="#1f2522" stroke="#fff" stroke-width="2" filter="url(#shadow-sm)"/>
+                <text x="179" y="318" text-anchor="middle" font-size="9">📷</text>
+                <circle cx="207" cy="271" r="10.5" fill="#1f2522" stroke="#fff" stroke-width="2" filter="url(#shadow-sm)"/>
+                <text x="207" y="275" text-anchor="middle" font-size="9" fill="#fff">Wi</text>
+                <circle cx="365" cy="353" r="10.5" fill="#1f2522" stroke="#fff" stroke-width="2" filter="url(#shadow-sm)"/>
+                <text x="365" y="357" text-anchor="middle" font-size="9">📷</text>
+                <circle cx="311" cy="442" r="10.5" fill="#1f2522" stroke="#fff" stroke-width="2" filter="url(#shadow-sm)"/>
+                <text x="311" y="446" text-anchor="middle" font-size="9">📷</text>
+                <circle cx="249" cy="535" r="10.5" fill="#1f2522" stroke="#fff" stroke-width="2" filter="url(#shadow-sm)"/>
+                <text x="249" y="539" text-anchor="middle" font-size="9">♪</text>
+                <circle cx="125" cy="563" r="10.5" fill="#1f2522" stroke="#fff" stroke-width="2" filter="url(#shadow-sm)"/>
+                <text x="125" y="567" text-anchor="middle" font-size="9" fill="#fff">☎</text>
+                <circle cx="180" cy="570" r="10.5" fill="#1f2522" stroke="#fff" stroke-width="2" filter="url(#shadow-sm)"/>
+                <text x="180" y="574" text-anchor="middle" font-size="9" fill="#fff">🚲</text>
+              </g>
+
+              <g class="facility-group" data-type="toilet">
+                <circle cx="250" cy="227" r="11" fill="#1f2522" stroke="#fff" stroke-width="2" filter="url(#shadow-sm)"/>
+                <text x="250" y="231" text-anchor="middle" font-size="7.5" font-weight="900" fill="#fff">WC</text>
+                <circle cx="267" cy="515" r="11" fill="#1f2522" stroke="#fff" stroke-width="2" filter="url(#shadow-sm)"/>
+                <text x="267" y="519" text-anchor="middle" font-size="7.5" font-weight="900" fill="#fff">WC</text>
+              </g>
+
+              <g class="facility-group" data-type="accessible">
+                <circle cx="335" cy="63" r="10" fill="#1d8bd1" stroke="#fff" stroke-width="2" filter="url(#shadow-sm)"/>
+                <text x="335" y="68" text-anchor="middle" font-size="11" fill="#fff">♿</text>
+                <circle cx="333" cy="182" r="10" fill="#1f2522" stroke="#fff" stroke-width="2" filter="url(#shadow-sm)"/>
+                <text x="333" y="187" text-anchor="middle" font-size="11" fill="#fff">♿</text>
+              </g>
+
+              <g class="facility-group" data-type="fountain">
+                <circle cx="260" cy="239" r="9.5" fill="#0d6efd" stroke="#fff" stroke-width="2" filter="url(#shadow-sm)"/>
+                <text x="260" y="244" text-anchor="middle" font-size="10" fill="#fff">💧</text>
+                <circle cx="320" cy="451" r="9.5" fill="#0d6efd" stroke="#fff" stroke-width="2" filter="url(#shadow-sm)"/>
+                <text x="320" y="456" text-anchor="middle" font-size="10" fill="#fff">💧</text>
+              </g>
+
+              <g class="facility-group" data-type="seating">
+                <circle cx="340" cy="97" r="9.5" fill="#7a5530" stroke="#fff" stroke-width="2" filter="url(#shadow-sm)"/>
+                <text x="340" y="100" text-anchor="middle" font-size="9">🪑</text>
+                <circle cx="286" cy="338" r="9.5" fill="#7a5530" stroke="#fff" stroke-width="2" filter="url(#shadow-sm)"/>
+                <text x="286" y="341" text-anchor="middle" font-size="9">🪑</text>
+                <circle cx="364" cy="392" r="9.5" fill="#7a5530" stroke="#fff" stroke-width="2" filter="url(#shadow-sm)"/>
+                <text x="364" y="395" text-anchor="middle" font-size="9">🪑</text>
+                <circle cx="249" cy="535" r="9.5" fill="#7a5530" stroke="#fff" stroke-width="2" filter="url(#shadow-sm)"/>
+                <text x="249" y="538" text-anchor="middle" font-size="9">🪑</text>
+              </g>
+
+              <g class="facility-group" data-type="picnic">
+                <circle cx="128" cy="209" r="9.5" fill="#c45e18" stroke="#fff" stroke-width="2" filter="url(#shadow-sm)"/>
+                <text x="128" y="213" text-anchor="middle" font-size="9">🍱</text>
+                <circle cx="235" cy="545" r="9.5" fill="#c45e18" stroke="#fff" stroke-width="2" filter="url(#shadow-sm)"/>
+                <text x="235" y="549" text-anchor="middle" font-size="9">🍱</text>
+              </g>
+
+              <g class="facility-group" data-type="cafe">
+                <circle cx="306" cy="455" r="11" fill="#b06012" stroke="#fff" stroke-width="2" filter="url(#shadow-sm)"/>
+                <text x="306" y="459" text-anchor="middle" font-size="10">☕</text>
+              </g>
             </g>
 
             <!-- ── My location dot (hidden until activated) ── -->
             <g id="my-location-group" style="display:none;">
-              <circle id="my-location-ring" cx="205" cy="265" r="8" fill="#006399" opacity="0.25"/>
-              <circle cx="205" cy="265" r="7" fill="#006399" stroke="#fff" stroke-width="2.5"/>
+              <circle id="my-location-ring" cx="179" cy="124" r="8" fill="#006399" opacity="0.25"/>
+              <circle cx="179" cy="124" r="7" fill="#006399" stroke="#fff" stroke-width="2.5"/>
             </g>
 
             <!-- ── NORTH ARROW ── -->
-            <g transform="translate(388,98)">
+            <g transform="translate(380,548)">
               <circle r="14" fill="#fff" opacity="0.9" filter="url(#shadow-sm)"/>
               <path d="M0,-10 L3.5,4 L0,1.5 L-3.5,4 Z" fill="#0f5238"/>
               <text x="0" y="-2" text-anchor="middle" font-family="'Plus Jakarta Sans',sans-serif" font-size="6.5" font-weight="800" fill="#0f5238">N</text>
             </g>
 
             <!-- ── SCALE BAR ── -->
-            <g transform="translate(36,98)">
+            <g transform="translate(52,548)">
               <rect x="0" y="-1" width="64" height="5" rx="2.5" fill="#fff" opacity="0.75"/>
               <rect x="0" y="-1" width="32" height="5" rx="2.5" fill="#0f5238" opacity="0.75"/>
               <text x="0" y="-4" font-family="'Work Sans',sans-serif" font-size="5.5" fill="#1e5e30" opacity="0.85">0</text>
-              <text x="29" y="-4" font-family="'Work Sans',sans-serif" font-size="5.5" fill="#1e5e30" opacity="0.85">150m</text>
-              <text x="58" y="-4" font-family="'Work Sans',sans-serif" font-size="5.5" fill="#1e5e30" opacity="0.85">300m</text>
+              <text x="29" y="-4" font-family="'Work Sans',sans-serif" font-size="5.5" fill="#1e5e30" opacity="0.85">50m</text>
+              <text x="58" y="-4" font-family="'Work Sans',sans-serif" font-size="5.5" fill="#1e5e30" opacity="0.85">100m</text>
             </g>
           </svg>
 
@@ -456,11 +1315,12 @@
             <button class="map-filter-chip" data-filter="picnic">🍱 Picnic</button>
             <button class="map-filter-chip" data-filter="cafe">☕ Café</button>
             <button class="map-filter-chip" data-filter="accessible">♿ Access</button>
+            <button class="map-filter-chip" data-filter="landmark">📍 Landmarks</button>
             <button class="map-filter-chip" data-filter="trail">🏃 Trail Quest</button>
           </div>
           <p class="map-legend-hint">
             <span class="material-symbols-outlined">info</span>
-            Trail Quest stops <strong>①–⑥</strong> shown as numbered green circles.
+            Drawn map updated from the real garden signs: route, toilets, water, café and key landmarks are placed together.
           </p>
         </section>
 
@@ -530,7 +1390,8 @@
 
     /* ── Zoom (SVG viewBox pan/zoom) ── */
     const svg = document.getElementById('park-map-svg');
-    let vb = { x: 0, y: 0, w: 420, h: 620 };
+    const fullVB = { x: 0, y: 0, w: 420, h: 620 };
+    let vb = { ...fullVB };
 
     function applyVB() {
       svg.setAttribute('viewBox', `${vb.x} ${vb.y} ${vb.w} ${vb.h}`);
@@ -547,10 +1408,10 @@
 
     document.getElementById('btn-zoom-out').addEventListener('click', () => {
       const cx = vb.x + vb.w / 2, cy = vb.y + vb.h / 2;
-      vb.w = Math.min(420, vb.w * 1.28);
-      vb.h = Math.min(620, vb.h * 1.28);
-      vb.x = Math.max(0, cx - vb.w / 2);
-      vb.y = Math.max(0, cy - vb.h / 2);
+      vb.w = Math.min(fullVB.w, vb.w * 1.28);
+      vb.h = Math.min(fullVB.h, vb.h * 1.28);
+      vb.x = Math.max(fullVB.x, Math.min(fullVB.x + fullVB.w - vb.w, cx - vb.w / 2));
+      vb.y = Math.max(fullVB.y, Math.min(fullVB.y + fullVB.h - vb.h, cy - vb.h / 2));
       applyVB();
     });
 
@@ -569,8 +1430,8 @@
       if (!isDragging || e.touches.length !== 1) return;
       const dx = (lastX - e.touches[0].clientX) * (vb.w / svg.clientWidth);
       const dy = (lastY - e.touches[0].clientY) * (vb.h / svg.clientHeight);
-      vb.x = Math.max(0, Math.min(420 - vb.w, vb.x + dx));
-      vb.y = Math.max(0, Math.min(620 - vb.h, vb.y + dy));
+      vb.x = Math.max(fullVB.x, Math.min(fullVB.x + fullVB.w - vb.w, vb.x + dx));
+      vb.y = Math.max(fullVB.y, Math.min(fullVB.y + fullVB.h - vb.h, vb.y + dy));
       applyVB();
       lastX = e.touches[0].clientX;
       lastY = e.touches[0].clientY;
