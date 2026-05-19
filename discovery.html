@@ -23,6 +23,96 @@
       .tq-screen { display: none; }
       .tq-screen.is-active { display: block; }
 
+      /* Trail chooser */
+      .trail-picker-hero {
+        padding: 1.5rem 1.25rem 1rem;
+      }
+      .trail-picker-hero__eyebrow {
+        margin: 0 0 0.35rem;
+        font-size: 0.6875rem;
+        font-weight: 800;
+        letter-spacing: 0.14em;
+        text-transform: uppercase;
+        color: var(--primary);
+      }
+      .trail-picker-hero__title {
+        margin: 0;
+        font-family: var(--font-display);
+        font-size: 1.9rem;
+        font-weight: 800;
+        line-height: 1.12;
+        color: var(--on-surface);
+      }
+      .trail-picker-hero__sub {
+        margin: 0.55rem 0 0;
+        font-size: 0.9375rem;
+        line-height: 1.45;
+        color: var(--on-surface-variant);
+      }
+      .trail-picker-list {
+        display: grid;
+        gap: 0.85rem;
+        padding: 0.5rem 1.25rem 6rem;
+      }
+      .trail-choice-card {
+        width: 100%;
+        display: grid;
+        grid-template-columns: auto 1fr auto;
+        align-items: center;
+        gap: 0.85rem;
+        padding: 1rem;
+        border-radius: 14px;
+        background: var(--surface-container-lowest);
+        box-shadow: var(--shadow-ambient);
+        text-align: left;
+        color: var(--on-surface);
+      }
+      .trail-choice-card:not(:disabled):active { transform: scale(0.99); }
+      .trail-choice-card:disabled {
+        cursor: default;
+        opacity: 0.68;
+        box-shadow: none;
+        background: var(--surface-container-low);
+      }
+      .trail-choice-card__icon {
+        width: 3rem;
+        height: 3rem;
+        border-radius: 13px;
+        display: grid;
+        place-items: center;
+        font-size: 1.35rem;
+        background: color-mix(in srgb, var(--primary-fixed) 65%, white);
+      }
+      .trail-choice-card__body {
+        min-width: 0;
+      }
+      .trail-choice-card__label {
+        margin: 0 0 0.25rem;
+        font-size: 0.68rem;
+        font-weight: 800;
+        letter-spacing: 0.1em;
+        text-transform: uppercase;
+        color: var(--primary);
+      }
+      .trail-choice-card:disabled .trail-choice-card__label {
+        color: var(--on-surface-variant);
+      }
+      .trail-choice-card__title {
+        margin: 0;
+        font-family: var(--font-display);
+        font-size: 1rem;
+        font-weight: 800;
+      }
+      .trail-choice-card__meta {
+        margin: 0.3rem 0 0;
+        font-size: 0.78rem;
+        color: var(--on-surface-variant);
+      }
+      .trail-choice-card__action {
+        font-size: 1.35rem;
+        color: var(--primary);
+      }
+
       /* ── Overview screen ── */
       .tq-overview-hero {
         background: linear-gradient(160deg, var(--primary) 0%, var(--primary-container) 100%);
@@ -133,6 +223,21 @@
       }
       .tq-start-btn:active { transform: scale(0.97); }
       .tq-start-btn .material-symbols-outlined { font-size: 1.25rem; }
+      .tq-back-row {
+        padding: 0.85rem 1.25rem 0;
+        background: var(--surface);
+      }
+      .tq-back-btn {
+        display: inline-flex;
+        align-items: center;
+        gap: 0.3rem;
+        padding: 0.45rem 0;
+        color: var(--primary);
+        font-family: var(--font-display);
+        font-size: 0.875rem;
+        font-weight: 800;
+      }
+      .tq-back-btn .material-symbols-outlined { font-size: 1.1rem; }
 
       .tq-resume-note {
         margin: 0.75rem 0 0;
@@ -419,6 +524,27 @@
         margin: 0.35rem 0 0;
         font-size: 0.75rem;
         color: var(--on-surface-variant);
+      }
+      .tq-choice-list {
+        display: grid;
+        gap: 0.5rem;
+      }
+      .tq-choice-btn {
+        width: 100%;
+        padding: 0.72rem 0.85rem;
+        border-radius: 14px;
+        border: 1.5px solid var(--outline-variant);
+        background: var(--surface-container-low);
+        text-align: left;
+        font-family: var(--font-display);
+        font-size: 0.9rem;
+        font-weight: 700;
+        color: var(--on-surface);
+      }
+      .tq-choice-btn.is-selected {
+        border-color: var(--primary);
+        background: color-mix(in srgb, var(--primary-fixed) 55%, white);
+        color: var(--primary-container);
       }
 
       .tq-error-msg {
@@ -823,18 +949,75 @@
 
       <main id="tq-main" style="flex:1;">
 
+        <!-- ── SCREEN: Trail chooser ── -->
+        <div id="tq-screen-trails" class="tq-screen">
+          <section class="trail-picker-hero">
+            <p class="trail-picker-hero__eyebrow">Brisbane City Botanic Gardens</p>
+            <h2 class="trail-picker-hero__title">Start your Trail Quest</h2>
+            <p class="trail-picker-hero__sub">Pick a family-friendly route. More guided trails will be added soon.</p>
+          </section>
+
+          <section class="trail-picker-list" aria-label="Available trails">
+            <button class="trail-choice-card" id="tq-open-medicinal" type="button">
+              <span class="trail-choice-card__icon" aria-hidden="true">🌿</span>
+              <span class="trail-choice-card__body">
+                <span class="trail-choice-card__label">Available now</span>
+                <span class="trail-choice-card__title">Medicinal Plant Treasures</span>
+                <span class="trail-choice-card__meta">6 stops · 15 min · Trail Quest</span>
+              </span>
+              <span class="material-symbols-outlined trail-choice-card__action" aria-hidden="true">chevron_right</span>
+            </button>
+
+            <button class="trail-choice-card" type="button" disabled>
+              <span class="trail-choice-card__icon" aria-hidden="true">🌺</span>
+              <span class="trail-choice-card__body">
+                <span class="trail-choice-card__label">Coming soon</span>
+                <span class="trail-choice-card__title">Rainforest Hideaway Walk</span>
+                <span class="trail-choice-card__meta">A shaded discovery route is being prepared.</span>
+              </span>
+              <span class="material-symbols-outlined trail-choice-card__action" aria-hidden="true">lock</span>
+            </button>
+
+            <button class="trail-choice-card" type="button" disabled>
+              <span class="trail-choice-card__icon" aria-hidden="true">🪷</span>
+              <span class="trail-choice-card__body">
+                <span class="trail-choice-card__label">Coming soon</span>
+                <span class="trail-choice-card__title">Lagoons and Lawns</span>
+                <span class="trail-choice-card__meta">A gentle route around water, lawns and rest stops.</span>
+              </span>
+              <span class="material-symbols-outlined trail-choice-card__action" aria-hidden="true">lock</span>
+            </button>
+
+            <button class="trail-choice-card" type="button" disabled>
+              <span class="trail-choice-card__icon" aria-hidden="true">🎵</span>
+              <span class="trail-choice-card__body">
+                <span class="trail-choice-card__label">Coming soon</span>
+                <span class="trail-choice-card__title">Riverstage and River Walk</span>
+                <span class="trail-choice-card__meta">A riverside route for landmarks and facilities.</span>
+              </span>
+              <span class="material-symbols-outlined trail-choice-card__action" aria-hidden="true">lock</span>
+            </button>
+          </section>
+        </div>
+
         <!-- ── SCREEN: Overview ── -->
         <div id="tq-screen-overview" class="tq-screen">
+          <div class="tq-back-row">
+            <button class="tq-back-btn" id="tq-back-to-trails" type="button">
+              <span class="material-symbols-outlined" aria-hidden="true">arrow_back</span>
+              Back to trails
+            </button>
+          </div>
           <section class="tq-overview-hero">
             <p class="tq-overview-hero__eyebrow">Brisbane City Botanic Gardens</p>
             <h2 class="tq-overview-hero__title">Trail Quest</h2>
-            <p class="tq-overview-hero__sub">A self-guided discovery walk through one of Brisbane's most treasured parks.</p>
+            <p class="tq-overview-hero__sub">A short medicinal-plant treasure hunt for families to do together along the garden paths.</p>
             <div class="tq-overview-hero__meta">
               <span class="tq-meta-pill">
-                <span class="material-symbols-outlined">schedule</span>45–60 min
+                <span class="material-symbols-outlined">schedule</span>15 min
               </span>
               <span class="tq-meta-pill">
-                <span class="material-symbols-outlined">route</span>7 stops
+                <span class="material-symbols-outlined">route</span>6 stops
               </span>
               <span class="tq-meta-pill">
                 <span class="material-symbols-outlined">accessible</span>Accessible
@@ -927,16 +1110,17 @@
               <!-- Question area (shown for photo-and-question tasks) -->
               <div id="tq-question-area" style="display:none;" class="tq-question-wrap">
                 <p class="tq-question-label" id="tq-question-text"></p>
+                <div class="tq-choice-list" id="tq-choice-list" style="display:none;"></div>
                 <input class="tq-answer-input" type="text" id="tq-answer-input"
                   placeholder="Type your answer…" autocomplete="off" />
-                <p class="tq-answer-hint">Enter any number — there's no wrong answer here!</p>
+                <p class="tq-answer-hint" id="tq-answer-hint">Enter any number — there's no wrong answer here!</p>
               </div>
             </div>
 
             <div class="tq-error-msg" id="tq-error-msg"></div>
             <button class="tq-btn-submit" id="tq-btn-submit">
               <span class="material-symbols-outlined">lock_open</span>
-              Unlock Discover Card
+              Collect Treasure
             </button>
           </div>
 
@@ -982,20 +1166,20 @@
           <div class="tq-complete-hero">
             <div class="tq-complete-trophy">🏆</div>
             <h2 class="tq-complete-title">Trail Complete!</h2>
-            <p class="tq-complete-sub">You've explored all 7 stops in the Brisbane City Botanic Gardens.</p>
+            <p class="tq-complete-sub">You've collected all 6 medicinal plant treasures in the Brisbane City Botanic Gardens.</p>
             <div class="tq-complete-stats">
               <span class="tq-complete-stat">
-                <span class="material-symbols-outlined">flag</span>7 stops
+                <span class="material-symbols-outlined">flag</span>6 stops
               </span>
               <span class="tq-complete-stat">
-                <span class="material-symbols-outlined">photo_camera</span>
-                <span id="tq-photo-count">0 photos</span>
+                <span class="material-symbols-outlined">auto_awesome</span>
+                <span id="tq-photo-count">0 treasures</span>
               </span>
             </div>
           </div>
 
           <section class="tq-photos-section">
-            <p class="tq-photos-section__title">Your trail photos</p>
+            <p class="tq-photos-section__title">Your trail treasures</p>
             <div class="tq-photos-grid" id="tq-photos-grid"></div>
           </section>
 
@@ -1007,7 +1191,7 @@
               </div>
               <div class="tq-next-option__body">
                 <p class="tq-next-option__title">Nearest toilet</p>
-                <p class="tq-next-option__sub">2 min walk · Near Alice St entrance</p>
+                <p class="tq-next-option__sub">Lower gardens area · Follow the path</p>
               </div>
               <span class="material-symbols-outlined chevron">chevron_right</span>
             </div>
@@ -1017,7 +1201,7 @@
               </div>
               <div class="tq-next-option__body">
                 <p class="tq-next-option__title">Nearest drinking fountain</p>
-                <p class="tq-next-option__sub">1 min walk · At entrance plaza</p>
+                <p class="tq-next-option__sub">Near Cafe Outlook</p>
               </div>
               <span class="material-symbols-outlined chevron">chevron_right</span>
             </div>
@@ -1027,7 +1211,7 @@
               </div>
               <div class="tq-next-option__body">
                 <p class="tq-next-option__title">Nearest exit</p>
-                <p class="tq-next-option__sub">Alice Street · George Street</p>
+                <p class="tq-next-option__sub">Return to map for the best route</p>
               </div>
               <span class="material-symbols-outlined chevron">chevron_right</span>
             </div>
@@ -1071,125 +1255,128 @@
     const CHECKPOINTS = [
       {
         id: 1,
-        title: 'Start Check-in',
-        locationName: 'Alice Street Entrance',
-        icon: '🌿',
-        taskType: 'checkin-only',
-        taskInstruction: 'Welcome! Tap "Start Trail" below to begin your adventure at the Brisbane City Botanic Gardens.',
-        unlockTitle: 'Welcome to the Gardens!',
-        unlockDescription: "You're exploring one of Brisbane's oldest parks, established in 1855. This trail takes approximately 45–60 minutes and guides you through 7 stops covering history, wildlife, play areas, and public art. Estimated walk: 2–3 km total.",
+        title: 'Neem Tree',
+        scientificName: 'Azadirachta indica',
+        locationName: 'Formal Flower Garden path',
+        icon: '🍃',
+        taskType: 'choice',
+        taskInstruction: 'Find the Neem Tree sign. With your family, look for one leaf shape or bark texture, then tap Check In.',
+        question: 'What is one common use of neem today?',
+        choices: ['Hand washes and toothpaste', 'Mobile phones', 'Building bridges'],
+        correctAnswer: 'Hand washes and toothpaste',
+        unlockTitle: 'Neem Leaf collected',
+        unlockDescription: 'Neem has been used in traditional medicine and is now found in everyday products like hand washes and toothpaste. Treasure tip: notice the leaves, then look back up from the screen.',
         nearbyFacilities: [
-          { icon: 'wc', label: 'Toilets', detail: 'Near entrance' },
-          { icon: 'water_drop', label: 'Drinking Fountain', detail: 'At entrance' },
-          { icon: 'accessible', label: 'Accessible Route', detail: 'Available' },
-          { icon: 'exit_to_app', label: 'Exits', detail: 'Alice St & George St' }
+          { icon: 'wc', label: 'Nearest toilet', detail: 'Formal Flower Garden area' },
+          { icon: 'water_drop', label: 'Water', detail: 'Short walk nearby' },
+          { icon: 'chair', label: 'Rest point', detail: 'Benches along the path' }
         ],
-        safetyNote: null,
+        safetyNote: 'Look with your eyes. Please do not pick leaves or seeds.',
         nextCheckpointId: 2
       },
       {
         id: 2,
-        title: 'Cannon Landmark',
-        locationName: 'Historic Cannon Area',
-        icon: '🏛️',
-        taskType: 'photo',
-        taskInstruction: 'Take or upload a photo of the cannon landmark you can see here.',
-        unlockTitle: 'Historical Landmark Unlocked',
-        unlockDescription: "This cannon reflects the gardens' connection to Brisbane's colonial and civic history. The Brisbane City Botanic Gardens were established in 1855 and remain one of the city's most treasured green spaces. More detailed historical information can be added after source verification.",
+        title: 'Candle Nut Tree',
+        scientificName: 'Aleurites moluccanus',
+        locationName: 'Main Drive near Baldwin Lawn',
+        icon: '🌰',
+        taskType: 'choice',
+        taskInstruction: 'Spot the Candle Nut Tree near the route. Do a quick family “point and find”: trunk, leaves, shade.',
+        question: 'What should you be careful about with this tree?',
+        choices: ['Its leaves and seeds can be toxic unless carefully treated', 'It only grows underwater', 'It has no cultural history'],
+        correctAnswer: 'Its leaves and seeds can be toxic unless carefully treated',
+        unlockTitle: 'Candle Nut collected',
+        unlockDescription: 'The brochure notes that parts of this tree can be toxic unless carefully treated. Treasure tip: some plants are useful, but they still need respect and care.',
         nearbyFacilities: [
-          { icon: 'park', label: 'Shade Trees', detail: 'Nearby' },
-          { icon: 'chair', label: 'Seating', detail: 'Available' },
-          { icon: 'water_drop', label: 'Water', detail: 'Short walk' }
+          { icon: 'accessible', label: 'Accessible route', detail: 'Along Main Drive' },
+          { icon: 'chair', label: 'Rest point', detail: 'Open lawn nearby' },
+          { icon: 'wc', label: 'Toilets', detail: 'Back toward Formal Flower Garden' }
         ],
-        safetyNote: null,
+        safetyNote: 'Do not touch or taste any seeds, nuts or leaves.',
         nextCheckpointId: 3
       },
       {
         id: 3,
-        title: 'Baldwin Lawn Playground',
-        locationName: 'Baldwin Lawn',
-        icon: '🛝',
-        taskType: 'photo-and-question',
-        taskInstruction: 'Take or upload a photo of the playground.',
-        question: 'How many slides can you see?',
-        unlockTitle: 'Family Playground Unlocked',
-        unlockDescription: "Baldwin Lawn playground is a great spot for families! The area features slides, climbing structures, and open play space — perfect for kids of all ages. Picnic tables and accessible toilets are nearby for everyone's comfort.",
+        title: 'Logwood',
+        scientificName: 'Haematoxylum campechianum',
+        locationName: 'Central path toward Middle Gardens',
+        icon: '💧',
+        taskType: 'choice',
+        taskInstruction: 'Find the tree connected to natural dye. Ask: what colours can you spot around this part of the path?',
+        question: 'What colour was Logwood historically used to produce?',
+        choices: ['Blue', 'Pink', 'White'],
+        correctAnswer: 'Blue',
+        unlockTitle: 'Blue Dye Drop collected',
+        unlockDescription: 'Logwood heartwood was used to produce blue, grey and black dye. Treasure tip: choose one real colour nearby before moving on.',
         nearbyFacilities: [
-          { icon: 'accessible', label: 'Accessible Toilets', detail: 'Very close' },
-          { icon: 'chair', label: 'Seating', detail: 'On site' },
-          { icon: 'deck', label: 'Picnic Tables', detail: 'Available' },
-          { icon: 'water_drop', label: 'Drinking Fountain', detail: 'Nearby' }
+          { icon: 'directions_walk', label: 'Clear path', detail: 'Follow the marked route' },
+          { icon: 'chair', label: 'Rest point', detail: 'Short walk ahead' },
+          { icon: 'park', label: 'Shade', detail: 'Trees along the route' }
         ],
         safetyNote: null,
         nextCheckpointId: 4
       },
       {
         id: 4,
-        title: 'Comfort Stop',
-        locationName: 'Public Amenities Area',
-        icon: '🚻',
-        taskType: 'photo',
-        taskInstruction: 'Take or upload a photo of the outside of the toilet facility only. Do not photograph people or the inside of toilet areas.',
-        unlockTitle: 'Then & Now: Park Comfort',
-        unlockDescription: "Public park facilities like these have transformed how people experience outdoor spaces. Today's accessible amenities support everyone from young families to elderly visitors — a far cry from Brisbane's earliest park days when such facilities were rare or non-existent.",
+        title: 'Maidenhair Tree',
+        scientificName: 'Ginkgo biloba',
+        locationName: 'Path toward Residence Hill',
+        icon: '🌿',
+        taskType: 'choice',
+        taskInstruction: 'Find the ancient-looking Ginkgo. Look for a leaf shape that feels different from the trees around it.',
+        question: 'Why is Ginkgo special?',
+        choices: ['It is known as a living fossil', 'It grows only in Brisbane', 'It has no leaves'],
+        correctAnswer: 'It is known as a living fossil',
+        unlockTitle: 'Ancient Leaf collected',
+        unlockDescription: 'Ginkgo is often called a living fossil because its history reaches back millions of years. Treasure tip: imagine a tree family older than dinosaurs.',
         nearbyFacilities: [
-          { icon: 'wc', label: 'Toilet', detail: "You're here!" },
-          { icon: 'accessible', label: 'Accessible Toilet', detail: 'Available' },
-          { icon: 'chair', label: 'Seating', detail: 'Nearby' },
-          { icon: 'water_drop', label: 'Water', detail: 'Close by' }
+          { icon: 'chair', label: 'Rest point', detail: 'Nearby lawn edge' },
+          { icon: 'accessible', label: 'Accessible route', detail: 'Continue on path' },
+          { icon: 'water_drop', label: 'Water', detail: 'Ahead toward cafe area' }
         ],
-        safetyNote: 'Privacy reminder: Please do not photograph people or the inside of toilet areas.',
+        safetyNote: null,
         nextCheckpointId: 5
       },
       {
         id: 5,
-        title: "Oakman's Lagoon",
-        locationName: "Oakman's Lagoon",
-        icon: '🦎',
-        taskType: 'photo',
-        taskInstruction: 'Primary: Take or upload a photo of a lizard if one is visible near the lagoon. Backup: Take or upload a photo of the lagoon if no lizard appears.',
-        unlockTitle: 'Wildlife Encounter Unlocked',
-        unlockDescription: "Brisbane parks are home to water dragons, skinks, and other reptiles. These animals are a vital part of the local ecosystem. Observe from a distance — do not touch or feed wildlife.",
+        title: 'Tamarind Tree',
+        scientificName: 'Tamarindus indica',
+        locationName: 'Cafe Outlook path',
+        icon: '🫘',
+        taskType: 'choice',
+        taskInstruction: 'Find the Tamarind Tree and read the clue. If you see pods, count them quietly with your group.',
+        question: 'What was tamarind commonly used for in traditional medicine?',
+        choices: ['Treating digestive issues and fever', 'Charging batteries', 'Making glass'],
+        correctAnswer: 'Treating digestive issues and fever',
+        unlockTitle: 'Tamarind Pod collected',
+        unlockDescription: 'Tamarind has a long history of use in traditional medicine, including for digestive issues and fever. Treasure tip: check in, then take a sip of water if you need one.',
         nearbyFacilities: [
-          { icon: 'park', label: 'Shade', detail: 'Available' },
-          { icon: 'chair', label: 'Seating', detail: 'Nearby' },
-          { icon: 'directions_walk', label: 'Walking Path', detail: 'Well-marked' }
+          { icon: 'local_cafe', label: 'Cafe', detail: 'Cafe Outlook nearby' },
+          { icon: 'water_drop', label: 'Water', detail: 'Near cafe area' },
+          { icon: 'chair', label: 'Rest point', detail: 'Good pause spot' }
         ],
-        safetyNote: 'Do not disturb wildlife. Stay on marked paths at all times.',
+        safetyNote: 'Only eat food brought by your family or bought from the cafe.',
         nextCheckpointId: 6
       },
       {
         id: 6,
-        title: 'Riverstage',
-        locationName: 'Riverstage Venue',
-        icon: '🎭',
-        taskType: 'photo',
-        taskInstruction: 'Take or upload a photo of the Riverstage venue area.',
-        unlockTitle: 'Riverstage Unlocked',
-        unlockDescription: "Riverstage is one of Brisbane's most iconic outdoor performance venues. Used for concerts, festivals, live performances, and community events, it sits within the botanic gardens with stunning river views as a backdrop.",
+        title: 'Jackfruit Tree',
+        scientificName: 'Artocarpus heterophyllus',
+        locationName: 'Lower path near The Gardens Club',
+        icon: '💎',
+        taskType: 'choice',
+        taskInstruction: 'Find the Jackfruit Tree near the final part of the trail. Look for the biggest fruit shape you can see.',
+        question: 'What is notable about jackfruit?',
+        choices: ['It is edible and has high nutritional potential', 'It is always poisonous', 'It only grows in cold climates'],
+        correctAnswer: 'It is edible and has high nutritional potential',
+        unlockTitle: 'Jackfruit Gem collected',
+        unlockDescription: 'Jackfruit is edible and has high nutritional potential. Treasure complete: you found all six medicinal plant treasures.',
         nearbyFacilities: [
-          { icon: 'exit_to_app', label: 'Exit Routes', detail: 'Multiple exits' },
-          { icon: 'wc', label: 'Toilets', detail: 'Nearby' },
-          { icon: 'water_drop', label: 'Drinking Fountain', detail: 'Available' }
+          { icon: 'wc', label: 'Nearest toilet', detail: 'Lower gardens area' },
+          { icon: 'local_cafe', label: 'Cafe', detail: 'Cafe Outlook nearby' },
+          { icon: 'exit_to_app', label: 'Return route', detail: 'Follow paths back to map' }
         ],
-        safetyNote: null,
-        nextCheckpointId: 7
-      },
-      {
-        id: 7,
-        title: 'Trail Complete!',
-        locationName: 'Brisbane City Botanic Gardens',
-        icon: '🏆',
-        taskType: 'checkin-only',
-        taskInstruction: 'You\'ve reached the final stop. Tap "Finish Trail" to complete your Trail Quest!',
-        unlockTitle: 'You finished the Trail Quest!',
-        unlockDescription: "Congratulations! You've explored all 7 stops through the Brisbane City Botanic Gardens — from the historic entrance to the iconic Riverstage. We hope you discovered something new today.",
-        nearbyFacilities: [
-          { icon: 'wc', label: 'Nearest Toilet', detail: '2 min walk' },
-          { icon: 'water_drop', label: 'Nearest Fountain', detail: '1 min walk' },
-          { icon: 'exit_to_app', label: 'Nearest Exit', detail: 'Alice St' }
-        ],
-        safetyNote: null,
+        safetyNote: 'Stay with your group near the lower path.',
         nextCheckpointId: null
       }
     ];
@@ -1201,7 +1388,12 @@
       try {
         const raw = localStorage.getItem(LS_KEY);
         if (!raw) return null;
-        return JSON.parse(raw);
+        const state = JSON.parse(raw);
+        if (state.currentCheckpointId && state.currentCheckpointId > CHECKPOINTS.length) {
+          clearState();
+          return null;
+        }
+        return state;
       } catch (e) {
         return null;
       }
@@ -1221,7 +1413,7 @@
 
     /* ── App state ── */
     let appState = {
-      screen: 'overview',       // 'overview' | 'checkpoint' | 'complete'
+      screen: 'trails',         // 'trails' | 'overview' | 'checkpoint' | 'complete'
       currentCheckpointId: 1,
       completedIds: [],
       panel: 'precheckin',      // 'precheckin' | 'task' | 'unlocked'
@@ -1231,6 +1423,7 @@
 
     /* ── DOM refs ── */
     const screens = {
+      trails:     document.getElementById('tq-screen-trails'),
       overview:   document.getElementById('tq-screen-overview'),
       checkpoint: document.getElementById('tq-screen-checkpoint'),
       complete:   document.getElementById('tq-screen-complete')
@@ -1252,7 +1445,7 @@
       });
       appState.screen = name;
       const resetBtn = document.getElementById('tq-reset-btn');
-      resetBtn.style.display = name !== 'overview' ? 'inline-flex' : 'none';
+      resetBtn.style.display = (name === 'checkpoint' || name === 'complete') ? 'inline-flex' : 'none';
     }
 
     /* ── Show panel (within checkpoint screen) ── */
@@ -1323,7 +1516,7 @@
         safetyEl.style.display = 'none';
       }
       const checkinLabel = document.getElementById('tq-checkin-btn-label');
-      checkinLabel.textContent = cp.id === 1 ? 'Start Trail' : (cp.id === 7 ? 'Finish Trail' : 'Check In Here');
+      checkinLabel.textContent = !cp.nextCheckpointId ? 'Final Check In' : 'Check In Here';
 
       // Task panel
       document.getElementById('tq-task-instruction').textContent = cp.taskInstruction;
@@ -1350,11 +1543,28 @@
         photoArea.style.display = 'none';
       }
 
-      if (cp.taskType === 'photo-and-question') {
+      if (cp.taskType === 'photo-and-question' || cp.taskType === 'choice') {
         questionArea.style.display = 'block';
         document.getElementById('tq-question-text').textContent = cp.question;
+        const choiceList = document.getElementById('tq-choice-list');
         const answerEl = document.getElementById('tq-answer-input');
-        answerEl.value = appState.answers[id] || '';
+        const answerHint = document.getElementById('tq-answer-hint');
+        if (cp.taskType === 'choice') {
+          answerEl.style.display = 'none';
+          answerHint.textContent = 'Pick one answer together, then keep exploring.';
+          choiceList.style.display = 'grid';
+          choiceList.innerHTML = cp.choices.map(choice => `
+            <button class="tq-choice-btn${appState.answers[id] === choice ? ' is-selected' : ''}" type="button" data-choice="${choice}">
+              ${choice}
+            </button>
+          `).join('');
+        } else {
+          choiceList.style.display = 'none';
+          choiceList.innerHTML = '';
+          answerEl.style.display = 'block';
+          answerHint.textContent = 'Enter any number — there is no wrong answer here!';
+          answerEl.value = appState.answers[id] || '';
+        }
       } else {
         questionArea.style.display = 'none';
       }
@@ -1402,29 +1612,19 @@
 
     /* ── Render complete screen ── */
     function renderComplete() {
-      const photoCount = Object.keys(appState.photos).length;
+      const treasureCount = appState.completedIds.length;
       document.getElementById('tq-photo-count').textContent =
-        photoCount === 1 ? '1 photo' : `${photoCount} photos`;
+        treasureCount === 1 ? '1 treasure' : `${treasureCount} treasures`;
 
       const grid = document.getElementById('tq-photos-grid');
-      grid.innerHTML = CHECKPOINTS.map(cp => {
-        const photo = appState.photos[cp.id];
-        if (photo && photo !== 'placeholder') {
-          return `
-            <div class="tq-photo-thumb">
-              <img src="${photo}" alt="Photo from stop ${cp.id}" />
-              <div class="tq-photo-thumb__stop">${cp.id}</div>
-            </div>`;
-        } else {
-          return `
-            <div class="tq-photo-thumb">
-              <div class="tq-photo-thumb__placeholder">
-                <span class="material-symbols-outlined">photo_camera</span>
-              </div>
-              <div class="tq-photo-thumb__stop">${cp.id}</div>
-            </div>`;
-        }
-      }).join('');
+      grid.innerHTML = CHECKPOINTS.map(cp => `
+        <div class="tq-photo-thumb">
+          <div class="tq-photo-thumb__placeholder">
+            <span aria-hidden="true" style="font-size:1.45rem;">${cp.icon}</span>
+          </div>
+          <div class="tq-photo-thumb__stop">${cp.id}</div>
+        </div>
+      `).join('');
     }
 
     /* ── Error helpers ── */
@@ -1513,6 +1713,18 @@
 
     /* ── Event handlers ── */
 
+    // Open the active trail from the chooser
+    document.getElementById('tq-open-medicinal').addEventListener('click', function() {
+      renderOverview();
+      showScreen('overview');
+      window.scrollTo(0, 0);
+    });
+
+    document.getElementById('tq-back-to-trails').addEventListener('click', function() {
+      showScreen('trails');
+      window.scrollTo(0, 0);
+    });
+
     // Start trail
     document.getElementById('tq-start-btn').addEventListener('click', function() {
       appState = {
@@ -1594,6 +1806,18 @@
       this.value = '';
     });
 
+    document.getElementById('tq-choice-list').addEventListener('click', function(event) {
+      const choiceBtn = event.target.closest('.tq-choice-btn');
+      if (!choiceBtn) return;
+      const id = appState.currentCheckpointId;
+      appState.answers[id] = choiceBtn.dataset.choice;
+      this.querySelectorAll('.tq-choice-btn').forEach(btn => {
+        btn.classList.toggle('is-selected', btn === choiceBtn);
+      });
+      persistState();
+      clearError();
+    });
+
     // Submit task
     document.getElementById('tq-btn-submit').addEventListener('click', function() {
       clearError();
@@ -1616,6 +1840,17 @@
           return;
         }
         appState.answers[id] = answerVal;
+      }
+      if (cp.taskType === 'choice') {
+        const answerVal = appState.answers[id];
+        if (!answerVal) {
+          showError('Pick one answer together before collecting the treasure.');
+          return;
+        }
+        if (answerVal !== cp.correctAnswer) {
+          showError('Not quite. Read the clue with your family and try one more time.');
+          return;
+        }
       }
 
       // Mark complete and show unlock card
@@ -1644,27 +1879,27 @@
     // Restart (from complete screen)
     document.getElementById('tq-btn-restart').addEventListener('click', function() {
       appState = {
-        screen: 'overview', currentCheckpointId: 1,
+        screen: 'trails', currentCheckpointId: 1,
         completedIds: [], panel: 'precheckin',
         photos: {}, answers: {}
       };
       clearState();
       renderOverview();
-      showScreen('overview');
+      showScreen('trails');
       window.scrollTo(0, 0);
     });
 
     // Clear progress (from complete screen)
     document.getElementById('tq-btn-clear').addEventListener('click', function() {
-      if (confirm('Clear all saved progress and photos?')) {
+      if (confirm('Clear all saved trail progress?')) {
         appState = {
-          screen: 'overview', currentCheckpointId: 1,
+          screen: 'trails', currentCheckpointId: 1,
           completedIds: [], panel: 'precheckin',
           photos: {}, answers: {}
         };
         clearState();
         renderOverview();
-        showScreen('overview');
+        showScreen('trails');
         window.scrollTo(0, 0);
       }
     });
@@ -1673,13 +1908,13 @@
     document.getElementById('tq-reset-btn').addEventListener('click', function() {
       if (confirm('Reset your trail progress?')) {
         appState = {
-          screen: 'overview', currentCheckpointId: 1,
+          screen: 'trails', currentCheckpointId: 1,
           completedIds: [], panel: 'precheckin',
           photos: {}, answers: {}
         };
         clearState();
         renderOverview();
-        showScreen('overview');
+        showScreen('trails');
         window.scrollTo(0, 0);
       }
     });
@@ -1693,16 +1928,7 @@
 
       renderOverview();
 
-      if (appState.screen === 'complete') {
-        showScreen('complete');
-        renderComplete();
-      } else if (appState.screen === 'checkpoint' && appState.currentCheckpointId) {
-        renderCheckpoint(appState.currentCheckpointId);
-        showPanel(appState.panel || 'precheckin');
-        showScreen('checkpoint');
-      } else {
-        showScreen('overview');
-      }
+      showScreen('trails');
     }
 
     init();
