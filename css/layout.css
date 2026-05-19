@@ -74,8 +74,8 @@
   object-fit: cover;
   object-position: center;
   border-radius: 0.75rem;
-  background: var(--surface-container-lowest);
-  box-shadow: 0 4px 14px rgba(25, 28, 27, 0.08);
+  background: transparent;
+  box-shadow: none;
 }
 
 .app-header__title {

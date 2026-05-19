@@ -2,7 +2,7 @@
 <html lang="en">
   <head>
     <meta charset="utf-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, viewport-fit=cover" />
     <meta name="theme-color" content="#f8faf7" />
     <title>Park Quest — Map</title>
     <link rel="preconnect" href="https://fonts.googleapis.com" />
@@ -18,11 +18,17 @@
     <link rel="stylesheet" href="css/style.css" />
     <style>
       /* Map legend card (replaces trail-journey-card) */
+      html,
+      body,
+      .app {
+        touch-action: manipulation;
+      }
+
       .trail-guide-main {
         display: flex;
         flex-direction: column;
         overflow: hidden;
-        padding-bottom: calc(var(--bottom-nav-h) + env(safe-area-inset-bottom, 0));
+        padding-bottom: calc(var(--bottom-nav-h) + env(safe-area-inset-bottom, 0) + 1.5rem);
       }
       .trail-guide-map {
         position: relative;
@@ -32,15 +38,24 @@
       .trail-guide-map__svg {
         display: block;
         background: #f0eee4;
+        touch-action: none;
+      }
+      .trail-guide-header .icon-btn {
+        background: transparent;
+        box-shadow: none;
+      }
+      .trail-guide-header .app-header__logo {
+        background: transparent;
+        box-shadow: none;
       }
       .map-legend-card {
         position: relative;
         flex: 0 0 auto;
-        margin: 0.55rem 0.85rem 0.7rem;
-        border-radius: var(--radius-2xl);
+        margin: 0.55rem 0.85rem;
+        border-radius: 14px;
         background: var(--surface-container-lowest);
         box-shadow: var(--shadow-card);
-        padding: 0.72rem 1rem 0.76rem;
+        padding: 1rem 1rem 1.1rem;
         z-index: 10;
       }
       .map-legend-card__title {
@@ -81,16 +96,6 @@
         background: var(--primary);
         color: var(--on-primary);
       }
-      .map-legend-hint {
-        margin: 0.42rem 0 0;
-        font-size: 0.6875rem;
-        color: var(--on-surface-variant);
-        display: flex;
-        align-items: center;
-        gap: 0.3rem;
-      }
-      .map-legend-hint .material-symbols-outlined { font-size: 0.9rem; color: var(--primary); }
-
       /* Pulsing my-location dot */
       @keyframes loc-pulse {
         0%,100% { r: 8; opacity: 1; }
@@ -117,7 +122,7 @@
         <section class="trail-guide-map" aria-label="Brisbane City Botanic Gardens facilities map">
           <svg id="park-map-svg" class="trail-guide-map__svg"
                viewBox="0 0 420 620" preserveAspectRatio="xMidYMid slice"
-               role="img" aria-label="Illustrated map of Brisbane City Botanic Gardens showing the Medicinal Plant Treasures route, toilets, water, playground, cafe, river walk, landmarks and rest areas">
+               role="img" aria-label="Illustrated map of Brisbane City Botanic Gardens showing the Medicinal Plant Treasures route, toilets, water, playground, cafe, river walk and rest areas">
             <defs>
               <linearGradient id="bgGrad" x1="0" y1="0" x2="1" y2="1">
                 <stop offset="0%" stop-color="#ddd8d0"/>
@@ -1180,49 +1185,34 @@
 
             <g id="digital-map-markers" font-family="'Plus Jakarta Sans', 'Work Sans', sans-serif">
               <g class="facility-group" data-type="trail">
-                <path d="M 231,238 C 190,216 158,176 151,132
-                         C 205,105 262,119 296,166
-                         C 319,210 320,262 308,320
-                         C 292,385 268,436 244,482"
+                <path d="M 179,124
+                         L 212,154 L 239,193 L 258,224
+                         L 297,199 L 335,184
+                         L 343,285 L 336,354
+                         L 318,428 L 306,455
+                         L 292,480 L 267,515"
                       fill="none" stroke="#ffffff" stroke-width="7" stroke-linecap="round" stroke-linejoin="round" opacity="0.9"/>
-                <path d="M 231,238 C 190,216 158,176 151,132
-                         C 205,105 262,119 296,166
-                         C 319,210 320,262 308,320
-                         C 292,385 268,436 244,482"
+                <path d="M 179,124
+                         L 212,154 L 239,193 L 258,224
+                         L 297,199 L 335,184
+                         L 343,285 L 336,354
+                         L 318,428 L 306,455
+                         L 292,480 L 267,515"
                       fill="none" stroke="#cf3340" stroke-width="2.8" stroke-dasharray="3,4" stroke-linecap="round" stroke-linejoin="round"/>
-                <circle cx="231" cy="238" r="13" fill="#cf3340" stroke="#fff" stroke-width="2.5" filter="url(#shadow-sm)"/>
-                <text x="231" y="243" text-anchor="middle" font-size="10" font-weight="900" fill="#fff">1</text>
-                <circle cx="151" cy="132" r="13" fill="#cf3340" stroke="#fff" stroke-width="2.5" filter="url(#shadow-sm)"/>
-                <text x="151" y="137" text-anchor="middle" font-size="10" font-weight="900" fill="#fff">2</text>
-                <circle cx="296" cy="166" r="13" fill="#cf3340" stroke="#fff" stroke-width="2.5" filter="url(#shadow-sm)"/>
-                <text x="296" y="171" text-anchor="middle" font-size="10" font-weight="900" fill="#fff">3</text>
-                <circle cx="308" cy="320" r="13" fill="#cf3340" stroke="#fff" stroke-width="2.5" filter="url(#shadow-sm)"/>
-                <text x="308" y="325" text-anchor="middle" font-size="10" font-weight="900" fill="#fff">4</text>
-                <circle cx="279" cy="405" r="13" fill="#cf3340" stroke="#fff" stroke-width="2.5" filter="url(#shadow-sm)"/>
-                <text x="279" y="410" text-anchor="middle" font-size="10" font-weight="900" fill="#fff">5</text>
-                <circle cx="244" cy="482" r="13" fill="#cf3340" stroke="#fff" stroke-width="2.5" filter="url(#shadow-sm)"/>
-                <text x="244" y="487" text-anchor="middle" font-size="10" font-weight="900" fill="#fff">6</text>
-              </g>
-
-              <g class="facility-group" data-type="landmark">
-                <circle cx="179" cy="124" r="11" fill="#1f2522" stroke="#fff" stroke-width="2" filter="url(#shadow-sm)"/>
-                <text x="179" y="128" text-anchor="middle" font-size="8.5" font-weight="900" fill="#fff">BUS</text>
-                <circle cx="151" cy="335" r="12" fill="#1d8bd1" stroke="#fff" stroke-width="2" filter="url(#shadow-sm)"/>
-                <text x="151" y="340" text-anchor="middle" font-size="13" font-weight="900" fill="#fff">i</text>
-                <circle cx="179" cy="314" r="10.5" fill="#1f2522" stroke="#fff" stroke-width="2" filter="url(#shadow-sm)"/>
-                <text x="179" y="318" text-anchor="middle" font-size="9">📷</text>
-                <circle cx="207" cy="271" r="10.5" fill="#1f2522" stroke="#fff" stroke-width="2" filter="url(#shadow-sm)"/>
-                <text x="207" y="275" text-anchor="middle" font-size="9" fill="#fff">Wi</text>
-                <circle cx="365" cy="353" r="10.5" fill="#1f2522" stroke="#fff" stroke-width="2" filter="url(#shadow-sm)"/>
-                <text x="365" y="357" text-anchor="middle" font-size="9">📷</text>
-                <circle cx="311" cy="442" r="10.5" fill="#1f2522" stroke="#fff" stroke-width="2" filter="url(#shadow-sm)"/>
-                <text x="311" y="446" text-anchor="middle" font-size="9">📷</text>
-                <circle cx="249" cy="535" r="10.5" fill="#1f2522" stroke="#fff" stroke-width="2" filter="url(#shadow-sm)"/>
-                <text x="249" y="539" text-anchor="middle" font-size="9">♪</text>
-                <circle cx="125" cy="563" r="10.5" fill="#1f2522" stroke="#fff" stroke-width="2" filter="url(#shadow-sm)"/>
-                <text x="125" y="567" text-anchor="middle" font-size="9" fill="#fff">☎</text>
-                <circle cx="180" cy="570" r="10.5" fill="#1f2522" stroke="#fff" stroke-width="2" filter="url(#shadow-sm)"/>
-                <text x="180" y="574" text-anchor="middle" font-size="9" fill="#fff">🚲</text>
+                <circle cx="179" cy="124" r="10.5" fill="#1f2522" stroke="#fff" stroke-width="2" filter="url(#shadow-sm)"/>
+                <text x="179" y="128" text-anchor="middle" font-size="7.5" font-weight="900" fill="#fff">BUS</text>
+                <circle cx="262" cy="218" r="13" fill="#cf3340" stroke="#fff" stroke-width="2.5" filter="url(#shadow-sm)"/>
+                <text x="262" y="223" text-anchor="middle" font-size="10" font-weight="900" fill="#fff">1</text>
+                <circle cx="335" cy="184" r="13" fill="#cf3340" stroke="#fff" stroke-width="2.5" filter="url(#shadow-sm)"/>
+                <text x="335" y="189" text-anchor="middle" font-size="10" font-weight="900" fill="#fff">2</text>
+                <circle cx="343" cy="285" r="13" fill="#cf3340" stroke="#fff" stroke-width="2.5" filter="url(#shadow-sm)"/>
+                <text x="343" y="290" text-anchor="middle" font-size="10" font-weight="900" fill="#fff">3</text>
+                <circle cx="336" cy="354" r="13" fill="#cf3340" stroke="#fff" stroke-width="2.5" filter="url(#shadow-sm)"/>
+                <text x="336" y="359" text-anchor="middle" font-size="10" font-weight="900" fill="#fff">4</text>
+                <circle cx="318" cy="428" r="13" fill="#cf3340" stroke="#fff" stroke-width="2.5" filter="url(#shadow-sm)"/>
+                <text x="318" y="433" text-anchor="middle" font-size="10" font-weight="900" fill="#fff">5</text>
+                <circle cx="292" cy="480" r="13" fill="#cf3340" stroke="#fff" stroke-width="2.5" filter="url(#shadow-sm)"/>
+                <text x="292" y="485" text-anchor="middle" font-size="10" font-weight="900" fill="#fff">6</text>
               </g>
 
               <g class="facility-group" data-type="toilet">
@@ -1275,22 +1265,6 @@
               <circle id="my-location-ring" cx="179" cy="124" r="8" fill="#006399" opacity="0.25"/>
               <circle cx="179" cy="124" r="7" fill="#006399" stroke="#fff" stroke-width="2.5"/>
             </g>
-
-            <!-- ── NORTH ARROW ── -->
-            <g transform="translate(380,548)">
-              <circle r="14" fill="#fff" opacity="0.9" filter="url(#shadow-sm)"/>
-              <path d="M0,-10 L3.5,4 L0,1.5 L-3.5,4 Z" fill="#0f5238"/>
-              <text x="0" y="-2" text-anchor="middle" font-family="'Plus Jakarta Sans',sans-serif" font-size="6.5" font-weight="800" fill="#0f5238">N</text>
-            </g>
-
-            <!-- ── SCALE BAR ── -->
-            <g transform="translate(52,548)">
-              <rect x="0" y="-1" width="64" height="5" rx="2.5" fill="#fff" opacity="0.75"/>
-              <rect x="0" y="-1" width="32" height="5" rx="2.5" fill="#0f5238" opacity="0.75"/>
-              <text x="0" y="-4" font-family="'Work Sans',sans-serif" font-size="5.5" fill="#1e5e30" opacity="0.85">0</text>
-              <text x="29" y="-4" font-family="'Work Sans',sans-serif" font-size="5.5" fill="#1e5e30" opacity="0.85">50m</text>
-              <text x="58" y="-4" font-family="'Work Sans',sans-serif" font-size="5.5" fill="#1e5e30" opacity="0.85">100m</text>
-            </g>
           </svg>
 
           <!-- Map control buttons (floating top-right, under north arrow) -->
@@ -1315,13 +1289,8 @@
             <button class="map-filter-chip" data-filter="picnic">🍱 Picnic</button>
             <button class="map-filter-chip" data-filter="cafe">☕ Café</button>
             <button class="map-filter-chip" data-filter="accessible">♿ Access</button>
-            <button class="map-filter-chip" data-filter="landmark">📍 Landmarks</button>
             <button class="map-filter-chip" data-filter="trail">🏃 Trail Quest</button>
           </div>
-          <p class="map-legend-hint">
-            <span class="material-symbols-outlined">info</span>
-            Drawn map updated from the real garden signs: route, toilets, water, café and key landmarks are placed together.
-          </p>
         </section>
 
       </main>
@@ -1344,6 +1313,10 @@
 
     <script>
     'use strict';
+
+    document.addEventListener('dblclick', event => {
+      event.preventDefault();
+    }, { passive: false });
 
     /* ── Facility filter chips ── */
     const chips = document.querySelectorAll('.map-filter-chip');
