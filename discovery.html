@@ -308,6 +308,12 @@
         line-height: 1.15;
         color: var(--on-surface);
       }
+      .tq-cp-scientific {
+        margin: 0.28rem 0 0;
+        font-size: 0.84rem;
+        font-style: italic;
+        color: var(--on-surface-variant);
+      }
       .tq-cp-location {
         margin: 0.3rem 0 0;
         display: flex;
@@ -335,12 +341,80 @@
         text-align: center;
         margin-bottom: 0.75rem;
       }
+      .tq-tree-reference {
+        display: none;
+        width: 100%;
+        margin: 0 0 0.85rem;
+        border-radius: 14px;
+        overflow: hidden;
+        background: var(--surface-container-low);
+      }
+      .tq-tree-reference.is-visible { display: block; }
+      .tq-tree-reference img {
+        width: 100%;
+        aspect-ratio: 4 / 3;
+        object-fit: contain;
+        object-position: center;
+        background: #fff;
+      }
+      .tq-tree-reference__caption {
+        margin: 0;
+        padding: 0.45rem 0.65rem;
+        font-size: 0.72rem;
+        font-weight: 700;
+        color: var(--on-surface-variant);
+      }
       .tq-checkin-card__instruction {
         margin: 0 0 0.35rem;
         font-size: 0.9375rem;
         line-height: 1.5;
         color: var(--on-surface);
       }
+      .tq-stop-detail {
+        margin: 0.65rem 0;
+        padding: 0.72rem 0.85rem;
+        border-radius: 14px;
+        background: var(--surface-container-low);
+      }
+      .tq-stop-detail__label {
+        margin: 0 0 0.25rem;
+        font-size: 0.66rem;
+        font-weight: 800;
+        letter-spacing: 0.08em;
+        text-transform: uppercase;
+        color: var(--primary);
+      }
+      .tq-stop-detail__text {
+        margin: 0;
+        font-size: 0.86rem;
+        line-height: 1.45;
+        color: var(--on-surface);
+      }
+      .tq-help-btn {
+        display: inline-flex;
+        align-items: center;
+        gap: 0.3rem;
+        margin-top: 0.55rem;
+        padding: 0.48rem 0.7rem;
+        border-radius: var(--radius-pill);
+        background: color-mix(in srgb, var(--secondary-container) 35%, white);
+        color: var(--primary);
+        font-family: var(--font-display);
+        font-size: 0.78rem;
+        font-weight: 800;
+      }
+      .tq-help-btn .material-symbols-outlined { font-size: 1rem; }
+      .tq-help-text {
+        display: none;
+        margin: 0.6rem 0 0;
+        padding: 0.62rem 0.75rem;
+        border-radius: 14px;
+        background: color-mix(in srgb, var(--primary-fixed) 35%, white);
+        font-size: 0.8rem;
+        line-height: 1.45;
+        color: var(--on-surface);
+      }
+      .tq-help-text.is-visible { display: block; }
       .tq-checkin-card__safety {
         margin: 0.75rem 0 0;
         padding: 0.65rem 0.85rem;
@@ -407,74 +481,13 @@
         line-height: 1.5;
         color: var(--on-surface);
       }
-      .tq-photo-zone {
-        width: 100%;
-        aspect-ratio: 4/3;
-        border-radius: var(--radius-xl);
-        border: 2px dashed var(--outline-variant);
-        display: flex;
-        flex-direction: column;
-        align-items: center;
-        justify-content: center;
-        gap: 0.5rem;
-        background: var(--surface-container-low);
-        cursor: pointer;
-        overflow: hidden;
-        position: relative;
-        transition: border-color 0.2s ease;
-      }
-      .tq-photo-zone:hover { border-color: var(--primary); }
-      .tq-photo-zone.has-photo { border-style: solid; border-color: var(--primary); }
-      .tq-photo-zone__preview {
-        position: absolute;
-        inset: 0;
-        width: 100%;
-        height: 100%;
-        object-fit: cover;
-        display: none;
-      }
-      .tq-photo-zone.has-photo .tq-photo-zone__preview { display: block; }
-      .tq-photo-zone.has-photo .tq-photo-zone__placeholder { display: none; }
-      .tq-photo-zone__placeholder {
-        display: flex;
-        flex-direction: column;
-        align-items: center;
-        gap: 0.35rem;
-        pointer-events: none;
-      }
-      .tq-photo-zone__placeholder .material-symbols-outlined {
-        font-size: 2.25rem;
-        color: var(--on-surface-variant);
-      }
-      .tq-photo-zone__placeholder span {
-        font-size: 0.8125rem;
-        color: var(--on-surface-variant);
-        font-weight: 600;
-      }
-      .tq-photo-zone__done-badge {
-        position: absolute;
-        top: 0.6rem;
-        right: 0.6rem;
-        padding: 0.25rem 0.6rem;
-        border-radius: var(--radius-pill);
-        background: var(--primary);
-        color: var(--on-primary);
-        font-size: 0.625rem;
-        font-weight: 800;
-        letter-spacing: 0.06em;
-        text-transform: uppercase;
-        display: none;
-      }
-      .tq-photo-zone.has-photo .tq-photo-zone__done-badge { display: block; }
-      .tq-file-input { display: none; }
-
-      .tq-photo-btns {
+      .tq-action-btns {
         display: grid;
-        grid-template-columns: 1fr 1fr;
+        grid-template-columns: 1fr;
         gap: 0.5rem;
         margin-top: 0.6rem;
       }
-      .tq-photo-btn {
+      .tq-action-btn {
         display: flex;
         align-items: center;
         justify-content: center;
@@ -490,8 +503,8 @@
         cursor: pointer;
         transition: background 0.15s ease;
       }
-      .tq-photo-btn:active { background: var(--surface-container-high); }
-      .tq-photo-btn .material-symbols-outlined { font-size: 1.1rem; }
+      .tq-action-btn:active { background: var(--surface-container-high); }
+      .tq-action-btn .material-symbols-outlined { font-size: 1.1rem; }
 
       .tq-question-wrap {
         margin-top: 1rem;
@@ -524,6 +537,24 @@
         margin: 0.35rem 0 0;
         font-size: 0.75rem;
         color: var(--on-surface-variant);
+      }
+      .tq-feedback-msg {
+        display: none;
+        margin: 0.75rem 0 0;
+        padding: 0.65rem 0.8rem;
+        border-radius: 14px;
+        font-size: 0.82rem;
+        line-height: 1.42;
+        font-weight: 700;
+      }
+      .tq-feedback-msg.is-visible { display: block; }
+      .tq-feedback-msg.is-correct {
+        background: color-mix(in srgb, var(--primary-fixed) 55%, white);
+        color: var(--primary-container);
+      }
+      .tq-feedback-msg.is-incorrect {
+        background: color-mix(in srgb, #fde8e8 88%, var(--surface));
+        color: var(--error);
       }
       .tq-choice-list {
         display: grid;
@@ -618,33 +649,6 @@
         color: var(--on-surface);
       }
 
-      /* Photo collected display */
-      .tq-collected-photo {
-        margin: 0.75rem 1.25rem 0;
-        border-radius: var(--radius-xl);
-        overflow: hidden;
-        box-shadow: var(--shadow-ambient);
-        display: none;
-      }
-      .tq-collected-photo.is-visible { display: block; }
-      .tq-collected-photo img {
-        width: 100%;
-        aspect-ratio: 4/3;
-        object-fit: cover;
-        display: block;
-      }
-      .tq-collected-photo__label {
-        padding: 0.5rem 0.75rem;
-        background: var(--surface-container-low);
-        font-size: 0.75rem;
-        font-weight: 600;
-        color: var(--on-surface-variant);
-        display: flex;
-        align-items: center;
-        gap: 0.25rem;
-      }
-      .tq-collected-photo__label .material-symbols-outlined { font-size: 1rem; color: var(--primary); }
-
       .tq-facilities-section {
         margin: 0.85rem 1.25rem 0;
       }
@@ -672,6 +676,10 @@
         border-radius: var(--radius-md);
         background: var(--surface-container-lowest);
         box-shadow: var(--shadow-ambient);
+      }
+      a.tq-facility-card {
+        color: inherit;
+        text-decoration: none;
       }
       .tq-facility-card__icon {
         width: 2.25rem;
@@ -766,35 +774,29 @@
       }
       .tq-complete-stat .material-symbols-outlined { font-size: 1rem; }
 
-      .tq-photos-section {
+      .tq-treasures-section {
         padding: 1.25rem 1.25rem 0;
       }
-      .tq-photos-section__title {
+      .tq-treasures-section__title {
         margin: 0 0 0.75rem;
         font-family: var(--font-display);
         font-size: 1rem;
         font-weight: 800;
         color: var(--on-surface);
       }
-      .tq-photos-grid {
+      .tq-treasures-grid {
         display: grid;
         grid-template-columns: repeat(3, 1fr);
         gap: 0.5rem;
       }
-      .tq-photo-thumb {
+      .tq-treasure-thumb {
         aspect-ratio: 1;
         border-radius: var(--radius-md);
         overflow: hidden;
         background: var(--surface-container-high);
         position: relative;
       }
-      .tq-photo-thumb img {
-        width: 100%;
-        height: 100%;
-        object-fit: cover;
-        display: block;
-      }
-      .tq-photo-thumb__placeholder {
+      .tq-treasure-thumb__placeholder {
         width: 100%;
         height: 100%;
         display: flex;
@@ -803,12 +805,12 @@
         justify-content: center;
         gap: 0.2rem;
       }
-      .tq-photo-thumb__placeholder .material-symbols-outlined {
+      .tq-treasure-thumb__placeholder .material-symbols-outlined {
         font-size: 1.5rem;
         color: var(--on-surface-variant);
         opacity: 0.5;
       }
-      .tq-photo-thumb__stop {
+      .tq-treasure-thumb__stop {
         position: absolute;
         bottom: 0.3rem;
         left: 0.3rem;
@@ -846,6 +848,10 @@
         text-decoration: none;
         color: inherit;
       }
+      .tq-next-option.is-disabled {
+        opacity: 0.72;
+        box-shadow: none;
+      }
       .tq-next-option__icon {
         width: 2.25rem;
         height: 2.25rem;
@@ -880,6 +886,16 @@
         color: var(--on-surface-variant);
         font-size: 1.1rem;
         flex-shrink: 0;
+      }
+      .tq-coming-soon-pill {
+        padding: 0.18rem 0.48rem;
+        border-radius: var(--radius-pill);
+        background: var(--surface-container-high);
+        color: var(--on-surface-variant);
+        font-size: 0.65rem;
+        font-weight: 800;
+        text-transform: uppercase;
+        letter-spacing: 0.05em;
       }
 
       .tq-complete-actions {
@@ -963,7 +979,7 @@
               <span class="trail-choice-card__body">
                 <span class="trail-choice-card__label">Available now</span>
                 <span class="trail-choice-card__title">Medicinal Plant Treasures</span>
-                <span class="trail-choice-card__meta">6 stops · 15 min · Trail Quest</span>
+                <span class="trail-choice-card__meta">6 treasures · comfort stop · 15 min</span>
               </span>
               <span class="material-symbols-outlined trail-choice-card__action" aria-hidden="true">chevron_right</span>
             </button>
@@ -1011,13 +1027,13 @@
           <section class="tq-overview-hero">
             <p class="tq-overview-hero__eyebrow">Brisbane City Botanic Gardens</p>
             <h2 class="tq-overview-hero__title">Trail Quest</h2>
-            <p class="tq-overview-hero__sub">A short medicinal-plant treasure hunt for families to do together along the garden paths.</p>
+            <p class="tq-overview-hero__sub">A short medicinal-plant treasure hunt to do along the garden paths.</p>
             <div class="tq-overview-hero__meta">
               <span class="tq-meta-pill">
                 <span class="material-symbols-outlined">schedule</span>15 min
               </span>
               <span class="tq-meta-pill">
-                <span class="material-symbols-outlined">route</span>6 stops
+                <span class="material-symbols-outlined">route</span>6 treasures
               </span>
               <span class="tq-meta-pill">
                 <span class="material-symbols-outlined">accessible</span>Accessible
@@ -1026,7 +1042,7 @@
           </section>
 
           <section class="tq-stop-list">
-            <p class="tq-stop-list__title">Your stops</p>
+            <p class="tq-stop-list__title">Your route</p>
             <div id="tq-overview-stops"></div>
           </section>
 
@@ -1054,6 +1070,7 @@
           <div class="tq-cp-header">
             <p class="tq-cp-eyebrow" id="tq-cp-eyebrow"></p>
             <h2 class="tq-cp-title" id="tq-cp-title"></h2>
+            <p class="tq-cp-scientific" id="tq-cp-scientific"></p>
             <p class="tq-cp-location">
               <span class="material-symbols-outlined">location_on</span>
               <span id="tq-cp-location"></span>
@@ -1064,7 +1081,28 @@
           <div class="tq-panel" id="tq-panel-precheckin">
             <div class="tq-checkin-card">
               <div class="tq-checkin-card__icon" id="tq-cp-icon"></div>
+              <figure class="tq-tree-reference" id="tq-tree-reference">
+                <img id="tq-tree-img" src="" alt="" />
+                <figcaption class="tq-tree-reference__caption" id="tq-tree-caption"></figcaption>
+              </figure>
+              <div class="tq-stop-detail" id="tq-direction-block">
+                <p class="tq-stop-detail__label">Digital direction</p>
+                <p class="tq-stop-detail__text" id="tq-direction-text"></p>
+              </div>
+              <div class="tq-stop-detail" id="tq-clue-block">
+                <p class="tq-stop-detail__label">Clue</p>
+                <p class="tq-stop-detail__text" id="tq-clue-text"></p>
+              </div>
+              <div class="tq-stop-detail" id="tq-fact-block">
+                <p class="tq-stop-detail__label">Short fact</p>
+                <p class="tq-stop-detail__text" id="tq-fact-text"></p>
+              </div>
               <p class="tq-checkin-card__instruction" id="tq-checkin-instruction"></p>
+              <button class="tq-help-btn" id="tq-help-btn" type="button">
+                <span class="material-symbols-outlined" aria-hidden="true">help</span>
+                Need help finding it?
+              </button>
+              <p class="tq-help-text" id="tq-help-text"></p>
               <div class="tq-checkin-card__safety" id="tq-checkin-safety" style="display:none;"></div>
             </div>
             <div class="tq-gps-note">
@@ -1083,44 +1121,21 @@
               <p class="tq-task-card__label">Your task</p>
               <p class="tq-task-card__instruction" id="tq-task-instruction"></p>
 
-              <!-- Photo area (shown for photo/photo-and-question tasks) -->
-              <div id="tq-photo-area" style="display:none;">
-                <div class="tq-photo-zone" id="tq-photo-zone">
-                  <img class="tq-photo-zone__preview" id="tq-photo-preview" src="" alt="Your uploaded photo" />
-                  <div class="tq-photo-zone__placeholder">
-                    <span class="material-symbols-outlined">add_photo_alternate</span>
-                    <span>Tap to add photo</span>
-                  </div>
-                  <span class="tq-photo-zone__done-badge">✓ Photo added</span>
-                </div>
-                <div class="tq-photo-btns">
-                  <button class="tq-photo-btn" id="tq-btn-camera">
-                    <span class="material-symbols-outlined">photo_camera</span>
-                    Camera
-                  </button>
-                  <button class="tq-photo-btn" id="tq-btn-upload">
-                    <span class="material-symbols-outlined">upload</span>
-                    Upload
-                  </button>
-                </div>
-                <input class="tq-file-input" type="file" id="tq-file-camera" accept="image/*" capture="environment" />
-                <input class="tq-file-input" type="file" id="tq-file-upload" accept="image/*" />
-              </div>
-
-              <!-- Question area (shown for photo-and-question tasks) -->
+              <!-- Question area -->
               <div id="tq-question-area" style="display:none;" class="tq-question-wrap">
                 <p class="tq-question-label" id="tq-question-text"></p>
                 <div class="tq-choice-list" id="tq-choice-list" style="display:none;"></div>
                 <input class="tq-answer-input" type="text" id="tq-answer-input"
                   placeholder="Type your answer…" autocomplete="off" />
                 <p class="tq-answer-hint" id="tq-answer-hint">Enter any number — there's no wrong answer here!</p>
+                <p class="tq-feedback-msg" id="tq-feedback-msg"></p>
               </div>
             </div>
 
             <div class="tq-error-msg" id="tq-error-msg"></div>
             <button class="tq-btn-submit" id="tq-btn-submit">
               <span class="material-symbols-outlined">lock_open</span>
-              Collect Treasure
+              <span id="tq-btn-submit-label">Collect Treasure</span>
             </button>
           </div>
 
@@ -1135,15 +1150,6 @@
               <p class="tq-unlock-banner__desc" id="tq-unlock-desc"></p>
             </div>
 
-            <!-- Collected photo display -->
-            <div class="tq-collected-photo" id="tq-collected-photo">
-              <img id="tq-collected-img" src="" alt="Your photo" />
-              <div class="tq-collected-photo__label">
-                <span class="material-symbols-outlined">photo_camera</span>
-                Your photo
-              </div>
-            </div>
-
             <!-- Nearby facilities -->
             <div class="tq-facilities-section">
               <p class="tq-facilities-title">
@@ -1151,6 +1157,13 @@
                 Nearby facilities
               </p>
               <div class="tq-facilities-grid" id="tq-facilities-grid"></div>
+            </div>
+
+            <div class="tq-action-btns" id="tq-comfort-actions" style="display:none; margin:0.75rem 1.25rem 0;">
+              <button class="tq-action-btn" id="tq-pause-quest" type="button">
+                <span class="material-symbols-outlined">pause_circle</span>
+                Pause Quest
+              </button>
             </div>
 
             <button class="tq-btn-next" id="tq-btn-next">
@@ -1165,66 +1178,94 @@
         <div id="tq-screen-complete" class="tq-screen" style="padding-bottom:6rem;">
           <div class="tq-complete-hero">
             <div class="tq-complete-trophy">🏆</div>
-            <h2 class="tq-complete-title">Trail Complete!</h2>
-            <p class="tq-complete-sub">You've collected all 6 medicinal plant treasures in the Brisbane City Botanic Gardens.</p>
+            <h2 class="tq-complete-title">Quest Complete!</h2>
+            <p class="tq-complete-sub">You collected all 6 medicinal plant treasures.</p>
             <div class="tq-complete-stats">
               <span class="tq-complete-stat">
-                <span class="material-symbols-outlined">flag</span>6 stops
+                <span class="material-symbols-outlined">flag</span>6 treasures
               </span>
               <span class="tq-complete-stat">
                 <span class="material-symbols-outlined">auto_awesome</span>
-                <span id="tq-photo-count">0 treasures</span>
+                <span id="tq-treasure-count">0 treasures</span>
               </span>
             </div>
           </div>
 
-          <section class="tq-photos-section">
-            <p class="tq-photos-section__title">Your trail treasures</p>
-            <div class="tq-photos-grid" id="tq-photos-grid"></div>
+          <section class="tq-treasures-section">
+            <p class="tq-treasures-section__title">Your trail treasures</p>
+            <div class="tq-treasures-grid" id="tq-treasures-grid"></div>
+          </section>
+
+          <section class="tq-next-options" style="margin-top:1.25rem;">
+            <p class="tq-next-options__title">Badge unlocked</p>
+            <div class="tq-next-option">
+              <div class="tq-next-option__icon tq-next-option__icon--green">
+                <span class="material-symbols-outlined">workspace_premium</span>
+              </div>
+              <div class="tq-next-option__body">
+                <p class="tq-next-option__title">Botanic Explorer</p>
+                <p class="tq-next-option__sub">6 treasures collected · Comfort Stop reached · 15-minute mini trail completed · City Botanic Gardens explored</p>
+              </div>
+            </div>
           </section>
 
           <section class="tq-next-options" style="margin-top:1.25rem;">
             <p class="tq-next-options__title">What's nearby</p>
-            <div class="tq-next-option">
+            <a
+              class="tq-next-option"
+              href="https://www.google.com/maps/dir/?api=1&destination=Public%20Toilets%2C%20Botanic%20Gardens%20Bikeway%2C%20Brisbane%20City%20QLD%204000&travelmode=walking"
+              target="_blank"
+              rel="noopener noreferrer"
+            >
               <div class="tq-next-option__icon tq-next-option__icon--green">
                 <span class="material-symbols-outlined">wc</span>
               </div>
               <div class="tq-next-option__body">
                 <p class="tq-next-option__title">Nearest toilet</p>
-                <p class="tq-next-option__sub">Lower gardens area · Follow the path</p>
+                <p class="tq-next-option__sub">Navigate to public toilet</p>
               </div>
-              <span class="material-symbols-outlined chevron">chevron_right</span>
-            </div>
-            <div class="tq-next-option">
+              <span class="material-symbols-outlined chevron">open_in_new</span>
+            </a>
+            <a
+              class="tq-next-option"
+              href="https://www.google.com/maps/dir/?api=1&destination=Drinking%20Fountain%2C%20City%20Botanic%20Gardens%2C%20Brisbane%20City%20QLD%204000&travelmode=walking"
+              target="_blank"
+              rel="noopener noreferrer"
+            >
               <div class="tq-next-option__icon tq-next-option__icon--blue">
                 <span class="material-symbols-outlined">water_drop</span>
               </div>
               <div class="tq-next-option__body">
                 <p class="tq-next-option__title">Nearest drinking fountain</p>
-                <p class="tq-next-option__sub">Near Cafe Outlook</p>
+                <p class="tq-next-option__sub">Navigate to drinking water</p>
               </div>
-              <span class="material-symbols-outlined chevron">chevron_right</span>
-            </div>
-            <div class="tq-next-option">
+              <span class="material-symbols-outlined chevron">open_in_new</span>
+            </a>
+            <a
+              class="tq-next-option"
+              href="https://www.google.com/maps/dir/?api=1&destination=Goodwill%20Bridge%2C%20Brisbane%20City%20QLD%204000&travelmode=walking"
+              target="_blank"
+              rel="noopener noreferrer"
+            >
               <div class="tq-next-option__icon tq-next-option__icon--green">
                 <span class="material-symbols-outlined">exit_to_app</span>
               </div>
               <div class="tq-next-option__body">
                 <p class="tq-next-option__title">Nearest exit</p>
-                <p class="tq-next-option__sub">Return to map for the best route</p>
+                <p class="tq-next-option__sub">Navigate to Goodwill Bridge exit</p>
               </div>
-              <span class="material-symbols-outlined chevron">chevron_right</span>
-            </div>
+              <span class="material-symbols-outlined chevron">open_in_new</span>
+            </a>
           </section>
 
           <div class="tq-complete-actions">
             <button class="tq-btn-restart" id="tq-btn-restart">
-              <span class="material-symbols-outlined">replay</span>
-              Start Another Trail
+              <span class="material-symbols-outlined">map</span>
+              View Route Map
             </button>
             <button class="tq-btn-reset" id="tq-btn-clear">
-              <span class="material-symbols-outlined">delete_sweep</span>
-              Clear saved progress
+              <span class="material-symbols-outlined">replay</span>
+              Restart Quest
             </button>
           </div>
           <div style="height:0.5rem;"></div>
@@ -1252,20 +1293,35 @@
     'use strict';
 
     /* ── Data ── */
+    const TREE_REFERENCE_IMAGE = 'image/medicinal-plant-treasures-brochure.jpeg';
+    const TOTAL_TREASURES = 6;
     const CHECKPOINTS = [
       {
         id: 1,
         title: 'Neem Tree',
+        displayTitle: 'Treasure 1 of 6 — Neem Tree',
+        treasureNumber: 1,
+        treasureName: 'Neem Leaf',
         scientificName: 'Azadirachta indica',
-        locationName: 'Formal Flower Garden path',
+        locationName: 'Formal Garden area',
         icon: '🍃',
         taskType: 'choice',
-        taskInstruction: 'Find the Neem Tree sign. With your family, look for one leaf shape or bark texture, then tap Check In.',
-        question: 'What is one common use of neem today?',
-        choices: ['Hand washes and toothpaste', 'Mobile phones', 'Building bridges'],
+        taskInstruction: 'Find the Neem Tree, then answer the treasure question.',
+        digitalDirection: 'Walk towards the Formal Garden area and follow the highlighted route to Treasure 1.',
+        clue: 'Find the tree known for natural protection.',
+        shortFact: 'Neem has been used in hand washes, soaps, and toothpaste. It is also known for natural insect-repelling properties.',
+        helpText: 'Look for Treasure 1 near the Formal Garden area. Stay on the main path and follow the highlighted route.',
+        referenceImage: 'image/neem_tree.png',
+        referenceCaption: 'Tree reference: Neem Tree.',
+        question: 'What is neem commonly used in today?',
+        choices: ['A. Hand washes and toothpaste', 'B. Phone screens', 'C. Concrete paths'],
         correctAnswer: 'Hand washes and toothpaste',
+        correctChoice: 'A. Hand washes and toothpaste',
+        correctFeedback: 'Great job! You found the Neem Tree and collected the Neem Leaf.',
+        incorrectFeedback: 'Try again. Neem is commonly used in everyday hygiene products.',
         unlockTitle: 'Neem Leaf collected',
-        unlockDescription: 'Neem has been used in traditional medicine and is now found in everyday products like hand washes and toothpaste. Treasure tip: notice the leaves, then look back up from the screen.',
+        unlockDescription: 'Great job! You found the Neem Tree and collected the Neem Leaf.',
+        nextLabel: 'Next Treasure',
         nearbyFacilities: [
           { icon: 'wc', label: 'Nearest toilet', detail: 'Formal Flower Garden area' },
           { icon: 'water_drop', label: 'Water', detail: 'Short walk nearby' },
@@ -1277,16 +1333,29 @@
       {
         id: 2,
         title: 'Candle Nut Tree',
+        displayTitle: 'Treasure 2 of 6 — Candle Nut Tree',
+        treasureNumber: 2,
+        treasureName: 'Candle Nut',
         scientificName: 'Aleurites moluccanus',
-        locationName: 'Main Drive near Baldwin Lawn',
+        locationName: 'Royal Palm Lawn route',
         icon: '🌰',
         taskType: 'choice',
-        taskInstruction: 'Spot the Candle Nut Tree near the route. Do a quick family “point and find”: trunk, leaves, shade.',
+        taskInstruction: 'Find the Candle Nut Tree, then answer the treasure question.',
+        digitalDirection: 'Continue towards Royal Palm Lawn and follow the route to Treasure 2.',
+        clue: 'Look for the tree with a name connected to light.',
+        shortFact: 'The Candle Nut Tree has cultural and historical uses, but some parts can be toxic unless carefully treated.',
+        helpText: 'Follow the route to Treasure 2 near Royal Palm Lawn. Check the map if you are unsure.',
+        referenceImage: 'image/candle_nut_tree.png',
+        referenceCaption: 'Tree reference: Candle Nut Tree.',
         question: 'What should you be careful about with this tree?',
-        choices: ['Its leaves and seeds can be toxic unless carefully treated', 'It only grows underwater', 'It has no cultural history'],
-        correctAnswer: 'Its leaves and seeds can be toxic unless carefully treated',
+        choices: ['A. Some parts can be toxic unless treated', 'B. It only grows underwater', 'C. It has no roots'],
+        correctAnswer: 'Some parts can be toxic unless treated',
+        correctChoice: 'A. Some parts can be toxic unless treated',
+        correctFeedback: 'Nice work! You collected the Candle Nut.',
+        incorrectFeedback: 'Try again. Some parts of this tree need careful treatment.',
         unlockTitle: 'Candle Nut collected',
-        unlockDescription: 'The brochure notes that parts of this tree can be toxic unless carefully treated. Treasure tip: some plants are useful, but they still need respect and care.',
+        unlockDescription: 'Nice work! You collected the Candle Nut.',
+        nextLabel: 'Next Treasure',
         nearbyFacilities: [
           { icon: 'accessible', label: 'Accessible route', detail: 'Along Main Drive' },
           { icon: 'chair', label: 'Rest point', detail: 'Open lawn nearby' },
@@ -1298,16 +1367,29 @@
       {
         id: 3,
         title: 'Logwood',
+        displayTitle: 'Treasure 3 of 6 — Logwood',
+        treasureNumber: 3,
+        treasureName: 'Blue Dye Drop',
         scientificName: 'Haematoxylum campechianum',
-        locationName: 'Central path toward Middle Gardens',
+        locationName: 'Eastern path',
         icon: '💧',
         taskType: 'choice',
-        taskInstruction: 'Find the tree connected to natural dye. Ask: what colours can you spot around this part of the path?',
+        taskInstruction: 'Find the Logwood tree, then answer the treasure question.',
+        digitalDirection: 'Follow the eastern path towards Treasure 3.',
+        clue: 'Find the tree connected to colour.',
+        shortFact: 'Logwood was historically valued because its heartwood could produce blue dye.',
+        helpText: 'Look for Treasure 3 along the eastern side of the route. Follow the highlighted path and stay near the main garden walkway.',
+        referenceImage: 'image/logwood.png',
+        referenceCaption: 'Tree reference: Logwood.',
         question: 'What colour was Logwood historically used to produce?',
-        choices: ['Blue', 'Pink', 'White'],
+        choices: ['A. Blue', 'B. White', 'C. Orange'],
         correctAnswer: 'Blue',
+        correctChoice: 'A. Blue',
+        correctFeedback: 'Well done! You collected the Blue Dye Drop.',
+        incorrectFeedback: 'Try again. Logwood was known for producing a strong dye colour.',
         unlockTitle: 'Blue Dye Drop collected',
-        unlockDescription: 'Logwood heartwood was used to produce blue, grey and black dye. Treasure tip: choose one real colour nearby before moving on.',
+        unlockDescription: 'Well done! You collected the Blue Dye Drop.',
+        nextLabel: 'Continue to Comfort Stop',
         nearbyFacilities: [
           { icon: 'directions_walk', label: 'Clear path', detail: 'Follow the marked route' },
           { icon: 'chair', label: 'Rest point', detail: 'Short walk ahead' },
@@ -1318,59 +1400,128 @@
       },
       {
         id: 4,
-        title: 'Maidenhair Tree',
+        title: 'Comfort Stop',
+        displayTitle: 'Comfort Stop',
+        locationName: 'Toilets, water and rest area',
+        icon: '🚻',
+        isComfortStop: true,
+        taskType: 'checkin-only',
+        taskInstruction: 'You are halfway through the quest. This is a good place to pause, check toilets, have water, or let children rest before continuing.',
+        digitalDirection: 'Pause here before returning to the main quest route.',
+        clue: null,
+        shortFact: null,
+        helpText: null,
+        unlockTitle: 'Comfort Stop reached',
+        unlockDescription: 'You reached the Comfort Stop. Progress remains: Treasures collected: 3 / 6.',
+        nextLabel: 'Continue to Treasure 4',
+        nearbyFacilities: [
+          {
+            icon: 'wc',
+            label: 'Toilet nearby',
+            detail: 'Navigate to public toilet',
+            href: 'https://www.google.com/maps/dir/?api=1&destination=Public%20Toilets%2C%20Botanic%20Gardens%20Bikeway%2C%20Brisbane%20City%20QLD%204000&travelmode=walking'
+          },
+          { icon: 'chair', label: 'Shaded seating / rest area', detail: 'Pause if needed' },
+          { icon: 'local_cafe', label: 'Café or water nearby', detail: 'Good halfway break' },
+          { icon: 'directions_walk', label: 'Easy path back to the trail', detail: 'Return to the route' }
+        ],
+        safetyNote: 'Stay together and respect privacy around bathroom areas.',
+        nextCheckpointId: 5
+      },
+      {
+        id: 5,
+        title: 'Maidenhair Tree / Ginkgo',
+        displayTitle: 'Treasure 4 of 6 — Maidenhair Tree / Ginkgo',
+        treasureNumber: 4,
+        treasureName: 'Ancient Leaf',
         scientificName: 'Ginkgo biloba',
-        locationName: 'Path toward Residence Hill',
+        locationName: 'Rainforest area route',
         icon: '🌿',
         taskType: 'choice',
-        taskInstruction: 'Find the ancient-looking Ginkgo. Look for a leaf shape that feels different from the trees around it.',
+        taskInstruction: 'Find the Ginkgo / Maidenhair Tree, then answer the treasure question.',
+        digitalDirection: 'After the Comfort Stop, continue towards the rainforest area and look for Treasure 4.',
+        clue: 'Find the ancient survivor.',
+        shortFact: 'Ginkgo is often called a living fossil because it belongs to one of the oldest living tree groups.',
+        helpText: 'Look for Treasure 4 near the rainforest area. Use the map route to return from the Comfort Stop to the main quest path.',
+        referenceImage: 'image/ginkgo.png',
+        referenceCaption: 'Tree reference: Ginkgo / Maidenhair Tree.',
         question: 'Why is Ginkgo special?',
-        choices: ['It is known as a living fossil', 'It grows only in Brisbane', 'It has no leaves'],
+        choices: ['A. It is known as a living fossil', 'B. It only grows in Brisbane', 'C. It has no leaves'],
         correctAnswer: 'It is known as a living fossil',
+        correctChoice: 'A. It is known as a living fossil',
+        correctFeedback: 'Great discovery! You collected the Ancient Leaf.',
+        incorrectFeedback: 'Try again. Ginkgo is famous for its ancient history.',
         unlockTitle: 'Ancient Leaf collected',
-        unlockDescription: 'Ginkgo is often called a living fossil because its history reaches back millions of years. Treasure tip: imagine a tree family older than dinosaurs.',
+        unlockDescription: 'Great discovery! You collected the Ancient Leaf.',
+        nextLabel: 'Next Treasure',
         nearbyFacilities: [
           { icon: 'chair', label: 'Rest point', detail: 'Nearby lawn edge' },
           { icon: 'accessible', label: 'Accessible route', detail: 'Continue on path' },
           { icon: 'water_drop', label: 'Water', detail: 'Ahead toward cafe area' }
         ],
         safetyNote: null,
-        nextCheckpointId: 5
+        nextCheckpointId: 6
       },
       {
-        id: 5,
+        id: 6,
         title: 'Tamarind Tree',
+        displayTitle: 'Treasure 5 of 6 — Tamarind Tree',
+        treasureNumber: 5,
+        treasureName: 'Tamarind Pod',
         scientificName: 'Tamarindus indica',
-        locationName: 'Cafe Outlook path',
+        locationName: 'Central route near Residence Hill',
         icon: '🫘',
         taskType: 'choice',
-        taskInstruction: 'Find the Tamarind Tree and read the clue. If you see pods, count them quietly with your group.',
-        question: 'What was tamarind commonly used for in traditional medicine?',
-        choices: ['Treating digestive issues and fever', 'Charging batteries', 'Making glass'],
-        correctAnswer: 'Treating digestive issues and fever',
+        taskInstruction: 'Find the Tamarind Tree, then answer the treasure question.',
+        digitalDirection: 'Move back towards the central route near Residence Hill and find Treasure 5.',
+        clue: 'Find the tree with the sour fruit.',
+        shortFact: 'Tamarind has been used in traditional medicine and is also widely known as a food ingredient.',
+        helpText: 'Follow the route towards Treasure 5 near the central garden area. Stay on the main path.',
+        referenceImage: 'image/tamarind_tree.png',
+        referenceCaption: 'Tree reference: Tamarind Tree.',
+        question: 'What has tamarind commonly been used for?',
+        choices: ['A. Digestive issues and fever', 'B. Making glass', 'C. Charging batteries'],
+        correctAnswer: 'Digestive issues and fever',
+        correctChoice: 'A. Digestive issues and fever',
+        correctFeedback: 'Nice work! You collected the Tamarind Pod.',
+        incorrectFeedback: 'Try again. Tamarind has been linked to traditional health uses.',
         unlockTitle: 'Tamarind Pod collected',
-        unlockDescription: 'Tamarind has a long history of use in traditional medicine, including for digestive issues and fever. Treasure tip: check in, then take a sip of water if you need one.',
+        unlockDescription: 'Nice work! You collected the Tamarind Pod.',
+        nextLabel: 'Next Treasure',
         nearbyFacilities: [
           { icon: 'local_cafe', label: 'Cafe', detail: 'Cafe Outlook nearby' },
           { icon: 'water_drop', label: 'Water', detail: 'Near cafe area' },
           { icon: 'chair', label: 'Rest point', detail: 'Good pause spot' }
         ],
         safetyNote: 'Only eat food brought by your family or bought from the cafe.',
-        nextCheckpointId: 6
+        nextCheckpointId: 7
       },
       {
-        id: 6,
+        id: 7,
         title: 'Jackfruit Tree',
+        displayTitle: 'Treasure 6 of 6 — Jackfruit Tree',
+        treasureNumber: 6,
+        treasureName: 'Jackfruit Gem',
         scientificName: 'Artocarpus heterophyllus',
-        locationName: 'Lower path near The Gardens Club',
+        locationName: 'Final route',
         icon: '💎',
         taskType: 'choice',
-        taskInstruction: 'Find the Jackfruit Tree near the final part of the trail. Look for the biggest fruit shape you can see.',
+        taskInstruction: 'Find the Jackfruit Tree, then answer the treasure question.',
+        digitalDirection: 'Follow the final part of the route to Treasure 6 and complete the quest.',
+        clue: 'Find the tree with the giant fruit.',
+        shortFact: 'Jackfruit is edible and has high nutritional potential. It is widely grown in tropical and subtropical places.',
+        helpText: 'Follow the final route to Treasure 6. After this stop, the quest is complete.',
+        referenceImage: 'image/jackfruit_tree.png',
+        referenceCaption: 'Tree reference: Jackfruit Tree.',
         question: 'What is notable about jackfruit?',
-        choices: ['It is edible and has high nutritional potential', 'It is always poisonous', 'It only grows in cold climates'],
-        correctAnswer: 'It is edible and has high nutritional potential',
+        choices: ['A. It is edible and nutritious', 'B. It is always poisonous', 'C. It only grows in cold climates'],
+        correctAnswer: 'It is edible and nutritious',
+        correctChoice: 'A. It is edible and nutritious',
+        correctFeedback: 'Final treasure collected! You found the Jackfruit Gem.',
+        incorrectFeedback: 'Try again. Jackfruit is known as a large edible fruit.',
         unlockTitle: 'Jackfruit Gem collected',
-        unlockDescription: 'Jackfruit is edible and has high nutritional potential. Treasure complete: you found all six medicinal plant treasures.',
+        unlockDescription: 'Final treasure collected! You found the Jackfruit Gem.',
+        nextLabel: 'Finish Quest',
         nearbyFacilities: [
           { icon: 'wc', label: 'Nearest toilet', detail: 'Lower gardens area' },
           { icon: 'local_cafe', label: 'Cafe', detail: 'Cafe Outlook nearby' },
@@ -1382,7 +1533,7 @@
     ];
 
     /* ── Storage helpers ── */
-    const LS_KEY = 'trailquest_v1';
+    const LS_KEY = 'trailquest_v3';
 
     function loadState() {
       try {
@@ -1417,7 +1568,6 @@
       currentCheckpointId: 1,
       completedIds: [],
       panel: 'precheckin',      // 'precheckin' | 'task' | 'unlocked'
-      photos: {},               // { checkpointId: base64 | 'placeholder' }
       answers: {}               // { checkpointId: string }
     };
 
@@ -1436,6 +1586,40 @@
 
     function getCheckpoint(id) {
       return CHECKPOINTS.find(c => c.id === id);
+    }
+
+    function isTreasure(cp) {
+      return cp && !cp.isComfortStop;
+    }
+
+    function getCollectedTreasureCount() {
+      return CHECKPOINTS.filter(cp => isTreasure(cp) && appState.completedIds.includes(cp.id)).length;
+    }
+
+    function mapsDirectionUrl(destination) {
+      return `https://www.google.com/maps/dir/?api=1&destination=${encodeURIComponent(destination)}&travelmode=walking`;
+    }
+
+    function facilityDirectionUrl(facility) {
+      if (facility.href) return facility.href;
+
+      const label = `${facility.label} ${facility.detail}`.toLowerCase();
+      if (label.includes('toilet')) {
+        return mapsDirectionUrl('Public Toilets, Botanic Gardens Bikeway, Brisbane City QLD 4000');
+      }
+      if (label.includes('water') || label.includes('drinking')) {
+        return mapsDirectionUrl('Drinking Fountain, City Botanic Gardens, Brisbane City QLD 4000');
+      }
+      if (label.includes('cafe') || label.includes('café')) {
+        return mapsDirectionUrl('Cafe Outlook, City Botanic Gardens, Brisbane City QLD 4000');
+      }
+      if (label.includes('exit') || label.includes('return')) {
+        return mapsDirectionUrl('Goodwill Bridge, Brisbane City QLD 4000');
+      }
+      if (label.includes('rest') || label.includes('seat') || label.includes('shade') || label.includes('lawn')) {
+        return mapsDirectionUrl('City Botanic Gardens, Brisbane City QLD 4000');
+      }
+      return mapsDirectionUrl('City Botanic Gardens, Brisbane City QLD 4000');
     }
 
     /* ── Show screen ── */
@@ -1461,8 +1645,8 @@
       const stopsEl = document.getElementById('tq-overview-stops');
       stopsEl.innerHTML = CHECKPOINTS.map(cp => `
         <div class="tq-stop-item">
-          <div class="tq-stop-num">${cp.id}</div>
-          <span class="tq-stop-name">${cp.title}</span>
+          <div class="tq-stop-num">${cp.isComfortStop ? '★' : cp.treasureNumber}</div>
+          <span class="tq-stop-name">${cp.displayTitle || cp.title}</span>
           <span class="tq-stop-icon">${cp.icon}</span>
         </div>
       `).join('');
@@ -1481,7 +1665,8 @@
       const stepsEl = document.getElementById('tq-progress-steps');
       const labelEl = document.getElementById('tq-progress-label');
       const total = CHECKPOINTS.length;
-      const doneCount = appState.completedIds.length;
+      const doneCount = getCollectedTreasureCount();
+      const current = getCheckpoint(currentId);
 
       stepsEl.innerHTML = CHECKPOINTS.map(cp => {
         const isDone = appState.completedIds.includes(cp.id);
@@ -1492,7 +1677,13 @@
         return `<div class="${cls}" aria-hidden="true"></div>`;
       }).join('');
 
-      labelEl.textContent = `Stop ${currentId} of ${total} · ${doneCount} completed`;
+      if (current && current.isComfortStop) {
+        labelEl.textContent = `Treasures collected: ${doneCount} / ${TOTAL_TREASURES} · Comfort Stop reached`;
+      } else if (current && current.treasureNumber) {
+        labelEl.textContent = `Treasure ${current.treasureNumber} of ${TOTAL_TREASURES} · Treasures collected: ${doneCount} / ${TOTAL_TREASURES}`;
+      } else {
+        labelEl.textContent = `Treasures collected: ${doneCount} / ${TOTAL_TREASURES}`;
+      }
     }
 
     /* ── Render checkpoint ── */
@@ -1500,14 +1691,57 @@
       const cp = getCheckpoint(id);
       if (!cp) return;
 
-      document.getElementById('tq-cp-eyebrow').textContent = `Stop ${cp.id}`;
-      document.getElementById('tq-cp-title').textContent = cp.title;
+      document.getElementById('tq-cp-eyebrow').textContent = cp.isComfortStop ? 'Comfort Stop' : `Treasure ${cp.treasureNumber} of ${TOTAL_TREASURES}`;
+      document.getElementById('tq-cp-title').textContent = cp.displayTitle || cp.title;
+      const scientificEl = document.getElementById('tq-cp-scientific');
+      if (cp.scientificName) {
+        scientificEl.style.display = 'block';
+        scientificEl.textContent = `Scientific name: ${cp.scientificName}`;
+      } else {
+        scientificEl.style.display = 'none';
+        scientificEl.textContent = '';
+      }
       document.getElementById('tq-cp-location').textContent = cp.locationName;
       renderProgressBar(id);
 
       // Pre-checkin panel
       document.getElementById('tq-cp-icon').textContent = cp.icon;
+      const treeRef = document.getElementById('tq-tree-reference');
+      const treeImg = document.getElementById('tq-tree-img');
+      const treeCaption = document.getElementById('tq-tree-caption');
+      if (cp.referenceImage) {
+        treeImg.src = cp.referenceImage;
+        treeImg.alt = cp.referenceCaption || `${cp.title} reference image`;
+        treeCaption.textContent = cp.referenceCaption || `${cp.title} reference image`;
+        treeRef.classList.add('is-visible');
+      } else {
+        treeRef.classList.remove('is-visible');
+        treeImg.removeAttribute('src');
+        treeImg.alt = '';
+        treeCaption.textContent = '';
+      }
       document.getElementById('tq-checkin-instruction').textContent = cp.taskInstruction;
+      const detailBlocks = [
+        ['tq-direction-block', 'tq-direction-text', cp.digitalDirection],
+        ['tq-clue-block', 'tq-clue-text', cp.clue],
+        ['tq-fact-block', 'tq-fact-text', cp.shortFact]
+      ];
+      detailBlocks.forEach(([blockId, textId, value]) => {
+        const block = document.getElementById(blockId);
+        const text = document.getElementById(textId);
+        if (value) {
+          block.style.display = 'block';
+          text.textContent = value;
+        } else {
+          block.style.display = 'none';
+          text.textContent = '';
+        }
+      });
+      const helpText = document.getElementById('tq-help-text');
+      const helpBtn = document.getElementById('tq-help-btn');
+      helpText.textContent = cp.helpText || '';
+      helpText.classList.remove('is-visible');
+      helpBtn.style.display = cp.helpText ? 'inline-flex' : 'none';
       const safetyEl = document.getElementById('tq-checkin-safety');
       if (cp.safetyNote) {
         safetyEl.style.display = 'block';
@@ -1516,78 +1750,45 @@
         safetyEl.style.display = 'none';
       }
       const checkinLabel = document.getElementById('tq-checkin-btn-label');
-      checkinLabel.textContent = !cp.nextCheckpointId ? 'Final Check In' : 'Check In Here';
+      checkinLabel.textContent = cp.isComfortStop ? 'Next' : 'Check In';
 
       // Task panel
       document.getElementById('tq-task-instruction').textContent = cp.taskInstruction;
-      const photoArea = document.getElementById('tq-photo-area');
+      const submitLabel = document.getElementById('tq-btn-submit-label');
+      if (submitLabel) {
+        submitLabel.textContent = cp.treasureName ? `Collect ${cp.treasureName}` : 'Continue';
+      }
       const questionArea = document.getElementById('tq-question-area');
 
-      if (cp.taskType === 'photo' || cp.taskType === 'photo-and-question') {
-        photoArea.style.display = 'block';
-        // Restore photo if already captured
-        const savedPhoto = appState.photos[id];
-        const zone = document.getElementById('tq-photo-zone');
-        const preview = document.getElementById('tq-photo-preview');
-        if (savedPhoto && savedPhoto !== 'placeholder') {
-          preview.src = savedPhoto;
-          zone.classList.add('has-photo');
-        } else if (savedPhoto === 'placeholder') {
-          zone.classList.add('has-photo');
-          preview.src = '';
-        } else {
-          zone.classList.remove('has-photo');
-          preview.src = '';
-        }
-      } else {
-        photoArea.style.display = 'none';
-      }
-
-      if (cp.taskType === 'photo-and-question' || cp.taskType === 'choice') {
+      if (cp.taskType === 'choice') {
         questionArea.style.display = 'block';
         document.getElementById('tq-question-text').textContent = cp.question;
         const choiceList = document.getElementById('tq-choice-list');
         const answerEl = document.getElementById('tq-answer-input');
         const answerHint = document.getElementById('tq-answer-hint');
-        if (cp.taskType === 'choice') {
-          answerEl.style.display = 'none';
-          answerHint.textContent = 'Pick one answer together, then keep exploring.';
-          choiceList.style.display = 'grid';
-          choiceList.innerHTML = cp.choices.map(choice => `
-            <button class="tq-choice-btn${appState.answers[id] === choice ? ' is-selected' : ''}" type="button" data-choice="${choice}">
-              ${choice}
-            </button>
-          `).join('');
-        } else {
-          choiceList.style.display = 'none';
-          choiceList.innerHTML = '';
-          answerEl.style.display = 'block';
-          answerHint.textContent = 'Enter any number — there is no wrong answer here!';
-          answerEl.value = appState.answers[id] || '';
-        }
+        answerEl.style.display = 'none';
+        answerHint.textContent = 'Pick one answer together, then keep exploring.';
+        choiceList.style.display = 'grid';
+        choiceList.innerHTML = cp.choices.map(choice => `
+          <button class="tq-choice-btn${appState.answers[id] === choice ? ' is-selected' : ''}" type="button" data-choice="${choice}">
+            ${choice}
+          </button>
+        `).join('');
       } else {
         questionArea.style.display = 'none';
       }
+      const feedbackEl = document.getElementById('tq-feedback-msg');
+      feedbackEl.className = 'tq-feedback-msg';
+      feedbackEl.textContent = '';
 
       // Unlocked panel
       document.getElementById('tq-unlock-title').textContent = cp.unlockTitle;
       document.getElementById('tq-unlock-desc').textContent = cp.unlockDescription;
 
-      // Collected photo
-      const collectedDiv = document.getElementById('tq-collected-photo');
-      const collectedImg = document.getElementById('tq-collected-img');
-      const photo = appState.photos[id];
-      if (photo && photo !== 'placeholder') {
-        collectedImg.src = photo;
-        collectedDiv.classList.add('is-visible');
-      } else {
-        collectedDiv.classList.remove('is-visible');
-      }
-
       // Facilities
       const facilitiesGrid = document.getElementById('tq-facilities-grid');
       facilitiesGrid.innerHTML = cp.nearbyFacilities.map(f => `
-        <div class="tq-facility-card">
+        <a class="tq-facility-card" href="${facilityDirectionUrl(f)}" target="_blank" rel="noopener noreferrer" aria-label="Navigate to ${f.label}">
           <div class="tq-facility-card__icon">
             <span class="material-symbols-outlined">${f.icon}</span>
           </div>
@@ -1595,13 +1796,16 @@
             <p class="tq-facility-card__label">${f.label}</p>
             <p class="tq-facility-card__detail">${f.detail}</p>
           </div>
-        </div>
+        </a>
       `).join('');
+      document.getElementById('tq-comfort-actions').style.display = cp.isComfortStop ? 'grid' : 'none';
 
       // Next button label
       const nextLabel = document.getElementById('tq-next-label');
-      if (!cp.nextCheckpointId) {
-        nextLabel.textContent = 'View summary';
+      if (cp.nextLabel) {
+        nextLabel.textContent = cp.nextLabel;
+      } else if (!cp.nextCheckpointId) {
+        nextLabel.textContent = 'Finish Quest';
       } else {
         const next = getCheckpoint(cp.nextCheckpointId);
         nextLabel.textContent = next ? `Next: ${next.title}` : 'Next stop';
@@ -1612,17 +1816,17 @@
 
     /* ── Render complete screen ── */
     function renderComplete() {
-      const treasureCount = appState.completedIds.length;
-      document.getElementById('tq-photo-count').textContent =
+      const treasureCount = getCollectedTreasureCount();
+      document.getElementById('tq-treasure-count').textContent =
         treasureCount === 1 ? '1 treasure' : `${treasureCount} treasures`;
 
-      const grid = document.getElementById('tq-photos-grid');
-      grid.innerHTML = CHECKPOINTS.map(cp => `
-        <div class="tq-photo-thumb">
-          <div class="tq-photo-thumb__placeholder">
+      const grid = document.getElementById('tq-treasures-grid');
+      grid.innerHTML = CHECKPOINTS.filter(isTreasure).map(cp => `
+        <div class="tq-treasure-thumb">
+          <div class="tq-treasure-thumb__placeholder">
             <span aria-hidden="true" style="font-size:1.45rem;">${cp.icon}</span>
           </div>
-          <div class="tq-photo-thumb__stop">${cp.id}</div>
+          <div class="tq-treasure-thumb__stop">${cp.treasureNumber}</div>
         </div>
       `).join('');
     }
@@ -1637,38 +1841,6 @@
       document.getElementById('tq-error-msg').classList.remove('is-visible');
     }
 
-    /* ── Photo handling ── */
-    function handleFileInput(file) {
-      if (!file) return;
-      const zone = document.getElementById('tq-photo-zone');
-      const preview = document.getElementById('tq-photo-preview');
-      const id = appState.currentCheckpointId;
-
-      // Try to store as base64; fall back to placeholder if too large
-      const reader = new FileReader();
-      reader.onload = function(e) {
-        const b64 = e.target.result;
-        // Rough size check: don't store if > 1MB base64
-        if (b64.length > 1024 * 1024) {
-          appState.photos[id] = 'placeholder';
-          preview.src = '';
-        } else {
-          appState.photos[id] = b64;
-          preview.src = b64;
-        }
-        zone.classList.add('has-photo');
-        clearError();
-        persistState();
-      };
-      reader.onerror = function() {
-        appState.photos[id] = 'placeholder';
-        zone.classList.add('has-photo');
-        clearError();
-        persistState();
-      };
-      reader.readAsDataURL(file);
-    }
-
     /* ── Persist state ── */
     function persistState() {
       saveState({
@@ -1676,7 +1848,6 @@
         completedIds: appState.completedIds,
         panel: appState.panel,
         screen: appState.screen,
-        photos: appState.photos,
         answers: appState.answers
       });
     }
@@ -1725,6 +1896,16 @@
       window.scrollTo(0, 0);
     });
 
+    document.getElementById('tq-help-btn').addEventListener('click', function() {
+      document.getElementById('tq-help-text').classList.toggle('is-visible');
+    });
+
+    document.getElementById('tq-pause-quest').addEventListener('click', function() {
+      persistState();
+      showScreen('trails');
+      window.scrollTo(0, 0);
+    });
+
     // Start trail
     document.getElementById('tq-start-btn').addEventListener('click', function() {
       appState = {
@@ -1732,7 +1913,6 @@
         currentCheckpointId: 1,
         completedIds: [],
         panel: 'precheckin',
-        photos: {},
         answers: {}
       };
       persistState();
@@ -1784,36 +1964,19 @@
       window.scrollTo(0, 0);
     });
 
-    // Camera button
-    document.getElementById('tq-btn-camera').addEventListener('click', function() {
-      document.getElementById('tq-file-camera').click();
-    });
-    // Upload button
-    document.getElementById('tq-btn-upload').addEventListener('click', function() {
-      document.getElementById('tq-file-upload').click();
-    });
-    // Tap photo zone
-    document.getElementById('tq-photo-zone').addEventListener('click', function() {
-      document.getElementById('tq-file-upload').click();
-    });
-
-    document.getElementById('tq-file-camera').addEventListener('change', function() {
-      handleFileInput(this.files[0]);
-      this.value = '';
-    });
-    document.getElementById('tq-file-upload').addEventListener('change', function() {
-      handleFileInput(this.files[0]);
-      this.value = '';
-    });
-
     document.getElementById('tq-choice-list').addEventListener('click', function(event) {
       const choiceBtn = event.target.closest('.tq-choice-btn');
       if (!choiceBtn) return;
       const id = appState.currentCheckpointId;
+      const cp = getCheckpoint(id);
       appState.answers[id] = choiceBtn.dataset.choice;
       this.querySelectorAll('.tq-choice-btn').forEach(btn => {
         btn.classList.toggle('is-selected', btn === choiceBtn);
       });
+      const feedbackEl = document.getElementById('tq-feedback-msg');
+      const isCorrect = choiceBtn.dataset.choice === (cp.correctChoice || cp.correctAnswer);
+      feedbackEl.textContent = isCorrect ? cp.correctFeedback : cp.incorrectFeedback;
+      feedbackEl.className = `tq-feedback-msg is-visible ${isCorrect ? 'is-correct' : 'is-incorrect'}`;
       persistState();
       clearError();
     });
@@ -1824,31 +1987,15 @@
       const id = appState.currentCheckpointId;
       const cp = getCheckpoint(id);
 
-      // Validate photo
-      if (cp.taskType === 'photo' || cp.taskType === 'photo-and-question') {
-        if (!appState.photos[id]) {
-          showError('Please add a photo before continuing.');
-          return;
-        }
-      }
-
       // Validate question answer
-      if (cp.taskType === 'photo-and-question') {
-        const answerVal = document.getElementById('tq-answer-input').value.trim();
-        if (!answerVal) {
-          showError('Please answer the question before continuing.');
-          return;
-        }
-        appState.answers[id] = answerVal;
-      }
       if (cp.taskType === 'choice') {
         const answerVal = appState.answers[id];
         if (!answerVal) {
           showError('Pick one answer together before collecting the treasure.');
           return;
         }
-        if (answerVal !== cp.correctAnswer) {
-          showError('Not quite. Read the clue with your family and try one more time.');
+        if (answerVal !== (cp.correctChoice || cp.correctAnswer)) {
+          showError('Not quite. Read the clue and try one more time.');
           return;
         }
       }
@@ -1876,30 +2023,22 @@
       window.scrollTo(0, 0);
     });
 
-    // Restart (from complete screen)
+    // View route map (from complete screen)
     document.getElementById('tq-btn-restart').addEventListener('click', function() {
-      appState = {
-        screen: 'trails', currentCheckpointId: 1,
-        completedIds: [], panel: 'precheckin',
-        photos: {}, answers: {}
-      };
-      clearState();
-      renderOverview();
-      showScreen('trails');
-      window.scrollTo(0, 0);
+      window.location.href = 'index.html';
     });
 
-    // Clear progress (from complete screen)
+    // Restart quest (from complete screen)
     document.getElementById('tq-btn-clear').addEventListener('click', function() {
-      if (confirm('Clear all saved trail progress?')) {
+      if (confirm('Restart this Trail Quest?')) {
         appState = {
-          screen: 'trails', currentCheckpointId: 1,
+          screen: 'overview', currentCheckpointId: 1,
           completedIds: [], panel: 'precheckin',
-          photos: {}, answers: {}
+          answers: {}
         };
         clearState();
         renderOverview();
-        showScreen('trails');
+        showScreen('overview');
         window.scrollTo(0, 0);
       }
     });
@@ -1910,7 +2049,7 @@
         appState = {
           screen: 'trails', currentCheckpointId: 1,
           completedIds: [], panel: 'precheckin',
-          photos: {}, answers: {}
+          answers: {}
         };
         clearState();
         renderOverview();
